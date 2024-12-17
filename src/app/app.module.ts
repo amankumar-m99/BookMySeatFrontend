@@ -16,6 +16,8 @@ import { AllBookingsComponent } from './components/all-bookings/all-bookings.com
 import { NewBookingComponent } from './components/new-booking/new-booking.component';
 import { AllTheatresComponent } from './components/all-theatres/all-theatres.component';
 import { AllMoviesComponent } from './components/all-movies/all-movies.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,10 @@ import { AllMoviesComponent } from './components/all-movies/all-movies.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
