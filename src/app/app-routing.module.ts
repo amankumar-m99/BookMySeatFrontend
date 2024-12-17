@@ -1,7 +1,40 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './components/admin/admin.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { RegisterComponent } from './components/register/register.component';
+import { UserComponent } from './components/user/user.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { CompletedBookingsComponent } from './components/completed-bookings/completed-bookings.component';
+import { UpcomingBookingsComponent } from './components/upcoming-bookings/upcoming-bookings.component';
+import { AllBookingsComponent } from './components/all-bookings/all-bookings.component';
+import { NewBookingComponent } from './components/new-booking/new-booking.component';
+import { AllTheatresComponent } from './components/all-theatres/all-theatres.component';
+import { AllMoviesComponent } from './components/all-movies/all-movies.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: "home", redirectTo: "" },
+  { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
+  {
+    path: "admin", component: AdminComponent, children: [
+      { path: "all-theatres", component: AllTheatresComponent },
+      { path: "all-movies", component: AllMoviesComponent }
+    ]
+  },
+  {
+    path: "user", component: UserComponent, children: [
+      { path: "", redirectTo: "upcoming-bookings", pathMatch: "full" },
+      { path: "upcoming-bookings", component: UpcomingBookingsComponent },
+      { path: "completed-bookings", component: CompletedBookingsComponent },
+      { path: "all-bookings", component: AllBookingsComponent },
+      { path: "new-booking", component: NewBookingComponent },
+    ]
+  },
+  { path: "", component: HomeComponent, pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

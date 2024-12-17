@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="d-flex justify-content-between">
+        <div class="h2">User</div>
+        <div>
+            <button class="btn btn-outline-warning">New Booking</button>
+        </div>
+    </div>
+    <ul class="nav nav-underline">
+        <li class="nav-item mx-3">
+            <a class="nav-link text-light" routerLink="/user/upcoming-bookings" routerLinkActive="active"  aria-current="page">Upcoming Bookings</a>
+        </li>
+        <li class="nav-item mx-3">
+            <a class="nav-link text-light" routerLink="/user/completed-bookings" routerLinkActive="active">Completed Bookings</a>
+        </li>
+        <li class="nav-item mx-3">
+            <a class="nav-link text-light" routerLink="/user/all-bookings" routerLinkActive="active">All Bookings</a>
+        </li>
+        <li class="nav-item mx-3">
+            <a class="nav-link text-light" routerLink="/user/new-booking" routerLinkActive="active">New Booking</a>
+        </li>
+    </ul>
+    <hr>
+    <div class="my-3">
+        <router-outlet></router-outlet>
+    </div>
+</div>

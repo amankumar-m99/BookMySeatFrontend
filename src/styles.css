@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    color: white;
+    background-color: black;
+}
+.dark-input{
+    background-color: #333635;
+    color:white;
+    font-weight: 400;
+}
+.dark-input:focus {
+    background-color: lightblue;
+    font-weight: 500;
+}
+.dark-input::placeholder {
+    color: white;
+}
+
+.dark-my-modal{
+    /* background-color: #17242b; */
+    /* background-color: #1b2a33; */
+    background-color: rgb(20, 20, 20);
+    color: white;
+}
+
+.dark-modal-cross-btn{
+    background-color: #5f6e75;
+}
+
+.my-modal-text-color{
+    color: white;
+}

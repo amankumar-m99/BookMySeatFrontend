@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="d-flex justify-content-between">
+        <div class="h2">Admin</div>
+        <div>
+            <button class="btn btn-outline-warning mx-3">Add New Theatre</button>
+            <button class="btn btn-outline-warning mx-3">Add New Movie</button>
+        </div>
+    </div>
+    <ul class="nav nav-underline">
+        <li class="nav-item mx-3">
+            <a class="nav-link text-light" routerLink="/admin/all-theatres" routerLinkActive="active">All Theatres</a>
+        </li>
+        <li class="nav-item mx-3">
+            <a class="nav-link text-light" routerLink="/admin/all-movies" routerLinkActive="active">All Movies</a>
+        </li>
+    </ul>
+    <hr>
+    <div class="my-3">
+        <router-outlet></router-outlet>
+    </div>
+</div>

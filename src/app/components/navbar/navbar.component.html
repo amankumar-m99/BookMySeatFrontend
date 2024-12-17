@@ -1,0 +1,15 @@
+<nav class="navbar bg-body-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand text-light">
+            <img src="../../../assets/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top"  [routerLink]="['/home']">
+            BookMySeat
+        </a>
+        <div>
+            <button class="btn btn-outline-warning mx-2" (click)="login()">Login</button>
+            <button class="btn btn-outline-warning mx-2" (click)="register()">Register</button>
+            <button class="btn btn-outline-warning mx-2" (click)="user()">User</button>
+            <button class="btn btn-outline-warning mx-2" (click)="admin()">Admin</button>
+        </div>
+    </div>
+</nav>
+<hr>
