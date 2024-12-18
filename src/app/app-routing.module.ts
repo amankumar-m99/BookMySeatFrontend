@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { RegisterComponent } from './components/register/register.component';
+import { SignUpComponent } from './components/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CompletedBookingsComponent } from './components/completed-bookings/completed-bookings.component';
@@ -16,7 +16,7 @@ import { AllMoviesComponent } from './components/all-movies/all-movies.component
 const routes: Routes = [
   { path: "home", redirectTo: "" },
   { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
+  { path: "signup", component: SignUpComponent },
   {
     path: "admin", component: AdminComponent, children: [
       { path: "all-theatres", component: AllTheatresComponent },

@@ -26,15 +26,15 @@ export class LoginComponent {
   }
 
   submit():void{
-    let email:string = this.loginForm.get("username")?.value;
+    let username:string = this.loginForm.get("username")?.value;
     let password:string = this.loginForm.get("password")?.value;
-    let loginFormModel = new LoginFormModel(email, password);
+    let loginFormModel = new LoginFormModel(username, password);
     this.loginService.login(loginFormModel).subscribe({
       next:(response)=>{
-        alert("Login Success.")
+        alert("Login Success. "+response.personalDetails.firstName);
       },
       error: (error)=>{
-        alert(error);
+        alert(error.status + " " + error.message);
       },
       complete: ()=>{}
     });

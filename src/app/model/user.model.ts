@@ -1,7 +1,12 @@
-export class User{
+import { UserpersonalDetails } from "./user-personal-details.model"
+
+export class User {
     constructor(
-        public email:string,
-        public password:string
-        )
-    {}
+        public id: number,
+        public email: string,
+        public username: string,
+        public password: string,
+        public createdAt: string,
+        public personalDetails: UserpersonalDetails
+    ) { }
 }

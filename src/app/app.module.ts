@@ -7,7 +7,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { RegisterComponent } from './components/register/register.component';
+import { SignUpComponent } from './components/signup/signup.component';
 import { UserComponent } from './components/user/user.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UpcomingBookingsComponent } from './components/upcoming-bookings/upcoming-bookings.component';
@@ -26,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     HomeComponent,
     NavbarComponent,
-    RegisterComponent,
+    SignUpComponent,
     UserComponent,
     PageNotFoundComponent,
     UpcomingBookingsComponent,
