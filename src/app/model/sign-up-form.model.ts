@@ -5,6 +5,7 @@ export class SignUpFormModel{
         public firstName:string,
         public middlename:string,
         public lastName:string,
-        public phoneNumber:string
+        public phoneNumber:string,
+        public role:string = "user"
     ){}
 }

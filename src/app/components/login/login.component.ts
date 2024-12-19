@@ -31,7 +31,17 @@ export class LoginComponent {
     let loginFormModel = new LoginFormModel(username, password);
     this.loginService.login(loginFormModel).subscribe({
       next:(response)=>{
-        alert("Login Success. "+response.personalDetails.firstName);
+        alert("Login Success. " + response.role + ":" +response.personalDetails.firstName);
+        let role = response.role;
+        if(role == "superadmin"){
+          this.router.navigate(["super-admin"]);
+        }
+        else if(role == "theateradmin"){
+          this.router.navigate(["theater-admin"]);
+        }
+        else{
+          this.router.navigate(["user"]);
+        }
       },
       error: (error)=>{
         alert(error.status + " " + error.message);

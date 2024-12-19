@@ -18,6 +18,8 @@ import { AllTheatresComponent } from './components/all-theatres/all-theatres.com
 import { AllMoviesComponent } from './components/all-movies/all-movies.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TheaterAdminComponent } from './components/theater-admin/theater-admin.component';
+import { SuperAdminComponent } from './components/super-admin/super-admin.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { HttpClientModule } from '@angular/common/http';
     AllBookingsComponent,
     NewBookingComponent,
     AllTheatresComponent,
-    AllMoviesComponent
+    AllMoviesComponent,
+    TheaterAdminComponent,
+    SuperAdminComponent
   ],
   imports: [
     BrowserModule,

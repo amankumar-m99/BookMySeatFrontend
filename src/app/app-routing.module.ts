@@ -12,6 +12,8 @@ import { AllBookingsComponent } from './components/all-bookings/all-bookings.com
 import { NewBookingComponent } from './components/new-booking/new-booking.component';
 import { AllTheatresComponent } from './components/all-theatres/all-theatres.component';
 import { AllMoviesComponent } from './components/all-movies/all-movies.component';
+import { TheaterAdminComponent } from './components/theater-admin/theater-admin.component';
+import { SuperAdminComponent } from './components/super-admin/super-admin.component';
 
 const routes: Routes = [
   { path: "home", redirectTo: "" },
@@ -23,6 +25,8 @@ const routes: Routes = [
       { path: "all-movies", component: AllMoviesComponent }
     ]
   },
+  { path: "super-admin", component: SuperAdminComponent },
+  { path: "theater-admin", component: TheaterAdminComponent },
   {
     path: "user", component: UserComponent, children: [
       { path: "", redirectTo: "upcoming-bookings", pathMatch: "full" },
