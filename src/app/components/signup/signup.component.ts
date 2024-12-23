@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SignUpFormModel } from 'src/app/model/sign-up-form.model';
-import { LoginService } from 'src/app/services/login.service';
-import { SignupService } from 'src/app/services/signup.service';
+import { SignupService } from 'src/app/services/signup/signup.service';
 
 @Component({
   selector: 'app-register',
@@ -39,7 +38,7 @@ export class SignUpComponent {
     let middleName: string = this.signUpForm.get("middleName")?.value;
     let lastName: string = this.signUpForm.get("lastName")?.value;
     let phoneNumber: string = this.signUpForm.get("phoneNumber")?.value;
-    if(this.signUpForm.invalid){
+    if (this.signUpForm.invalid) {
       alert("Invalid form!");
       return;
     }

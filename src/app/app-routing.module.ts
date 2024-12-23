@@ -14,6 +14,13 @@ import { AllTheatresComponent } from './components/all-theatres/all-theatres.com
 import { AllMoviesComponent } from './components/all-movies/all-movies.component';
 import { TheaterAdminComponent } from './components/theater-admin/theater-admin.component';
 import { SuperAdminComponent } from './components/super-admin/super-admin.component';
+import { TheaterActionsComponent } from './components/theater-actions/theater-actions.component';
+import { MovieBookingComponent } from './components/movie-booking/movie-booking.component';
+import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-marketplace.component';
+import { AllItemsMarketplaceComponent } from './components/all-items-marketplace/all-items-marketplace.component';
+import { AvailableItemsMarketplaceComponent } from './components/available-items-marketplace/available-items-marketplace.component';
+import { MyBagMarketplaceComponent } from './components/my-bag-marketplace/my-bag-marketplace.component';
+import { MyCollectionMarketplaceComponent } from './components/my-collection-marketplace/my-collection-marketplace.component';
 
 const routes: Routes = [
   { path: "home", redirectTo: "" },
@@ -28,12 +35,27 @@ const routes: Routes = [
   { path: "super-admin", component: SuperAdminComponent },
   { path: "theater-admin", component: TheaterAdminComponent },
   {
+    path: "movie-marketplace", component: MovieMarketplaceComponent, children: [
+      { path: "", redirectTo: "available-items", pathMatch: "full"},
+      { path: "all-items", component: AllItemsMarketplaceComponent },
+      { path: "available-items", component: AvailableItemsMarketplaceComponent },
+      { path: "my-bag", component: MyBagMarketplaceComponent },
+      { path: "my-collection", component: MyCollectionMarketplaceComponent}
+    ]
+  },
+  { path: "theater/:theaterId", component: TheaterActionsComponent },
+  {
     path: "user", component: UserComponent, children: [
       { path: "", redirectTo: "upcoming-bookings", pathMatch: "full" },
       { path: "upcoming-bookings", component: UpcomingBookingsComponent },
       { path: "completed-bookings", component: CompletedBookingsComponent },
       { path: "all-bookings", component: AllBookingsComponent },
-      { path: "new-booking", component: NewBookingComponent },
+      {
+        path: "new-booking", component: NewBookingComponent, children: [
+          { path: "movie/:movieId", component: MovieBookingComponent },
+          { path: "", component: AllMoviesComponent }
+        ]
+      },
     ]
   },
   { path: "", component: HomeComponent, pathMatch: 'full' },

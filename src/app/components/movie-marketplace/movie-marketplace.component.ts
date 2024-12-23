@@ -3,11 +3,12 @@ import { Movie } from 'src/app/model/movie.model';
 import { MovieService } from 'src/app/services/movie/movie.service';
 
 @Component({
-  selector: 'app-all-movies',
-  templateUrl: './all-movies.component.html',
-  styleUrls: ['./all-movies.component.css']
+  selector: 'app-movie-marketplace',
+  templateUrl: './movie-marketplace.component.html',
+  styleUrls: ['./movie-marketplace.component.css']
 })
-export class AllMoviesComponent {
+export class MovieMarketplaceComponent {
+
   movies: Movie[];
 
   constructor(
@@ -33,6 +34,6 @@ export class AllMoviesComponent {
   }
 
   getRouterLink(id: number): string {
-    return "/user/new-booking/movie/" + id;
+    return "/movie-marketplace/all-items/" + id;
   }
 }

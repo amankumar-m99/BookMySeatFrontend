@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppData } from 'src/app/data/app.data';
+import { CookieData } from 'src/app/data/cookie.data';
 import { LoginFormModel } from 'src/app/model/login-form.model';
-import { LoginService } from 'src/app/services/login.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -30,9 +32,9 @@ export class LoginComponent {
     let password:string = this.loginForm.get("password")?.value;
     let loginFormModel = new LoginFormModel(username, password);
     this.loginService.login(loginFormModel).subscribe({
-      next:(response)=>{
-        alert("Login Success. " + response.role + ":" +response.personalDetails.firstName);
-        let role = response.role;
+      next:(user)=>{
+        CookieData.setCookie("userId", ""+user.id);
+        let role = user.role;
         if(role == "superadmin"){
           this.router.navigate(["super-admin"]);
         }

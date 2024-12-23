@@ -20,6 +20,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TheaterAdminComponent } from './components/theater-admin/theater-admin.component';
 import { SuperAdminComponent } from './components/super-admin/super-admin.component';
+import { TheaterActionsComponent } from './components/theater-actions/theater-actions.component';
+import { MovieBookingComponent } from './components/movie-booking/movie-booking.component';
+import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-marketplace.component';
+import { AllItemsMarketplaceComponent } from './components/all-items-marketplace/all-items-marketplace.component';
+import { AvailableItemsMarketplaceComponent } from './components/available-items-marketplace/available-items-marketplace.component';
+import { MyBagMarketplaceComponent } from './components/my-bag-marketplace/my-bag-marketplace.component';
+import { MyCollectionMarketplaceComponent } from './components/my-collection-marketplace/my-collection-marketplace.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +45,14 @@ import { SuperAdminComponent } from './components/super-admin/super-admin.compon
     AllTheatresComponent,
     AllMoviesComponent,
     TheaterAdminComponent,
-    SuperAdminComponent
+    SuperAdminComponent,
+    TheaterActionsComponent,
+    MovieBookingComponent,
+    MovieMarketplaceComponent,
+    AllItemsMarketplaceComponent,
+    AvailableItemsMarketplaceComponent,
+    MyBagMarketplaceComponent,
+    MyCollectionMarketplaceComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { Theater } from "./theater.model";
 import { UserpersonalDetails } from "./user-personal-details.model"
 
 export class User {
@@ -8,6 +9,5 @@ export class User {
         public password: string,
         public role:string,
         public createdAt: string,
-        public personalDetails: UserpersonalDetails
     ) { }
 }

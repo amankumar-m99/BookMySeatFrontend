@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="my-3">
+        <div>
+            <span class="h2">{{theater?.name}}</span>
+        </div>
+        <div>
+            <span class="h4">{{theater?.location}}</span>
+        </div>
+        <hr>
+    </div>
+    <table class="table table-dark table-striped my-3">
+        <thead>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="col">Name</th>
+                <td>{{theater?.name}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Location</th>
+                <td>{{theater?.location}}</td>
+            </tr>
+            <tr>
+                <th scope="col">screens</th>
+                <td>{{theater?.numberOfScreens}}</td>
+            </tr>
+            <tr>
+                <th scope="col">phoneNumber</th>
+                <td>{{theater?.phoneNumber}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Date created</th>
+                <td>{{theater?.createdAt | date }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Movies</th>
+                <td>N/A</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <div class="d-flex justify-content-between">
+            <p class="h3">Movies</p>
+            <a routerLink="/movie-marketplace" class="btn btn-outline-warning">Add Movies</a>
+        </div>
+        <div class="d-flex " style="overflow: auto;">
+
+            <div class="card bg-dark text-light mx-2" style="width: 13rem; min-width: 13rem;">
+                <img src="../../../assets/logo.png" class="card-img-top" alt="movie" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">Movie</h5>
+                    <p class="card-text">Release Year</p>
+                    <a href="#" class="btn btn-outline-warning">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
