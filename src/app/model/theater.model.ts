@@ -4,9 +4,11 @@ export class Theater {
         public id: Number,
         public name: string,
         public location: string,
-        public numberOfScreens: string,
         public phoneNumber: string,
-        public createdAt: Date
+        public createdAt: Date,
+        public ownerId: number,
+        public screenIds: number[],
+        public movieIds: number[]
     ) { }
 
 }

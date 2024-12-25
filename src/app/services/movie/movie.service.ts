@@ -18,4 +18,8 @@ export class MovieService {
   getMovieById(id: number): Observable<Movie> {
     return this.httpClient.get<Movie>(AppData.baseUrl + "/movie/get/" + id);
   }
-}
+
+  getAllMoviesByIds(ids: number[]): Observable < Movie[] > {
+      return this.httpClient.post<Movie[]>(AppData.baseUrl + "/movie/all", ids);
+    }
+  }

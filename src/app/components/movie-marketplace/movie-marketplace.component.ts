@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Movie } from 'src/app/model/movie.model';
 import { MovieService } from 'src/app/services/movie/movie.service';
+import { TheaterService } from 'src/app/services/theater/theater.service';
 
 @Component({
   selector: 'app-movie-marketplace',
@@ -10,30 +12,67 @@ import { MovieService } from 'src/app/services/movie/movie.service';
 export class MovieMarketplaceComponent {
 
   movies: Movie[];
+  addedMovieIds: number[];
+  theaterId: number;
 
   constructor(
-    private movieService: MovieService
+    private theaterService: TheaterService,
+    private movieService: MovieService,
+    private activatedroute: ActivatedRoute
   ) {
     this.movies = [];
+    this.theaterId = 0;
+    this.addedMovieIds = [];
+    if (this.activatedroute.snapshot.paramMap?.has("theaterId")) {
+      this.theaterId = Number(this.activatedroute.snapshot.paramMap.get("theaterId"));
+    }
   }
 
   ngOnInit(): void {
-    this.fetchMovies();
+    this.fetchAddedMovies();
   }
 
-  fetchMovies(): void {
-    this.movieService.getAllMovies().subscribe({
+  fetchAddedMovies() {
+    this.theaterService.getTheaterById(this.theaterId).subscribe({
       next: (response) => {
-        this.movies = response;
+        this.addedMovieIds = response.movieIds;
+        this.fetchAllMovies();
       },
       error: (error) => {
-        alert("error");
+        alert(error);
       },
       complete: () => { }
     });
   }
 
-  getRouterLink(id: number): string {
-    return "/movie-marketplace/all-items/" + id;
+  fetchAllMovies(): void {
+    this.movieService.getAllMovies().subscribe({
+      next: (response) => {
+        this.movies = response;
+      },
+      error: (error) => {
+        alert(error.message);
+      },
+      complete: () => { }
+    });
+  }
+
+  addMovieToTheater(movieId: number): void {
+    this.theaterService.addMovieToTheater(this.theaterId, movieId).subscribe({
+      next: (respnse) => {
+        this.addedMovieIds.push(movieId);
+      },
+      error: (error) => {
+        alert(error.message)
+      }
+    })
+  }
+
+  isMovieAdded(movieId: number): boolean {
+    let result = this.addedMovieIds.find(x => x == movieId);
+    if(result != undefined){
+      return true;
+    }
+    return false;
   }
 }

@@ -17,10 +17,6 @@ import { SuperAdminComponent } from './components/super-admin/super-admin.compon
 import { TheaterActionsComponent } from './components/theater-actions/theater-actions.component';
 import { MovieBookingComponent } from './components/movie-booking/movie-booking.component';
 import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-marketplace.component';
-import { AllItemsMarketplaceComponent } from './components/all-items-marketplace/all-items-marketplace.component';
-import { AvailableItemsMarketplaceComponent } from './components/available-items-marketplace/available-items-marketplace.component';
-import { MyBagMarketplaceComponent } from './components/my-bag-marketplace/my-bag-marketplace.component';
-import { MyCollectionMarketplaceComponent } from './components/my-collection-marketplace/my-collection-marketplace.component';
 
 const routes: Routes = [
   { path: "home", redirectTo: "" },
@@ -34,15 +30,7 @@ const routes: Routes = [
   },
   { path: "super-admin", component: SuperAdminComponent },
   { path: "theater-admin", component: TheaterAdminComponent },
-  {
-    path: "movie-marketplace", component: MovieMarketplaceComponent, children: [
-      { path: "", redirectTo: "available-items", pathMatch: "full"},
-      { path: "all-items", component: AllItemsMarketplaceComponent },
-      { path: "available-items", component: AvailableItemsMarketplaceComponent },
-      { path: "my-bag", component: MyBagMarketplaceComponent },
-      { path: "my-collection", component: MyCollectionMarketplaceComponent}
-    ]
-  },
+  { path: "movie-marketplace/:theaterId", component: MovieMarketplaceComponent },
   { path: "theater/:theaterId", component: TheaterActionsComponent },
   {
     path: "user", component: UserComponent, children: [

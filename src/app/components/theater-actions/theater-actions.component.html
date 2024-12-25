@@ -1,58 +1,61 @@
 <div class="container">
     <div class="my-3">
-        <div>
+        <div class="my-1">
             <span class="h2">{{theater?.name}}</span>
         </div>
-        <div>
-            <span class="h4">{{theater?.location}}</span>
+        <div class="my-2">
+            <span class="my-1">
+                <span class="text-warning"><i class="bi bi-geo-alt"></i></span>
+                <span class="h6 mx-2">{{theater?.location}}</span>
+            </span>
+            <span class="my-1 mx-4">
+                <span class="text-warning"><i class="bi bi-telephone"></i></span>
+                <span class="h6 mx-2">{{theater?.phoneNumber}}</span>
+            </span>
+            <span class="my-1 mx-4">
+                <span class="text-warning"><i class="bi bi-calendar2"></i></span>
+                <span class="h6 mx-2">Since {{theater?.createdAt | date: 'yyyy' }}</span>
+            </span>
+            <span class="my-1 mx-4">
+                <span class="text-warning"><i class="bi bi-film"></i></span>
+                <span class="h6 mx-2">{{theater?.movieIds?.length}}</span>
+            </span>
+            <span class="my-1 mx-4">
+                <span class="text-warning"><i class="bi bi-tv"></i></span>
+                <span class="h6 mx-2">{{theater?.screenIds?.length}}</span>
+            </span>
         </div>
         <hr>
     </div>
-    <table class="table table-dark table-striped my-3">
-        <thead>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="col">Name</th>
-                <td>{{theater?.name}}</td>
-            </tr>
-            <tr>
-                <th scope="col">Location</th>
-                <td>{{theater?.location}}</td>
-            </tr>
-            <tr>
-                <th scope="col">screens</th>
-                <td>{{theater?.numberOfScreens}}</td>
-            </tr>
-            <tr>
-                <th scope="col">phoneNumber</th>
-                <td>{{theater?.phoneNumber}}</td>
-            </tr>
-            <tr>
-                <th scope="col">Date created</th>
-                <td>{{theater?.createdAt | date }}</td>
-            </tr>
-            <tr>
-                <th scope="col">Movies</th>
-                <td>N/A</td>
-            </tr>
-        </tbody>
-    </table>
     <div>
         <div class="d-flex justify-content-between">
-            <p class="h3">Movies</p>
-            <a routerLink="/movie-marketplace" class="btn btn-outline-warning">Add Movies</a>
+            <p class="h4">Show times</p>
+            <a [routerLink]="getRouterLink()" class="btn btn-outline-warning">Add Showtimes</a>
         </div>
-        <div class="d-flex " style="overflow: auto;">
+        <div class="d-flex my-2" style="overflow: auto;">
+            <span class="border border-warning rounded-3 text-warning p-2 mx-3">09:30 AM</span>
+            <span class="border border-warning rounded-3 text-warning p-2 mx-3">01:00 PM</span>
+            <span class="border border-warning rounded-3 text-warning p-2 mx-3">05:00 PM</span>
+            <span class="border border-warning rounded-3 text-warning p-2 mx-3">07:00 PM</span>
+        </div>
+    </div>
+    <hr> 
+    <div class="">
+        <div class="d-flex justify-content-between">
+            <p class="h4">Movies</p>
+            <a [routerLink]="getRouterLink()" class="btn btn-outline-warning">Add Movies</a>
+        </div>
+        <div class="d-flex my-3" style="overflow: auto;">
 
-            <div class="card bg-dark text-light mx-2" style="width: 13rem; min-width: 13rem;">
+            <div *ngFor="let movie of movies" class="card bg-dark text-light mx-3" style="width: 13rem; min-width: 13rem;">
                 <img src="../../../assets/logo.png" class="card-img-top" alt="movie" style="width: 100%;">
                 <div class="card-body">
-                    <h5 class="card-title">Movie</h5>
-                    <p class="card-text">Release Year</p>
-                    <a href="#" class="btn btn-outline-warning">Go somewhere</a>
+                    <hr>
+                    <h5 class="card-title">{{movie.title}}</h5>
+                    <p class="card-text">{{movie.releaseDate | date: 'mediumDate'}}</p>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

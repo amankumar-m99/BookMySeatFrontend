@@ -23,10 +23,7 @@ import { SuperAdminComponent } from './components/super-admin/super-admin.compon
 import { TheaterActionsComponent } from './components/theater-actions/theater-actions.component';
 import { MovieBookingComponent } from './components/movie-booking/movie-booking.component';
 import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-marketplace.component';
-import { AllItemsMarketplaceComponent } from './components/all-items-marketplace/all-items-marketplace.component';
-import { AvailableItemsMarketplaceComponent } from './components/available-items-marketplace/available-items-marketplace.component';
-import { MyBagMarketplaceComponent } from './components/my-bag-marketplace/my-bag-marketplace.component';
-import { MyCollectionMarketplaceComponent } from './components/my-collection-marketplace/my-collection-marketplace.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -49,17 +46,14 @@ import { MyCollectionMarketplaceComponent } from './components/my-collection-mar
     TheaterActionsComponent,
     MovieBookingComponent,
     MovieMarketplaceComponent,
-    AllItemsMarketplaceComponent,
-    AvailableItemsMarketplaceComponent,
-    MyBagMarketplaceComponent,
-    MyCollectionMarketplaceComponent
+    ToastComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

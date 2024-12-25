@@ -1,6 +1,9 @@
+import { R3SelectorScopeMode } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Movie } from 'src/app/model/movie.model';
 import { Theater } from 'src/app/model/theater.model';
+import { MovieService } from 'src/app/services/movie/movie.service';
 import { TheaterService } from 'src/app/services/theater/theater.service';
 
 @Component({
@@ -12,13 +15,16 @@ export class TheaterActionsComponent {
 
   theaterId: number;
   theater?:Theater;
+  movies:Movie[];
 
   constructor(
     private theaterService: TheaterService,
+    private movieService: MovieService,
     private router: Router,
     private activatedroute: ActivatedRoute
   ) {
     this.theaterId = 0;
+    this.movies = [];
     if (this.activatedroute.snapshot.paramMap?.has("theaterId")) {
       this.theaterId = Number(this.activatedroute.snapshot.paramMap.get("theaterId"));
       this.fetchData();
@@ -29,10 +35,27 @@ export class TheaterActionsComponent {
     this.theaterService.getTheaterById(this.theaterId).subscribe({
       next: (response) => {
         this.theater = response;
+        let m = this.theater.movieIds;
+        if(this.theater.movieIds.length < 1)
+          return;
+        this.movieService.getAllMoviesByIds(this.theater.movieIds).subscribe({
+          next: (response) => {
+            this.movies = response;
+          },
+          error: (error) => {
+            alert("error in fetching movies:"+error.message);
+          }
+        })
       },
-      error: (error) => {},
+      error: (error) => {
+        alert(error);
+      },
       complete: () => {}
     });
+  }
+
+  getRouterLink(): string{
+    return "/movie-marketplace/"+this.theaterId;
   }
 
 }

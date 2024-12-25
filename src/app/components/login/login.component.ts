@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AppData } from 'src/app/data/app.data';
+import { Router } from '@angular/router';
 import { CookieData } from 'src/app/data/cookie.data';
 import { LoginFormModel } from 'src/app/model/login-form.model';
 import { LoginService } from 'src/app/services/login/login.service';
+import { ToastService } from 'src/app/services/toast/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -13,42 +13,54 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class LoginComponent {
 
-  loginForm : FormGroup;
+  loginForm: FormGroup;
+  toasts: { message: string; duration: number }[] = [];
 
   constructor(
-    private formBuilder:FormBuilder,
-    private loginService:LoginService,
-    private router:Router,
-    private activatedroute:ActivatedRoute
-  ){
+    private formBuilder: FormBuilder,
+    private loginService: LoginService,
+    private router: Router,
+    private toastService: ToastService
+  ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.toastService.toast$.subscribe(toast => {
+      this.toasts.push(toast);
+      setTimeout(() => {
+        this.toasts.shift();
+      }, toast.duration);
+    });
   }
 
-  submit():void{
-    let username:string = this.loginForm.get("username")?.value;
-    let password:string = this.loginForm.get("password")?.value;
+  submit(): void {
+    let username: string = this.loginForm.get("username")?.value;
+    let password: string = this.loginForm.get("password")?.value;
     let loginFormModel = new LoginFormModel(username, password);
     this.loginService.login(loginFormModel).subscribe({
-      next:(user)=>{
-        CookieData.setCookie("userId", ""+user.id);
+      next: (user) => {
+        CookieData.setCookie("userId", "" + user.id);
         let role = user.role;
-        if(role == "superadmin"){
+        if (role == "superadmin") {
           this.router.navigate(["super-admin"]);
         }
-        else if(role == "theateradmin"){
+        else if (role == "theateradmin") {
           this.router.navigate(["theater-admin"]);
         }
-        else{
+        else {
           this.router.navigate(["user"]);
         }
       },
-      error: (error)=>{
+      error: (error) => {
         alert(error.status + " " + error.message);
+        this.showToast(error.message);
       },
-      complete: ()=>{}
+      complete: () => { }
     });
+  }
+
+  showToast(msg: string) {
+    this.toastService.showToast(msg, 4000);
   }
 }
