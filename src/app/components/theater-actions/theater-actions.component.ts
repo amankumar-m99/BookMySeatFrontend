@@ -20,7 +20,6 @@ export class TheaterActionsComponent {
   constructor(
     private theaterService: TheaterService,
     private movieService: MovieService,
-    private router: Router,
     private activatedroute: ActivatedRoute
   ) {
     this.theaterId = 0;
@@ -35,7 +34,6 @@ export class TheaterActionsComponent {
     this.theaterService.getTheaterById(this.theaterId).subscribe({
       next: (response) => {
         this.theater = response;
-        let m = this.theater.movieIds;
         if(this.theater.movieIds.length < 1)
           return;
         this.movieService.getAllMoviesByIds(this.theater.movieIds).subscribe({

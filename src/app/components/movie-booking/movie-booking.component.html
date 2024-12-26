@@ -33,3 +33,9 @@
     <p class="h2">About the movie</p>
     <p class="h5">{{movie.description}}</p>
 </div>
+<div>
+    <p>List of theaters</p>
+    <ul>
+        <li *ngFor="let theater of movie.theaters">{{theater?.id}} {{theater.name}}</li>
+    </ul>
+</div>

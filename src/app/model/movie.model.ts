@@ -1,3 +1,5 @@
+import { Theater } from "./theater.model";
+
 export class Movie {
     constructor(
         public id: number,
@@ -20,7 +22,7 @@ export class Movie {
 
         public showcases:Object[],
 
-        public theaters:Object[]
+        public theaters: Theater[]
 
     ) { }
 
