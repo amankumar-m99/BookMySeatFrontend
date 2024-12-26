@@ -24,6 +24,7 @@ import { TheaterActionsComponent } from './components/theater-actions/theater-ac
 import { MovieBookingComponent } from './components/movie-booking/movie-booking.component';
 import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-marketplace.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { ShowComponent } from './components/show/show.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ToastComponent } from './components/toast/toast.component';
     TheaterActionsComponent,
     MovieBookingComponent,
     MovieMarketplaceComponent,
-    ToastComponent
+    ToastComponent,
+    ShowComponent
   ],
   imports: [
     BrowserModule,

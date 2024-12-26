@@ -17,6 +17,7 @@ import { SuperAdminComponent } from './components/super-admin/super-admin.compon
 import { TheaterActionsComponent } from './components/theater-actions/theater-actions.component';
 import { MovieBookingComponent } from './components/movie-booking/movie-booking.component';
 import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-marketplace.component';
+import { ShowComponent } from './components/show/show.component';
 
 const routes: Routes = [
   { path: "home", redirectTo: "" },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: "super-admin", component: SuperAdminComponent },
   { path: "theater-admin", component: TheaterAdminComponent },
   { path: "movie-marketplace/:theaterId", component: MovieMarketplaceComponent },
+  { path: "theater-show/:theaterId", component: ShowComponent },
   { path: "theater/:theaterId", component: TheaterActionsComponent },
   {
     path: "user", component: UserComponent, children: [

@@ -1,0 +1,58 @@
+<div class="container w-50 my-5">
+    <main class="form-signin mx-auto my-5">
+        <form class=" border border-2 p-3" [formGroup]="form" (ngSubmit)="submit()">
+            <h1 class="h3 mb-3 fw-normal text-center">Showtime</h1>
+            <div class="my-2">
+                Time-slot
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="showTime1" formControlName="showTime1">
+                    <label class="form-check-label" for="showTime1">09:30 AM</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="showTime2" formControlName="showTime2">
+                    <label class="form-check-label" for="showTime2">1:00 PM</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="showTime3" formControlName="showTime3">
+                    <label class="form-check-label" for="showTime3">5:00 PM</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="showTime4" formControlName="showTime4">
+                    <label class="form-check-label" for="showTime4">7:00 PM</label>
+                </div>
+            </div>
+
+            <div class="my-2">
+                Days
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="day-today" formControlName="dayToday">
+                    <label class="form-check-label" for="day-today">Today</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="day-tomorrow" formControlName="dayTomorrow">
+                    <label class="form-check-label" for="day-tomorrow">Tomorrow</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="day-this-week" formControlName="dayThisWeek">
+                    <label class="form-check-label" for="day-this-week">This whole week</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="day-next-week" formControlName="dayNextWeek">
+                    <label class="form-check-label" for="day-next-week">Next whole week</label>
+                </div>
+            </div>
+
+            <div class="my-2">
+                <select class="form-select" aria-label="Default select example" formControlName="movieId">
+                    <option class="dropdown-item" selected [value]="0">-- Select the movie--</option>
+                    <option class="dropdown-item" *ngFor="let movie of movies" [value]="movie.id">{{movie.title}} - {{movie.releaseDate |
+                        date: 'yyyy'}}</option>
+                </select>
+            </div>
+
+            <div class="my-2 d-flex justify-content-center">
+                <button class="btn btn-warning w-25 py-2" type="submit">Add show</button>
+            </div>
+        </form>
+    </main>
+</div>
