@@ -35,7 +35,7 @@ export class MovieMarketplaceComponent {
   fetchAddedMovies() {
     this.theaterService.getTheaterById(this.theaterId).subscribe({
       next: (response) => {
-        this.addedMovieIds = response.movieIds;
+        this.addedMovieIds = response.movies.map(m => m.id);
         this.fetchAllMovies();
       },
       error: (error) => {

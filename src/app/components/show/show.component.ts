@@ -51,16 +51,7 @@ export class ShowComponent {
   fetchData(theaterId: number): void {
     this.theaterService.getTheaterById(theaterId).subscribe({
       next: (response) => {
-        if (response.movieIds.length < 1)
-          return;
-        this.movieService.getAllMoviesByIds(response.movieIds).subscribe({
-          next: (response) => {
-            this.movies = response;//.map(m => m.title + "-" + m.releaseDate.getFullYear());
-          },
-          error: (error) => {
-            alert("error in fetching movies:" + error.message);
-          }
-        })
+        this.movies = response.movies;
       },
       error: (error) => {
         alert(error);
@@ -70,12 +61,12 @@ export class ShowComponent {
   }
 
   submit(): void {
-    if(this.form.invalid){
+    if (this.form.invalid) {
       alert("Invalid form.");
       return;
     }
     let movieId: string = this.form.get("movieId")?.value;
-    let formModel:ShowtimeForm[] = [];
+    let formModel: ShowtimeForm[] = [];
     formModel.push(new ShowtimeForm(Number(movieId), 2, this.theaterId, 9, 30));
     formModel.push(new ShowtimeForm(Number(movieId), 2, this.theaterId, 1, 0));
     formModel.push(new ShowtimeForm(Number(movieId), 2, this.theaterId, 5, 0));

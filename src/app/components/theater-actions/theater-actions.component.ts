@@ -14,8 +14,7 @@ import { TheaterService } from 'src/app/services/theater/theater.service';
 export class TheaterActionsComponent {
 
   theaterId: number;
-  theater?:Theater;
-  movies:Movie[];
+  theater?: Theater;
 
   constructor(
     private theaterService: TheaterService,
@@ -23,37 +22,26 @@ export class TheaterActionsComponent {
     private activatedroute: ActivatedRoute
   ) {
     this.theaterId = 0;
-    this.movies = [];
     if (this.activatedroute.snapshot.paramMap?.has("theaterId")) {
       this.theaterId = Number(this.activatedroute.snapshot.paramMap.get("theaterId"));
       this.fetchData();
     }
   }
 
-  fetchData():void{
+  fetchData(): void {
     this.theaterService.getTheaterById(this.theaterId).subscribe({
       next: (response) => {
         this.theater = response;
-        if(this.theater.movieIds.length < 1)
-          return;
-        this.movieService.getAllMoviesByIds(this.theater.movieIds).subscribe({
-          next: (response) => {
-            this.movies = response;
-          },
-          error: (error) => {
-            alert("error in fetching movies:"+error.message);
-          }
-        })
       },
       error: (error) => {
         alert(error);
       },
-      complete: () => {}
+      complete: () => { }
     });
   }
 
-  getRouterLink(): string{
-    return "/movie-marketplace/"+this.theaterId;
+  getRouterLink(): string {
+    return "/movie-marketplace/" + this.theaterId;
   }
 
 }
