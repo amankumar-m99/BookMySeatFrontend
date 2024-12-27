@@ -4,7 +4,7 @@
             <img src="../../../assets/logo.png" class="card-img-top" alt="movie" style="width: 100%;">
         </div>
     </div>
-    <div class="m-3">
+    <div class="m-3 mx-5">
         <span class="h2 my-2">{{movie.title}}</span>
         <div class="my-3 h5">
             <span class="text-warning"><i class="bi bi-star-fill"></i></span>
@@ -19,23 +19,40 @@
             <span class="badge rounded-pill text-bg-warning mx-2">2D</span>
             <span class="badge rounded-pill text-bg-warning mx-2">{{movie.language}}</span>
         </div>
-        <div class="my-3">
+        <div class="my-3 bg-dark p-1">
             <span class="h6">Releasing on {{movie.releaseDate | date}}</span>
         </div>
         <div class="my-3">
         </div>
     </div>
+    <div class="my-3 mx-5 w-50 p-3 bg-dark rounded">
+        <p class="h5">About the movie</p>
+        <p class="h6">{{movie.description}}</p>
+    </div>
 </div>
-<div class="d-flex justify-content-center">
-    <span class="mx-3"><button class="btn btn-outline-warning">Book Tickets</button></span>
+<hr>
+<div class="d-flex">
+    <form>
+        <div class="">
+            <label class="mx-2" for="bookingdate">Looking for Date</label>
+            <input type="date" class="dark-input" id="bookingdate" placeholder="Password" formControlName="password">
+        </div>
+    </form>
 </div>
-<div class="my-3">
-    <p class="h2">About the movie</p>
-    <p class="h5">{{movie.description}}</p>
-</div>
+<hr>
 <div>
-    <p>List of theaters</p>
-    <ul>
-        <li *ngFor="let theater of movie.theaters">{{theater?.id}} {{theater.name}}</li>
-    </ul>
+    <div *ngFor="let theater of movie.theaters" class="my-3 p-4 rounded bg-dark">
+        <div class="row">
+            <div class="col-3 my-auto">
+                <span>{{theater.name}}</span>
+            </div>
+            <div class="col-3 my-auto">
+                <div class="">{{theater.location}}</div>
+                <div class="">{{theater.phoneNumber}}</div>
+            </div>
+            <div class="col-6 my-auto">
+                <span *ngFor="let show of theater.showtimes" class="mx-2 text-warning border border-warning rounded p-2">{{show.startHH}} : {{show.startMM}} AM</span>
+            </div>
+        </div>
+    </div>
 </div>

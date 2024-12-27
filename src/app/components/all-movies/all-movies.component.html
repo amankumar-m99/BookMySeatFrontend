@@ -1,13 +1,22 @@
-<div class="d-flex justify-content-end">
-    <form class="">
-        <select class="dark-input" name="Location" id="Location">
-            <option value="">-Location-</option>
-            <option value="">Option 1</option>
-            <option value="">Option 1</option>
-            <option value="">Option 1</option>
-            <option value="">Option 1</option>
-        </select>
-    </form>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-5">
+        <form class="d-flex mx-auto" role="search">
+            <input class="form-control me-2 dark-input" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-warning" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="col-3">
+        <div class="form-check text-start d-flex justify-content-end align-items-center">
+            <select class="dark-input" name="Location" id="Location">
+                <option value="">-Location-</option>
+                <option value="">Option 1</option>
+                <option value="">Option 1</option>
+                <option value="">Option 1</option>
+                <option value="">Option 1</option>
+            </select>
+        </div>
+    </div>
 </div>
 <div class="row">
     <div *ngFor="let movie of movies" class="col-3 my-5 d-flex justify-content-center">
