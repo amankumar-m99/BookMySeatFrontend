@@ -54,7 +54,7 @@
                 <div class="d-flex">
                     <span *ngFor="let show of theater.showtimes"
                         class="mx-2 text-warning border border-warning rounded p-2">
-                        {{show.startHH}} : {{show.startMM}} AM
+                        {{show.startHH | leadingZero:2}} : {{show.startMM | leadingZero:2}} AM
                     </span>
                 </div>
             </div>
