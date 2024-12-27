@@ -43,15 +43,20 @@
 <div>
     <div *ngFor="let theater of movie.theaters" class="my-3 p-4 rounded bg-dark">
         <div class="row">
-            <div class="col-3 my-auto">
+            <div class="col-1 my-auto">
                 <span>{{theater.name}}</span>
             </div>
-            <div class="col-3 my-auto">
+            <div class="col-2 my-auto">
                 <div class="">{{theater.location}}</div>
                 <div class="">{{theater.phoneNumber}}</div>
             </div>
-            <div class="col-6 my-auto">
-                <span *ngFor="let show of theater.showtimes" class="mx-2 text-warning border border-warning rounded p-2">{{show.startHH}} : {{show.startMM}} AM</span>
+            <div class="col-9 my-auto">
+                <div class="d-flex">
+                    <span *ngFor="let show of theater.showtimes"
+                        class="mx-2 text-warning border border-warning rounded p-2">
+                        {{show.startHH}} : {{show.startMM}} AM
+                    </span>
+                </div>
             </div>
         </div>
     </div>
