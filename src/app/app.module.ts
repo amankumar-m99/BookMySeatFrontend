@@ -26,6 +26,7 @@ import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-
 import { ToastComponent } from './components/toast/toast.component';
 import { ShowComponent } from './components/show/show.component';
 import { TheaterListComponent } from './components/theater-list/theater-list.component';
+import { LeadingZeroPipe } from './pipes/leading-zero.pipe';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { TheaterListComponent } from './components/theater-list/theater-list.com
     MovieMarketplaceComponent,
     ToastComponent,
     ShowComponent,
-    TheaterListComponent
+    TheaterListComponent,
+    LeadingZeroPipe
   ],
   imports: [
     BrowserModule,
