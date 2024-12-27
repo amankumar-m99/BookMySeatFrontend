@@ -20,13 +20,11 @@ export class Movie {
 
         public releaseDate: Date,
 
-        public showcases:Object[],
-
         public theaters: Theater[]
 
     ) { }
 
     public static getDummyMovie():Movie{
-        return new Movie(0, "", "", "", 0, "", 0, "", new Date(), [], []);
+        return new Movie(0, "", "", "", 0, "", 0, "", new Date(), []);
     }
 }
