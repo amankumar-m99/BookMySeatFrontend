@@ -41,6 +41,7 @@ export class LoginComponent {
     this.loginService.login(loginFormModel).subscribe({
       next: (user) => {
         CookieData.setCookie("userId", "" + user.id);
+        CookieData.setCookie("role", "" + user.role);
         let role = user.role;
         if (role == "superadmin") {
           this.router.navigate(["/dashboard/super-admin"]);

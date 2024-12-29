@@ -30,7 +30,8 @@
     <div>
         <div class="d-flex justify-content-between">
             <p class="h4">Show times</p>
-            <a [routerLink]="'/dashboard/theater-admin/movie-marketplace/' + this.theaterId" class="btn btn-outline-warning">Add Showtimes</a>
+            <a [routerLink]="'/dashboard/theater-admin/movie-marketplace/' + this.theaterId"
+                class="btn btn-outline-warning">Add Showtimes</a>
         </div>
         <div class="d-flex my-2" style="overflow: auto;">
             <span class="border border-warning rounded-3 text-warning p-2 mx-3">09:30 AM</span>
@@ -43,17 +44,25 @@
     <div class="">
         <div class="d-flex justify-content-between">
             <p class="h4">Shows</p>
-            <a [routerLink]="'/dashboard/theater-admin/theater-show/'+theaterId" class="btn btn-outline-warning">Add Shows</a>
+            <a [routerLink]="'/dashboard/theater-admin/theater-show/'+theaterId" class="btn btn-outline-warning">Add
+                Shows</a>
+        </div>
+        <div class="d-flex my-3" style="overflow: auto;">
+            <div *ngFor="let showtime of theater?.showtimes" class="bg-dark rounded mx-2 p-2 text-center">
+                <div> {{showtime.startHH +":" + showtime.startMM | clockFormat12}} </div>
+                <div class="">{{showtime.movie.title}}</div>
+                <div class="">{{showtime.screen.name}}</div>
+            </div>
         </div>
     </div>
     <hr>
     <div class="">
         <div class="d-flex justify-content-between">
             <p class="h4">Movies</p>
-            <a [routerLink]="'/dashboard/theater-admin/movie-marketplace/' + this.theaterId" class="btn btn-outline-warning">Add Movies</a>
+            <a [routerLink]="'/dashboard/theater-admin/movie-marketplace/' + this.theaterId"
+                class="btn btn-outline-warning">Add Movies</a>
         </div>
         <div class="d-flex my-3" style="overflow: auto;">
-
             <div *ngFor="let movie of theater?.movies" class="card bg-dark text-light mx-3"
                 style="width: 13rem; min-width: 13rem;">
                 <img src="../../../assets/logo.png" class="card-img-top" alt="movie" style="width: 100%;">

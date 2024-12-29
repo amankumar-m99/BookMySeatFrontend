@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/app/model/movie.model';
+import { Showtime } from 'src/app/model/showtime.model';
+import { Theater } from 'src/app/model/theater.model';
 import { MovieService } from 'src/app/services/movie/movie.service';
 
 @Component({
@@ -13,6 +15,7 @@ export class MovieBookingComponent {
   movieId: number;
   movie: Movie;
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private movieService: MovieService
   ) {
@@ -42,5 +45,9 @@ export class MovieBookingComponent {
     let formattedHours = String(hours);
     let formattedMinutes = String(remainingMinutes);
     return `${formattedHours}h ${formattedMinutes}m`;
+  }
+
+  showBoxClicked(theater: Theater, showtime: Showtime){
+    this.router.navigate(['/dashboard/seat-selection', theater.id, showtime.id])
   }
 }

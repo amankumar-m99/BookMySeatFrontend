@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { SignUpFormModel } from 'src/app/model/sign-up-form.model';
 import { SignupService } from 'src/app/services/signup/signup.service';
 
@@ -16,8 +15,6 @@ export class SignUpComponent {
   constructor(
     private formBuilder: FormBuilder,
     private signUpService: SignupService,
-    private router: Router,
-    private activatedroute: ActivatedRoute
   ) {
     this.signUpForm = this.formBuilder.group({
       email: ['', Validators.required],

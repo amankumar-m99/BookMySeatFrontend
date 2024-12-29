@@ -1,0 +1,6 @@
+.show-box {
+    cursor: default;
+}
+.show-box:hover{
+    cursor: pointer;
+}

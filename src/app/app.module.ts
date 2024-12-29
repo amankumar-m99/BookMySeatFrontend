@@ -31,6 +31,8 @@ import { ClockFormat12Pipe } from './pipes/clock-format/clock-format-12.pipe';
 import { ClockFormat24Pipe } from './pipes/clock-format/clock-format-24.pipe';
 import { MinutesToHhmmPipe } from './pipes/time/minutes-to-hhmm/minutes-to-hhmm.pipe';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { SeatSelectionComponent } from './components/seat-selection/seat-selection.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     ClockFormat12Pipe,
     ClockFormat24Pipe,
     MinutesToHhmmPipe,
-    DashboardComponent
+    DashboardComponent,
+    ProfileComponent,
+    SeatSelectionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,3 @@
-import { Theater } from "./theater.model";
-import { UserpersonalDetails } from "./user-personal-details.model"
-
 export class User {
     constructor(
         public id: number,

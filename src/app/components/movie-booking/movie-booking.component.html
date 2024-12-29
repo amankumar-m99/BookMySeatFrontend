@@ -6,12 +6,11 @@
                 <img src="../../../assets/logo.png" class="card-img-top" alt="movie" style="width: 100%;">
             </div>
         </div>
-        <div class="m-3 mx-5">
+        <div class="mx-5">
             <span class="h2 my-2">{{movie.title}}</span>
             <div class="my-3 h5">
                 <span class="text-warning"><i class="bi bi-star-fill"></i></span>
                 <span class="mx-2">{{movie.rating}} / 10</span>
-                <span class="mx-3"></span>
             </div>
             <div class="my-3">
                 <p class="h6">{{movie.genre}}</p>
@@ -21,10 +20,8 @@
                 <span class="badge rounded-pill text-bg-warning mx-2">2D</span>
                 <span class="badge rounded-pill text-bg-warning mx-2">{{movie.language}}</span>
             </div>
-            <div class="my-3 bg-dark p-1">
+            <div class="my-3 bg-dark p-2 rounded">
                 <span class="h6">Releasing on {{movie.releaseDate | date}}</span>
-            </div>
-            <div class="my-3">
             </div>
         </div>
         <div class="my-3 mx-5 w-50 p-3 bg-dark rounded">
@@ -42,7 +39,9 @@
             </div>
         </form>
     </div>
-    <hr>
+    <div class="my-3" *ngIf="movie.theaters.length == 0">
+        <div class="bg-dark rounded text-center p-5 h5">This movie is not avaialable in any theater!</div>
+    </div>
     <div>
         <div *ngFor="let theater of movie.theaters" class="my-3 p-4 rounded bg-dark">
             <div class="row">
@@ -55,9 +54,12 @@
                 </div>
                 <div class="col-9 my-auto">
                     <div class="d-flex">
-                        <span *ngFor="let show of theater.showtimes"
-                            class="mx-2 text-warning border border-warning rounded p-2">
-                            {{show.startHH + ":" +show.startMM | clockFormat12}}
+                        <span *ngFor="let show of theater.showtimes;">
+                            <div *ngIf="show.movie.id == this.movie.id"
+                                class="mx-2 text-warning border border-warning rounded p-2 show-box"
+                                (click)="showBoxClicked(theater, show)">
+                                {{show.startHH + ":" +show.startMM | clockFormat12}}
+                            </div>
                         </span>
                     </div>
                 </div>
