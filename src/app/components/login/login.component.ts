@@ -43,13 +43,13 @@ export class LoginComponent {
         CookieData.setCookie("userId", "" + user.id);
         let role = user.role;
         if (role == "superadmin") {
-          this.router.navigate(["super-admin"]);
+          this.router.navigate(["/dashboard/super-admin"]);
         }
         else if (role == "theateradmin") {
-          this.router.navigate(["theater-admin"]);
+          this.router.navigate(["/dashboard/theater-admin"]);
         }
         else {
-          this.router.navigate(["user"]);
+          this.router.navigate(["/dashboard/user"]);
         }
       },
       error: (error) => {

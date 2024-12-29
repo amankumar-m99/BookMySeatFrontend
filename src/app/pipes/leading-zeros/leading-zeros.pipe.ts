@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'leadingZero'
+  name: 'leadingZeros'
 })
-export class LeadingZeroPipe implements PipeTransform {
+export class LeadingZerosPipe implements PipeTransform {
 
   transform(value: number, digits: number = 2): string {
     return value.toString().padStart(digits, '0');

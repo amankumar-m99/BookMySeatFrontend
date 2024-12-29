@@ -6,21 +6,32 @@
         </div>
     </div>
     <ul class="nav nav-underline">
-        <li class="nav-item mx-3">
-            <a class="nav-link text-light" routerLink="/user/upcoming-bookings" routerLinkActive="active"  aria-current="page">Upcoming Bookings</a>
+        <li class="nav-item mx-3 element" [class.border]="currentTabName == 'Upcoming Bookings'">
+            <span class="nav-link text-light" (click)="tabClick('Upcoming Bookings')">Upcoming Bookings</span>
         </li>
-        <li class="nav-item mx-3">
-            <a class="nav-link text-light" routerLink="/user/completed-bookings" routerLinkActive="active">Completed Bookings</a>
+        <li class="nav-item mx-3 element" [class.border]="currentTabName == 'Completed Bookings'">
+            <span class="nav-link text-light" (click)="tabClick('Completed Bookings')">Completed Bookings</span>
         </li>
-        <li class="nav-item mx-3">
-            <a class="nav-link text-light" routerLink="/user/all-bookings" routerLinkActive="active">All Bookings</a>
+        <li class="nav-item mx-3 element" [class.border]="currentTabName == 'All Bookings'">
+            <span class="nav-link text-light" (click)="tabClick('All Bookings')">All Bookings</span>
         </li>
-        <li class="nav-item mx-3">
-            <a class="nav-link text-light" routerLink="/user/new-booking" routerLinkActive="active">New Booking</a>
+        <li class="nav-item mx-3 element" [class.border]="currentTabName == 'New Booking'">
+            <span class="nav-link text-light" (click)="tabClick('New Booking')">New Booking</span>
         </li>
     </ul>
     <hr>
     <div class="my-3">
-        <router-outlet></router-outlet>
+        <div *ngIf="currentTabName == 'Upcoming Bookings'">
+            <app-upcoming-bookings></app-upcoming-bookings>
+        </div>
+        <div *ngIf="currentTabName == 'Completed Bookings'">
+            <app-completed-bookings></app-completed-bookings>
+        </div>
+        <div *ngIf="currentTabName == 'All Bookings'">
+            <app-all-bookings></app-all-bookings>
+        </div>
+        <div *ngIf="currentTabName == 'New Booking'">
+            <app-new-booking></app-new-booking>
+        </div>
     </div>
 </div>

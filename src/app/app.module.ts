@@ -26,7 +26,11 @@ import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-
 import { ToastComponent } from './components/toast/toast.component';
 import { ShowComponent } from './components/show/show.component';
 import { TheaterListComponent } from './components/theater-list/theater-list.component';
-import { LeadingZeroPipe } from './pipes/leading-zero.pipe';
+import { LeadingZerosPipe } from './pipes/leading-zeros/leading-zeros.pipe';
+import { ClockFormat12Pipe } from './pipes/clock-format/clock-format-12.pipe';
+import { ClockFormat24Pipe } from './pipes/clock-format/clock-format-24.pipe';
+import { MinutesToHhmmPipe } from './pipes/time/minutes-to-hhmm/minutes-to-hhmm.pipe';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,11 @@ import { LeadingZeroPipe } from './pipes/leading-zero.pipe';
     ToastComponent,
     ShowComponent,
     TheaterListComponent,
-    LeadingZeroPipe
+    LeadingZerosPipe,
+    ClockFormat12Pipe,
+    ClockFormat24Pipe,
+    MinutesToHhmmPipe,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

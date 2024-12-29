@@ -5,8 +5,21 @@
             BookMySeat
         </a>
         <div>
-            <button class="btn btn-outline-warning mx-2" (click)="login()">Login</button>
-            <button class="btn btn-outline-warning mx-2" (click)="signup()">Sign Up</button>
+            <div *ngIf="isLoggedIn" class="me-2 p-2">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class=""><i class="bi bi-person-circle"></i></span>
+                        <span class="mx-2">{{user?.email}}</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><span class="dropdown-item" (click)="logout()">Logout</span></li>
+                    </ul>
+                  </div>
+            </div>
+            <div *ngIf="!isLoggedIn">
+                <a class="btn btn-outline-warning mx-2" [routerLink]="'/login'">Login</a>
+                <a class="btn btn-outline-warning mx-2" [routerLink]="'/signup'">Sign Up</a>
+            </div>
         </div>
     </div>
 </nav>

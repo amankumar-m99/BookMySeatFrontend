@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AppData } from 'src/app/data/app.data';
 import { CookieData } from 'src/app/data/cookie.data';
 import { TheaterFormModel } from 'src/app/model/theater-form.model';
 import { Theater } from 'src/app/model/theater.model';
@@ -20,9 +18,7 @@ export class TheaterAdminComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private theaterService: TheaterService,
-    private router: Router,
-    private activatedroute: ActivatedRoute
+    private theaterService: TheaterService
   ) {
     this.theaters = [];
     this.userId = 0;

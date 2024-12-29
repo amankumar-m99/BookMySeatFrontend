@@ -31,8 +31,4 @@ export class AllMoviesComponent {
       complete: () => { }
     });
   }
-
-  getRouterLink(id: number): string {
-    return "/user/new-booking/movie/" + id;
-  }
 }

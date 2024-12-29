@@ -24,7 +24,7 @@ export class CookieData {
 
     public static hasCookie(cookie: string): boolean {
         let result = this.getCookie(cookie);
-        if (result === undefined || result == null) {
+        if (result === undefined || result == null || result == "") {
             return false;
         }
         return true;

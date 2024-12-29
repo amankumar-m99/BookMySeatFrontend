@@ -40,8 +40,4 @@ export class TheaterActionsComponent {
     });
   }
 
-  getRouterLink(): string {
-    return "/movie-marketplace/" + this.theaterId;
-  }
-
 }

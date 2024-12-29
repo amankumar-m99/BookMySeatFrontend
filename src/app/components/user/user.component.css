@@ -1,0 +1,9 @@
+.element {
+    /* Default cursor style */
+    cursor: default;
+}
+
+.element:hover {
+    /* Cursor changes to a pointer on hover */
+    cursor: pointer;
+}
