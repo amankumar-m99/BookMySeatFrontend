@@ -1,5 +1,6 @@
 import { Movie } from "./movie.model";
 import { Showtime } from "./showtime.model";
+import { Timeslot } from "./timeslot.model";
 
 export class Theater {
 
@@ -9,6 +10,7 @@ export class Theater {
         public location: string,
         public phoneNumber: string,
         public ownerId: number,
+        public timeslots: Timeslot[],
         public movies: Movie[],
         public showtimes: Showtime[],
         public screens: Screen[],
