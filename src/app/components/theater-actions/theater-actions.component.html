@@ -30,8 +30,42 @@
     <div>
         <div class="d-flex justify-content-between">
             <p class="h4">Timeslots</p>
-            <a [routerLink]="'/dashboard/theater-admin/movie-marketplace/' + this.theaterId"
-                class="btn btn-outline-warning">Add Timeslots</a>
+            <button class="btn btn-outline-warning" type="button" data-bs-toggle="modal"
+                data-bs-target="#addTimeslotsModal">Add Timeslots</button>
+            <!-- modal -->
+            <div class="modal fade" id="addTimeslotsModal" data-bs-backdrop="static" data-bs-keyboard="true"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content dark-my-modal">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Timeslots</h1>
+                            <button type="button" class="btn-close dark-modal-cross-btn" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="text-center p-3 bg-dark rounded" [formGroup]="addTimeslotsForm" (ngSubmit)="submitTimeslotForm()">
+                                <div class="form-floating my-3">
+                                    <input type="number" class="form-control dark-input" id="floatingInput" min="0" max="23"
+                                        placeholder="Hours" formControlName="startHH">
+                                    <label for="floatingInput">Start hours</label>
+                                </div>
+
+                                <div class="form-floating my-3">
+                                    <input type="number" class="form-control dark-input" id="floatingPassword" min="0" max="59"
+                                        placeholder="Minutes" formControlName="startMM">
+                                    <label for="floatingPassword">Start minutes</label>
+                                </div>
+                                <!-- <button class="btn btn-warning w-75 py-2" type="submit">Log in</button> -->
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                #cancelAddTimeslotsModalButton>Cancel</button>
+                            <button type="button" class="btn btn-warning" (click)="submitTimeslotForm()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="d-flex my-2" style="overflow: auto;">
             <span *ngFor="let timeslot of theater?.timeslots"
@@ -44,8 +78,30 @@
     <div class="">
         <div class="d-flex justify-content-between">
             <p class="h4">Shows</p>
-            <a [routerLink]="'/dashboard/theater-admin/theater-show/'+theaterId" class="btn btn-outline-warning">Add
-                Shows</a>
+            <a [routerLink]="'/dashboard/theater-admin/theater-show/'+theaterId"></a>
+
+            <button class="btn btn-outline-warning" type="button" data-bs-toggle="modal"
+                data-bs-target="#addShowsModal">Add Shows</button>
+            <!-- modal -->
+            <div class="modal fade" id="addShowsModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content dark-my-modal">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add shows</h1>
+                            <button type="button" class="btn-close dark-modal-cross-btn" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            You shall be logged out. Continue?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                #cancelbutton>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="d-flex my-3" style="overflow: auto;">
             <div *ngFor="let showtime of theater?.showtimes" class="bg-dark rounded mx-2 p-2 text-center">

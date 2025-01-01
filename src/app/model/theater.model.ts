@@ -5,7 +5,7 @@ import { Timeslot } from "./timeslot.model";
 export class Theater {
 
     constructor(
-        public id: Number,
+        public id: number,
         public name: string,
         public location: string,
         public phoneNumber: string,

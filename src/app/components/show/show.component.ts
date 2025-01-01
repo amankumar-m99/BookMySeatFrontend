@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CookieData } from 'src/app/data/cookie.data';
-import { LoginFormModel } from 'src/app/model/login-form.model';
+import { ActivatedRoute } from '@angular/router';
 import { Movie } from 'src/app/model/movie.model';
 import { ShowtimeForm } from 'src/app/model/showtime-form.model';
-import { LoginService } from 'src/app/services/login/login.service';
-import { MovieService } from 'src/app/services/movie/movie.service';
 import { ShowtimeService } from 'src/app/services/showtime/showtime.service';
 import { TheaterService } from 'src/app/services/theater/theater.service';
 
@@ -24,9 +20,7 @@ export class ShowComponent {
   constructor(
     private formBuilder: FormBuilder,
     private theaterService: TheaterService,
-    private movieService: MovieService,
     private showtimeService: ShowtimeService,
-    private router: Router,
     private activatedroute: ActivatedRoute
   ) {
     this.movies = [];
