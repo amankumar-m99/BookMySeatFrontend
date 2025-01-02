@@ -1,10 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ShowtimeForm } from 'src/app/model/showtime-form.model';
 import { Theater } from 'src/app/model/theater.model';
 import { TimeslotRequestDTO } from 'src/app/model/timeslot-request-dto.model';
-import { Timeslot } from 'src/app/model/timeslot.model';
 import { ShowtimeService } from 'src/app/services/showtime/showtime.service';
 import { TheaterService } from 'src/app/services/theater/theater.service';
 import { TimeslotService } from 'src/app/services/timeslot/timeslot.service';
@@ -14,15 +13,16 @@ import { TimeslotService } from 'src/app/services/timeslot/timeslot.service';
   templateUrl: './theater-actions.component.html',
   styleUrls: ['./theater-actions.component.css']
 })
-export class TheaterActionsComponent {
+export class TheaterActionsComponent implements OnInit {
 
   theaterId: number;
-  theater!: Theater;
+  theater?: Theater;
   addTimeslotsForm: FormGroup;
   addShowsForm: FormGroup;
-  timeslots: Timeslot[];
 
-  @ViewChild('cancelAddTimeslotsModalButton') modalCloseBtn!: ElementRef;
+  @ViewChild('cancelAddTimeslotsModalButton') modalCloseBtn?: ElementRef;
+  @ViewChild('openAddShowFormModal') openAddShowFormModal?: ElementRef;
+  @ViewChild('closeAddShowFormModalButton') closeAddShowFormModalButton?: ElementRef;
 
   constructor(
     private theaterService: TheaterService,
@@ -31,46 +31,46 @@ export class TheaterActionsComponent {
     private showtimeService: ShowtimeService,
     private timeslotService: TimeslotService
   ) {
-    if (this.activatedroute.snapshot.paramMap?.has("theaterId")) {
-      this.theaterId = Number(this.activatedroute.snapshot.paramMap.get("theaterId"));
-      this.fetchData();
-    }
     this.theaterId = 0;
-    this.timeslots = [];
     this.addTimeslotsForm = this.formBuilder.group({
       startHH: ['', Validators.required],
       startMM: ['', Validators.required]
     });
-    this.addShowsForm = this.formBuilder.group({});
+    this.addShowsForm = this.formBuilder.group({
+      timeslotsFormChecks: this.formBuilder.array([]),
+      dayToday: [false, Validators.required],
+      dayTomorrow: [false, Validators.required],
+      dayThisWeek: [false, Validators.required],
+      dayNextWeek: [true, Validators.required],
+      movieId: ["0", Validators.required]
+    });
+  }
+  ngOnInit(): void {
+    if (this.activatedroute.snapshot.paramMap?.has("theaterId")) {
+      this.theaterId = Number(this.activatedroute.snapshot.paramMap.get("theaterId"));
+      this.fetchData();
+    }
   }
 
   fetchData(): void {
     this.theaterService.getTheaterById(this.theaterId).subscribe({
-      next: (response) => {
-        this.theater = response;
-        this.timeslots = this.theater.timeslots;
-      },
-      error: (error) => {
-        alert(error);
-      },
+      next: (response) => this.theater = response,
+      error: (error) => alert(error),
       complete: () => { }
     });
   }
 
-  submitTimeslotForm(): void {
-    if (this.addTimeslotsForm.invalid) {
-      alert("Invalid form");
-      return;
-    }
-    this.modalCloseBtn.nativeElement.click();
-    let startHH = this.addTimeslotsForm.get("startHH")?.value;
-    let startMM = this.addTimeslotsForm.get("startMM")?.value;
-    let timeslotRequestDTO = new TimeslotRequestDTO(Number(startHH), Number(startMM), this.theater.id);
-    this.timeslotService.addTimeSlot(timeslotRequestDTO).subscribe({
-      next: (response) => { this.timeslots.push(response) },
-      error: (error) => { alert(error.message); }
-    });
+  initAddShowForm(): void {
+    this.refeshTimeSlotsCheckBoxes();
+    this.openAddShowFormModal?.nativeElement.click();
+  }
 
+  refeshTimeSlotsCheckBoxes(): void {
+    let checkBoxrray = this.timeslotsFormChecksArray;
+    checkBoxrray.clear();
+    this.theater?.timeslots.forEach(timeslot => {
+      checkBoxrray.push(this.formBuilder.control(true, Validators.required));
+    })
   }
 
   submitShowsForm(): void {
@@ -78,20 +78,38 @@ export class TheaterActionsComponent {
       alert("Invalid form.");
       return;
     }
+    this.closeAddShowFormModalButton?.nativeElement.click();
     let movieId: string = this.addShowsForm.get("movieId")?.value;
     let formModel: ShowtimeForm[] = [];
-    formModel.push(new ShowtimeForm(Number(movieId), 2, this.theaterId, 9, 30));
-    formModel.push(new ShowtimeForm(Number(movieId), 2, this.theaterId, 1, 0));
-    formModel.push(new ShowtimeForm(Number(movieId), 2, this.theaterId, 5, 0));
-    formModel.push(new ShowtimeForm(Number(movieId), 2, this.theaterId, 7, 0));
+    for(let i=0; i< this.timeslotsFormChecksArray?.length; i++){
+      let timeslot = this.theater?.timeslots?.[i];
+      if(timeslot != undefined && timeslot!=null && this.timeslotsFormChecksArray.value[i]){
+        formModel.push(new ShowtimeForm(Number(movieId), 2, this.theaterId, timeslot.id));
+      }
+    }
     this.showtimeService.addShowtime(formModel).subscribe({
-      next: (showtime) => {
-        alert("Added.")
-      },
-      error: (error) => {
-        alert(error.status + " " + error.message);
-      },
+      next: (showtime) => alert("Added."),
+      error: (error) => alert(error.status + ":" + error.message),
       complete: () => { }
+    });
+  }
+
+  get timeslotsFormChecksArray() {
+    return this.addShowsForm.get('timeslotsFormChecks') as FormArray;
+  }
+
+  submitTimeslotForm(): void {
+    if (this.addTimeslotsForm.invalid) {
+      alert("Invalid form");
+      return;
+    }
+    this.modalCloseBtn?.nativeElement.click();
+    let startHH = this.addTimeslotsForm.get("startHH")?.value;
+    let startMM = this.addTimeslotsForm.get("startMM")?.value;
+    let timeslotRequestDTO = new TimeslotRequestDTO(Number(startHH), Number(startMM), this.theaterId);
+    this.timeslotService.addTimeSlot(timeslotRequestDTO).subscribe({
+      next: (response) => { this.theater?.timeslots.push(response) },
+      error: (error) => { alert(error.message); }
     });
   }
 

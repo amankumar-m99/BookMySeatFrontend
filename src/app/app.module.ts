@@ -24,7 +24,6 @@ import { TheaterActionsComponent } from './components/theater-actions/theater-ac
 import { MovieBookingComponent } from './components/movie-booking/movie-booking.component';
 import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-marketplace.component';
 import { ToastComponent } from './components/toast/toast.component';
-import { ShowComponent } from './components/show/show.component';
 import { TheaterListComponent } from './components/theater-list/theater-list.component';
 import { LeadingZerosPipe } from './pipes/leading-zeros/leading-zeros.pipe';
 import { ClockFormat12Pipe } from './pipes/clock-format/clock-format-12.pipe';
@@ -56,7 +55,6 @@ import { SeatSelectionComponent } from './components/seat-selection/seat-selecti
     MovieBookingComponent,
     MovieMarketplaceComponent,
     ToastComponent,
-    ShowComponent,
     TheaterListComponent,
     LeadingZerosPipe,
     ClockFormat12Pipe,

@@ -4,7 +4,7 @@ export class CookieData {
         const d = new Date();
         d.setTime(d.getTime() + (0.25 * 24 * 60 * 60 * 1000)); // 6 hrs
         let expires = "expires=" + d.toUTCString();
-        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        document.cookie = name + "=" + value + ";" + expires + ";path=/"; // userid=12;expires1222233;path=book/ids;
     }
 
     public static getCookie(cname: string) {

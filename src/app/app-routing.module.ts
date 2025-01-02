@@ -10,7 +10,6 @@ import { SuperAdminComponent } from './components/super-admin/super-admin.compon
 import { TheaterActionsComponent } from './components/theater-actions/theater-actions.component';
 import { MovieBookingComponent } from './components/movie-booking/movie-booking.component';
 import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-marketplace.component';
-import { ShowComponent } from './components/show/show.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TheaterListComponent } from './components/theater-list/theater-list.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -25,7 +24,6 @@ const routes: Routes = [
         path: 'theater-admin', component: TheaterAdminComponent, children: [
           { path: "", pathMatch: 'full', component: TheaterListComponent },
           { path: "theater/:theaterId", component: TheaterActionsComponent },
-          { path: "theater-show/:theaterId", component: ShowComponent },
           { path: "movie-marketplace/:theaterId", component: MovieMarketplaceComponent },
         ]
       },
