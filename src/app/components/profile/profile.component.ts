@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieData } from 'src/app/data/cookie.data';
+import { AppData } from 'src/app/data/app.data';
 import { UserPersonalDetails } from 'src/app/model/user-personal-details.model';
 import { UserPersonalDetailsService } from 'src/app/services/user/user-personal-details.service';
 
@@ -19,8 +19,8 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (CookieData.hasCookie("userId")) {
-      this.fetchData(Number(CookieData.getCookie("userId")));
+    if (AppData.isLoggedIn()) {
+      this.fetchData(Number(localStorage.getItem("userId")));
     }
   }
 

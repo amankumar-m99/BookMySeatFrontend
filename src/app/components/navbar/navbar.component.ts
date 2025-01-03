@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieData } from 'src/app/data/cookie.data';
+import { AppData } from 'src/app/data/app.data';
 import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private userService: UserService
   ) {
-    if (CookieData.hasCookie("userId")) {
+    if (AppData.isLoggedIn()) {
       this.isLoggedIn = true;
     }
     else {
@@ -29,9 +29,9 @@ export class NavbarComponent implements OnInit {
     if (!this.isLoggedIn) {
       return;
     }
-    this.userService.getUserById(Number(CookieData.getCookie("userId"))).subscribe({
-      next: (response) => { this.user = response },
-      error: (error) => { alert("Error in fetching user data."); }
+    this.userService.getUserById(Number(localStorage.getItem("userId"))).subscribe({
+      next: (response) => this.user = response,
+      error: (error) => alert("Error in fetching user data.")
     });
   }
 
@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(): void {
-    CookieData.deleteCookie("userId");
+    AppData.logout();
     this.router.navigate(['/']);
   }
 }

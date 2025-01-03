@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CookieData } from 'src/app/data/cookie.data';
 import { TheaterFormModel } from 'src/app/model/theater-form.model';
 import { Theater } from 'src/app/model/theater.model';
 import { TheaterService } from 'src/app/services/theater/theater.service';
@@ -31,8 +30,8 @@ export class TheaterListComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    if (CookieData.hasCookie("userId")) {
-      this.userId = Number(CookieData.getCookie("userId"));
+    if (localStorage.getItem("userId")) {
+      this.userId = Number(localStorage.getItem("userId"));
       this.fetchTheaters();
     }
   }

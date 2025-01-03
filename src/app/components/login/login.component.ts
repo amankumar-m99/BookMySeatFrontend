@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CookieData } from 'src/app/data/cookie.data';
+import { AppData } from 'src/app/data/app.data';
 import { LoginFormModel } from 'src/app/model/login-form.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
@@ -40,17 +40,11 @@ export class LoginComponent {
     let loginFormModel = new LoginFormModel(username, password);
     this.loginService.login(loginFormModel).subscribe({
       next: (user) => {
-        CookieData.setCookie("userId", "" + user.id);
-        CookieData.setCookie("role", "" + user.role);
-        let role = user.role;
-        if (role == "superadmin") {
-          this.router.navigate(["/dashboard/super-admin"]);
-        }
-        else if (role == "theateradmin") {
-          this.router.navigate(["/dashboard/theater-admin"]);
-        }
-        else {
-          this.router.navigate(["/dashboard/user"]);
+        AppData.logIn(String(user.id), String(user.role));
+        switch (user.role) {
+          case "superadmin": this.router.navigate(["/dashboard/super-admin"]); break;
+          case "theateradmin": this.router.navigate(["/dashboard/theater-admin"]); break;
+          default: this.router.navigate(["/dashboard/user"]); break;
         }
       },
       error: (error) => {
