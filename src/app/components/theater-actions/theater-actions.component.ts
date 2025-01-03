@@ -23,6 +23,7 @@ export class TheaterActionsComponent implements OnInit {
   @ViewChild('cancelAddTimeslotsModalButton') modalCloseBtn?: ElementRef;
   @ViewChild('openAddShowFormModal') openAddShowFormModal?: ElementRef;
   @ViewChild('closeAddShowFormModalButton') closeAddShowFormModalButton?: ElementRef;
+  @ViewChild('customDatePicker') customDatePicker?: ElementRef;
 
   constructor(
     private theaterService: TheaterService,
@@ -50,6 +51,10 @@ export class TheaterActionsComponent implements OnInit {
       this.theaterId = Number(this.activatedroute.snapshot.paramMap.get("theaterId"));
       this.fetchData();
     }
+    this.customDatePicker?.nativeElement.datepicker({
+      multidate: true,
+      format: 'dd-mm-yyyy'
+    });
   }
 
   fetchData(): void {

@@ -58,7 +58,7 @@
                             <div *ngIf="show.movie.id == this.movie.id"
                                 class="mx-2 text-warning border border-warning rounded p-2 show-box"
                                 (click)="showBoxClicked(theater, show)">
-                                {{show.startHH + ":" +show.startMM | clockFormat12}}
+                                {{show.timeslot.startHH + ":" +show.timeslot.startMM | clockFormat12}}
                             </div>
                         </span>
                     </div>

@@ -9,13 +9,13 @@
     </div>
     <div>
         <span class="mx-2">Show:</span>
-        <span class="mx-2">{{showtime?.startHH +":" + showtime?.startMM | clockFormat12}}</span>
+        <span class="mx-2">{{showtime?.timeslot?.startHH+":"+showtime?.timeslot?.startHH | clockFormat12}}</span>
     </div>
     <hr>
     <div class="row">
         <div class="col-9">
             <div class="d-flex justify-content-center my-3">
-                <span class="border border-warning rounded p-3 w-50 text-center text-warning h5">Screen this way</span>
+                <span class="border border-warning rounded p-3 w-50 text-center text-warning h5 mx-1">Screen this way</span>
             </div>
             <div *ngFor="let row of rows" class="d-flex justify-content-center my-3">
                 <button *ngFor="let col of cols" class="btn btn-outline-secondary mx-4 p-2"
