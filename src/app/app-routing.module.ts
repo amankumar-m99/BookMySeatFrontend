@@ -14,11 +14,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TheaterListComponent } from './components/theater-list/theater-list.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SeatSelectionComponent } from './components/seat-selection/seat-selection.component';
+import { AuthGuard } from './guards/auth/auth.guard';
+import { LoginGuard } from './guards/login/login.guard';
 
 const routes: Routes = [
-  { path: "home", component: HomeComponent },
+  { path: "home", component: HomeComponent, canActivate: [LoginGuard] },
   {
-    path: "dashboard", component: DashboardComponent, children: [
+    path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard], children: [
       { path: 'super-admin', component: SuperAdminComponent },
       {
         path: 'theater-admin', component: TheaterAdminComponent, children: [
@@ -33,8 +35,8 @@ const routes: Routes = [
       { path: "seat-selection/:theaterId/:showtimeId", component: SeatSelectionComponent },
     ]
   },
-  { path: "login", component: LoginComponent },
-  { path: "signup", component: SignUpComponent },
+  { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
+  { path: "signup", component: SignUpComponent, canActivate: [LoginGuard] },
   { path: "", redirectTo: "home", pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
