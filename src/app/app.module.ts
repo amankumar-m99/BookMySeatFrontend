@@ -32,6 +32,7 @@ import { MinutesToHhmmPipe } from './pipes/time/minutes-to-hhmm/minutes-to-hhmm.
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SeatSelectionComponent } from './components/seat-selection/seat-selection.component';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { SeatSelectionComponent } from './components/seat-selection/seat-selecti
     MinutesToHhmmPipe,
     DashboardComponent,
     ProfileComponent,
-    SeatSelectionComponent
+    SeatSelectionComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

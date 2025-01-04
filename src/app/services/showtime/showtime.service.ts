@@ -12,8 +12,8 @@ export class ShowtimeService {
 
   constructor(private httpClient: HttpClient) { }
 
-  addShowtime(formModel: ShowtimeForm[]): Observable<Showtime> {
-    return this.httpClient.post<Showtime>(AppData.baseUrl + "/showtime", formModel);
+  addShowtime(formModel: ShowtimeForm[]): Observable<Showtime[]> {
+    return this.httpClient.post<Showtime[]>(AppData.baseUrl + "/showtime", formModel);
   }
 
 }

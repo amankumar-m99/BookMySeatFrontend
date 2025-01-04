@@ -15,11 +15,13 @@
     <div class="row">
         <div class="col-9">
             <div class="d-flex justify-content-center my-3">
-                <span class="border border-warning rounded p-3 w-50 text-center text-warning h5 mx-1">Screen this way</span>
+                <span class="border border-warning rounded p-3 w-50 text-center text-warning h5 mx-1">Screen this
+                    way</span>
             </div>
-            <div *ngFor="let row of rows" class="d-flex justify-content-center my-3">
-                <button *ngFor="let col of cols" class="btn btn-outline-secondary mx-4 p-2"
-                    style="width:50px; height:50px;">{{row + " " + col}}</button>
+            <div *ngFor="let row of ticketArr let i = index" class="d-flex justify-content-center my-3">
+                <button *ngFor="let col of row let j = index" class="btn mx-4 p-2" [ngClass]="classesArr[i][j]"
+                    [title]="getTooltipContent(i,j)" style="width:50px; height:50px;"
+                    (click)="seatClicked(i,j)">{{col.seatNumber}}</button>
             </div>
         </div>
         <div class="col-3 pt-5">
@@ -39,7 +41,7 @@
             </div>
             <div class="bg-dark rounded p-2 mt-3">
                 <p class="text-center h6">My selection</p>
-                <p class="text-center h6">{{selectionCount}}</p>
+                <p class="text-center h6">{{myBooking.length}}</p>
             </div>
             <div class="pt-2 mt-3">
                 <button class="btn btn-outline-warning">Book &amp; Checkout</button>

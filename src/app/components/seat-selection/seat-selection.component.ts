@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/app/model/movie.model';
 import { Showtime } from 'src/app/model/showtime.model';
 import { Theater } from 'src/app/model/theater.model';
+import { Ticket } from 'src/app/model/ticket.model';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { TheaterService } from 'src/app/services/theater/theater.service';
 
@@ -18,14 +19,17 @@ export class SeatSelectionComponent {
   theater?: Theater;
   showtimeId: number = 0;
   showtime?: Showtime;
-  cols = [1,2,3,4,5,6]
-  rows = ['A', 'B', 'C', 'D', 'E']
-  selectionCount:number = 0;
+  ticketArr: Ticket[][];
+  classesArr: string[][];
+  myBooking: string[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private theaterService: TheaterService
   ) {
+    this.ticketArr = [];
+    this.classesArr = [];
+    this.myBooking = [];
     if (this.activatedRoute.snapshot.paramMap?.has("showtimeId")) {
       this.showtimeId = Number(this.activatedRoute.snapshot.paramMap.get("showtimeId"));
       if (this.activatedRoute.snapshot.paramMap?.has("theaterId")) {
@@ -41,10 +45,51 @@ export class SeatSelectionComponent {
         this.theater = response;
         this.showtime = this.theater.showtimes.find(x => x.id == this.showtimeId);
         this.movie = this.theater.movies.find(x => x.id == this.showtime?.movie.id);
+        if (this.showtime != undefined) {
+          let cols = this.showtime.screen.maximumCols;
+          for (let i = 0; i < this.showtime.screen.maximumRows; i++) {
+            for (let j = 0; j < cols; j++) {
+              if (this.ticketArr[i] == undefined || this.ticketArr[i] == null) {
+                this.ticketArr[i] = [];
+                this.classesArr[i] = [];
+              }
+              let ticket = this.showtime?.tickets[(cols * i) + j];
+              this.ticketArr[i].push(ticket);
+              this.classesArr[i].push(ticket.isBooked ? "btn-outline-danger" : "btn-outline-secondary");
+            }
+          }
+        }
       },
       error: (error) => { },
       complete: () => { }
     });
+  }
+
+  getTooltipContent(i: number, j: number): string {
+    if (this.ticketArr[i][j].isBooked) {
+      return "Taken";
+    }
+    let isMyBooked = this.myBooking.find(x => x == (i + ":" + j));
+    if (isMyBooked == undefined || isMyBooked == null) {
+      return "Available";
+    }
+    return "Selected";
+  }
+
+  seatClicked(i: number, j: number): void {
+    // alert(i + ":" + j + this.ticketArr[i][j].isBooked);
+    if (this.ticketArr[i][j].isBooked) {
+      return;
+    }
+    let isMyBooked = this.myBooking.find(x => x == (i + ":" + j));
+    if (isMyBooked == undefined || isMyBooked == null) {
+      this.classesArr[i][j] = "btn-warning";
+      this.myBooking.push(i + ":" + j);
+    }
+    else {
+      this.myBooking = this.myBooking.filter(x => x != (i + ":" + j))
+      this.classesArr[i][j] = "btn-outline-secondary";
+    }
   }
 
 }

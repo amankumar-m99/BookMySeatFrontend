@@ -7,6 +7,7 @@ import { TimeslotRequestDTO } from 'src/app/model/timeslot-request-dto.model';
 import { ShowtimeService } from 'src/app/services/showtime/showtime.service';
 import { TheaterService } from 'src/app/services/theater/theater.service';
 import { TimeslotService } from 'src/app/services/timeslot/timeslot.service';
+import { DateUtils } from 'src/app/utils/date-utils';
 
 @Component({
   selector: 'app-theater-actions',
@@ -19,6 +20,7 @@ export class TheaterActionsComponent implements OnInit {
   theater?: Theater;
   addTimeslotsForm: FormGroup;
   addShowsForm: FormGroup;
+  minDate: String;
 
   @ViewChild('cancelAddTimeslotsModalButton') modalCloseBtn?: ElementRef;
   @ViewChild('openAddShowFormModal') openAddShowFormModal?: ElementRef;
@@ -33,18 +35,17 @@ export class TheaterActionsComponent implements OnInit {
     private timeslotService: TimeslotService
   ) {
     this.theaterId = 0;
+    this.minDate = "";
     this.addTimeslotsForm = this.formBuilder.group({
       startHH: ['', Validators.required],
       startMM: ['', Validators.required]
     });
     this.addShowsForm = this.formBuilder.group({
-      timeslotsFormChecks: this.formBuilder.array([]),
-      dayToday: [false, Validators.required],
-      dayTomorrow: [false, Validators.required],
-      dayThisWeek: [false, Validators.required],
-      dayNextWeek: [true, Validators.required],
+      fromDate: ["", Validators.required],
+      toDate: ["", Validators.required],
       screenId: ["0", Validators.required],
-      movieId: ["0", Validators.required]
+      movieId: ["0", Validators.required],
+      timeslotsFormChecks: this.formBuilder.array([]),
     });
   }
   ngOnInit(): void {
@@ -68,6 +69,7 @@ export class TheaterActionsComponent implements OnInit {
 
   initAddShowForm(): void {
     this.refeshTimeSlotsCheckBoxes();
+    this.minDate = DateUtils.getTodayDateString();
     this.openAddShowFormModal?.nativeElement.click();
   }
 
@@ -84,20 +86,59 @@ export class TheaterActionsComponent implements OnInit {
       alert("Invalid form.");
       return;
     }
-    this.closeAddShowFormModalButton?.nativeElement.click();
+    let fromDateValue: string = this.addShowsForm.get("fromDate")?.value;
+    let toDateValue: string = this.addShowsForm.get("toDate")?.value;
+    let screenId: string = this.addShowsForm.get("screenId")?.value;
     let movieId: string = this.addShowsForm.get("movieId")?.value;
-    let formModel: ShowtimeForm[] = [];
-    for(let i=0; i< this.timeslotsFormChecksArray?.length; i++){
-      let timeslot = this.theater?.timeslots?.[i];
-      if(timeslot != undefined && timeslot!=null && this.timeslotsFormChecksArray.value[i]){
-        formModel.push(new ShowtimeForm(Number(movieId), 2, this.theaterId, timeslot.id));
-      }
+    let fromDate: Date = new Date(Date.parse(fromDateValue));
+    let toDate: Date = new Date(Date.parse(toDateValue));
+    if (fromDate < new Date()) {
+      alert("'From' date connot be older than today.");
+      return;
+    }
+    if (fromDate > toDate) {
+      alert("'To' date is earlier than 'From' date.");
+      return;
+    }
+    if (screenId == "0") {
+      alert("Please select a screen.");
+      return;
+    }
+    if (movieId == "0") {
+      alert("Please select a movie.");
+      return;
+    }
+    let formModel = this.generateShowtimeFormArray(fromDate, toDate, movieId, screenId);
+    if (formModel.length == 0) {
+      alert("Please choose at least one timeslot.");
+      return;
     }
     this.showtimeService.addShowtime(formModel).subscribe({
-      next: (showtime) => alert("Added."),
+      next: (showtimes) => {
+        showtimes.forEach(showtime => {
+          this.theater?.showtimes.push(showtime);
+        });
+        this.closeAddShowFormModalButton?.nativeElement.click();
+        alert("Added.")
+      },
       error: (error) => alert(error.status + ":" + error.message),
       complete: () => { }
     });
+  }
+
+  generateShowtimeFormArray(fromDate: Date, toDate: Date, movieId: string, screenId: string): ShowtimeForm[] {
+    let arr: ShowtimeForm[] = [];
+    let currentDate = new Date(fromDate);
+    while (currentDate <= toDate) {
+      for (let i = 0; i < this.timeslotsFormChecksArray?.length; i++) {
+        let timeslot = this.theater?.timeslots?.[i];
+        if (timeslot != undefined && timeslot != null && this.timeslotsFormChecksArray.value[i]) {
+          arr.push(new ShowtimeForm(this.theaterId, Number(screenId), Number(movieId), timeslot.id, new Date(currentDate)));
+        }
+      }
+      currentDate.setDate(currentDate.getDate() + 1); // Increment by one day
+    }
+    return arr;
   }
 
   get timeslotsFormChecksArray() {
