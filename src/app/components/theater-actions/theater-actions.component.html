@@ -98,8 +98,9 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="bg-dark rounded p-3" [formGroup]="addShowsForm" (ngSubmit)="submitShowsForm()">
-                                <div class="my-2">
+                            <form class="bg-dark rounded p-1 px-3" [formGroup]="addShowsForm"
+                                (ngSubmit)="submitShowsForm()">
+                                <div class="">
                                     Time-slot
                                     <div formArrayName="timeslotsFormChecks"
                                         *ngFor="let item of timeslotsFormChecksArray?.controls let i=index"
@@ -132,6 +133,17 @@
                                             formControlName="dayNextWeek">
                                         <label class="form-check-label" for="day-next-week">Next whole week</label>
                                     </div>
+                                </div>
+
+                                <div class="my-2">
+                                    <select class="form-select" aria-label="Default select example"
+                                        formControlName="screenId">
+                                        <option class="dropdown-item" selected [value]="0">-- Select the screen --
+                                        </option>
+                                        <option class="dropdown-item"
+                                            *ngFor="let screen of theater?.screens let i = index" [value]="screen.id">
+                                            {{screen.name}}</option>
+                                    </select>
                                 </div>
 
                                 <div class="my-2">

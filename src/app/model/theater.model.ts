@@ -1,6 +1,7 @@
 import { Movie } from "./movie.model";
 import { Showtime } from "./showtime.model";
 import { Timeslot } from "./timeslot.model";
+import { Screen } from "./screen.model"
 
 export class Theater {
 

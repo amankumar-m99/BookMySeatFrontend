@@ -43,6 +43,7 @@ export class TheaterActionsComponent implements OnInit {
       dayTomorrow: [false, Validators.required],
       dayThisWeek: [false, Validators.required],
       dayNextWeek: [true, Validators.required],
+      screenId: ["0", Validators.required],
       movieId: ["0", Validators.required]
     });
   }
