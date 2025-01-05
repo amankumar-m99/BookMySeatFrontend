@@ -55,7 +55,7 @@ export class SeatSelectionComponent {
               }
               let ticket = this.showtime?.tickets[(cols * i) + j];
               this.ticketArr[i].push(ticket);
-              this.classesArr[i].push(ticket.isBooked ? "btn-outline-danger" : "btn-outline-secondary");
+              this.classesArr[i].push(ticket.isBooked ? "btn-outline-danger" : "btn-outline-light");
             }
           }
         }
@@ -71,13 +71,12 @@ export class SeatSelectionComponent {
     }
     let isMyBooked = this.myBooking.find(x => x == (i + ":" + j));
     if (isMyBooked == undefined || isMyBooked == null) {
-      return "Available";
+      return "Available, " + '\u20B9' + this.ticketArr[i][j].price;
     }
-    return "Selected";
+    return "Selected, " + '\u20B9' + this.ticketArr[i][j].price;
   }
 
   seatClicked(i: number, j: number): void {
-    // alert(i + ":" + j + this.ticketArr[i][j].isBooked);
     if (this.ticketArr[i][j].isBooked) {
       return;
     }
@@ -88,8 +87,33 @@ export class SeatSelectionComponent {
     }
     else {
       this.myBooking = this.myBooking.filter(x => x != (i + ":" + j))
-      this.classesArr[i][j] = "btn-outline-secondary";
+      this.classesArr[i][j] = "btn-outline-light";
     }
+  }
+  
+  clearSelection(): void {
+    while(this.myBooking.length != 0){
+      let value = this.myBooking.pop();
+      let arr = value?.split(":");
+      if(arr != undefined && arr != null){
+        let i = Number(arr[0]);
+        let j = Number(arr[1]);
+        this.classesArr[i][j] = "btn-outline-light";
+      }
+    }
+  }
+
+  calculateTotalAmount(): number{
+    let total = 0;
+    this.myBooking.forEach(e => {
+      let arr = e?.split(":");
+      if(arr != undefined && arr != null){
+        let i = Number(arr[0]);
+        let j = Number(arr[1]);
+        total += this.ticketArr[i][j].price
+      }
+    });
+    return total;
   }
 
 }
