@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BookingRequest } from 'src/app/model/booking-request.model';
+import { BookingResponseModel } from 'src/app/model/booking-response.model';
 import { Movie } from 'src/app/model/movie.model';
 import { Showtime } from 'src/app/model/showtime.model';
 import { Theater } from 'src/app/model/theater.model';
 import { Ticket } from 'src/app/model/ticket.model';
+import { BookingService } from 'src/app/services/booking/booking.service';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { TheaterService } from 'src/app/services/theater/theater.service';
 
@@ -25,7 +28,8 @@ export class SeatSelectionComponent {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private theaterService: TheaterService
+    private theaterService: TheaterService,
+    private bookingService: BookingService
   ) {
     this.ticketArr = [];
     this.classesArr = [];
@@ -106,14 +110,27 @@ export class SeatSelectionComponent {
   calculateTotalAmount(): number{
     let total = 0;
     this.myBooking.forEach(e => {
-      let arr = e?.split(":");
-      if(arr != undefined && arr != null){
-        let i = Number(arr[0]);
-        let j = Number(arr[1]);
-        total += this.ticketArr[i][j].price
-      }
+      total += this.searchElement(e).price;
     });
     return total;
+  }
+
+  searchElement(value: string): Ticket{
+    let arr = value?.split(":");
+    let i = Number(arr[0]);
+    let j = Number(arr[1]);
+    return this.ticketArr[i][j];
+  }
+
+  bookAndCheckout(): void{
+    let ticketIds: number[] = this.myBooking.map(e => this.searchElement(e).id);
+    let model = new BookingRequest(this.showtimeId, Number(localStorage.getItem("userId")), ticketIds);
+    this.bookingService.addBooking(model).subscribe({
+      next: (res) => { alert("Booked successfully.")},
+      error: (error) => {
+        alert("Error: " + error.status + " " + error.message);
+      }
+    })
   }
 
 }

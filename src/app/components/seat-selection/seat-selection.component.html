@@ -30,15 +30,18 @@
             </div>
             <div class="bg-dark rounded p-2">
                 <div class="my-2">
-                    <span class="btn btn-outline-light mx-4 p-2" style="width:50px; height:50px;"><i class="bi bi-hash"></i></span>
+                    <span class="btn btn-outline-light mx-4 p-2" style="width:50px; height:50px;"><i
+                            class="bi bi-hash"></i></span>
                     <span>Avaialable</span>
                 </div>
                 <div class="my-2">
-                    <span class="btn btn-outline-danger mx-4 p-2" style="width:50px; height:50px;"><i class="bi bi-hash"></i></span>
+                    <span class="btn btn-outline-danger mx-4 p-2" style="width:50px; height:50px;"><i
+                            class="bi bi-hash"></i></span>
                     <span>Taken</span>
                 </div>
                 <div class="my-2">
-                    <span class="btn btn-outline-warning mx-4 p-2" style="width:50px; height:50px;"><i class="bi bi-hash"></i></span>
+                    <span class="btn btn-outline-warning mx-4 p-2" style="width:50px; height:50px;"><i
+                            class="bi bi-hash"></i></span>
                     <span>Selected</span>
                 </div>
             </div>
@@ -53,7 +56,8 @@
             <div class="pt-2 mt-3">
                 <button class="btn btn-outline-warning m-1" [disabled]="myBooking.length<1"
                     (click)="clearSelection()">Clear Selection</button>
-                <button class="btn btn-outline-warning m-1" [disabled]="myBooking.length<1">Book &amp; Checkout</button>
+                <button class="btn btn-outline-warning m-1" [disabled]="myBooking.length<1"
+                    (click)="bookAndCheckout()">Book &amp; Checkout</button>
             </div>
         </div>
     </div>
