@@ -34,6 +34,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SeatSelectionComponent } from './components/seat-selection/seat-selection.component';
 import { TestComponent } from './components/test/test.component';
 import { BookingViewComponent } from './components/booking-view/booking-view.component';
+import { FallproofImageComponent } from './components/fallproof-image/fallproof-image.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { BookingViewComponent } from './components/booking-view/booking-view.com
     ProfileComponent,
     SeatSelectionComponent,
     TestComponent,
-    BookingViewComponent
+    BookingViewComponent,
+    FallproofImageComponent
   ],
   imports: [
     BrowserModule,
