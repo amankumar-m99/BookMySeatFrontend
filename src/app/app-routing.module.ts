@@ -16,6 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SeatSelectionComponent } from './components/seat-selection/seat-selection.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { LoginGuard } from './guards/login/login.guard';
+import { TestComponent } from './components/test/test.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent, canActivate: [LoginGuard] },
@@ -37,6 +38,7 @@ const routes: Routes = [
   },
   { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
   { path: "signup", component: SignUpComponent, canActivate: [LoginGuard] },
+  { path: "test", component: TestComponent },
   { path: "", redirectTo: "home", pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
