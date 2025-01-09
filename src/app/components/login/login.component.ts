@@ -15,6 +15,7 @@ export class LoginComponent {
 
   loginForm: FormGroup;
   toasts: { message: string; duration: number }[] = [];
+  type = "password";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -57,5 +58,13 @@ export class LoginComponent {
 
   showToast(msg: string) {
     this.toastService.showToast(msg, 4000);
+  }
+  showPassword(){
+    if(this.type == "text"){
+      this.type = "password";
+    }
+    else{
+      this.type = "text";
+    }
   }
 }
