@@ -78,7 +78,8 @@
         <div class="d-flex my-3" style="overflow: auto;">
             <div *ngFor="let movie of theater?.movies" class="card bg-dark text-light mx-3"
                 style="width: 13rem; min-width: 13rem;">
-                <img src="../../../assets/logo.png" class="card-img-top" alt="movie" style="width: 100%;">
+                <app-fallproof-image [src]="movie.posterUrl" [class]="'card-img-top'" [alt]="'movie'"
+                    [style]="'width: 100%;'"></app-fallproof-image>
                 <div class="card-body">
                     <hr>
                     <h5 class="card-title">{{movie.title}}</h5>

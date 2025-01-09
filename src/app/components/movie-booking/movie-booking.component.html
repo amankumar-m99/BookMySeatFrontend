@@ -3,7 +3,8 @@
     <div class="d-flex mt-5 mb-2">
         <div>
             <div class="bg-dark text-light mx-2" style="width: 15rem; min-width: 15rem;">
-                <img src="../../../assets/logo.png" class="card-img-top" alt="movie" style="width: 100%;">
+                <app-fallproof-image [src]="movie.posterUrl" [class]="'card-img-top'" [alt]="'movie'"
+                    [style]="'width: 100%;'"></app-fallproof-image>
             </div>
         </div>
         <div class="mx-5">
@@ -44,7 +45,8 @@
     </div>
     <div class="my-3" *ngIf="movieBookingShowDTO?.length == 0">
         <div class="bg-dark rounded text-center p-5 h5">No shows available for this movie in any theater on this day
-            <span class="text-warning"><i class="bi bi-emoji-frown-fill"></i></span></div>
+            <span class="text-warning"><i class="bi bi-emoji-frown-fill"></i></span>
+        </div>
     </div>
     <div>
         <div *ngFor="let dto of movieBookingShowDTO" class="my-3 p-4 rounded bg-dark">

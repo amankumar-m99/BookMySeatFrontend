@@ -10,6 +10,9 @@ export class FallproofImageComponent implements AfterViewInit {
   fallbackImageSrc = "../../../assets/logo.png";
   
   @Input('src') fallProofPicSrc: string = "";
+  @Input('class') class: string = "";
+  @Input('alt') alt: string = "";
+  @Input('style') style: string = "";
   @ViewChild('fallProofPic') fallProofPic!:ElementRef;
   
   ngAfterViewInit(): void {

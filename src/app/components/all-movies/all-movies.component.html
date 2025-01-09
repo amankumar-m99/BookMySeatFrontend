@@ -21,7 +21,8 @@
 <div class="row">
     <div *ngFor="let movie of movies" class="col-3 my-5 d-flex justify-content-center">
         <div class="card bg-dark text-light mx-2" style="width: 13rem; min-width: 13rem;">
-            <img src="../../../assets/logo.png" class="card-img-top" alt="movie" style="width: 100%;">
+            <app-fallproof-image [src]="movie.posterUrl" [class]="'card-img-top'" [alt]="'movie'"
+                [style]="'width: 100%;'"></app-fallproof-image>
             <div class="card-body">
                 <h5 class="card-title">{{movie.title}}</h5>
                 <div class="d-flex justify-content-between my-3">
