@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppData } from 'src/app/data/app.data';
 import { UserPersonalDetails } from 'src/app/model/user-personal-details.model';
@@ -12,9 +12,12 @@ import { UserPersonalDetailsService } from 'src/app/services/user/user-personal-
 export class ProfileComponent implements OnInit {
 
   user?: UserPersonalDetails;
+  profilePicSrc = "../../../assets/logo.png";
+
+  @ViewChild('fileInputTag') fileInputTag!:ElementRef;
+  @ViewChild('profilePic') profilePic!:ElementRef;
 
   constructor(
-    private router: Router,
     private userService: UserPersonalDetailsService
   ) { }
 
@@ -30,4 +33,16 @@ export class ProfileComponent implements OnInit {
       error: (error) => alert(error.message)
     });
   }
+
+  showModal(){
+    alert("Profile clicxked");
+  }
+
+  fileChangeEvent(event: any): void {
+  }
+
+  openFileChooser(){
+    this.fileInputTag.nativeElement.click();
+  }
+
 }

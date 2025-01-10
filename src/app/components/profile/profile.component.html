@@ -1,8 +1,17 @@
 <div class="container">
     <div class="d-flex mt-5 mb-2">
-        <div>
-            <div class="bg-dark text-light mx-2" style="width: 15rem; min-width: 15rem;">
-                <img src="../../../assets/logo.png" class="card-img-top" alt="movie" style="width: 100%;">
+        <div class="mx-2">
+            <div class="text-light" style="width: 15rem; min-width: 15rem;">
+                <app-fallproof-image #profilePic [class]="'img-fluid profile-pic'" [src]="profilePicSrc"
+                data-bs-toggle="modal"
+                data-bs-target="#addTimeslotsModal"
+                ></app-fallproof-image>
+            </div>
+            <div class="mx-2">
+                <input #fileInputTag type="file" class="file-input d-none" accept="image/png, image/jpeg"
+                    (change)="fileChangeEvent($event)">
+                <a class=" nav-link my-1 profile-upload-link" (click)="openFileChooser()"> <i class="bi bi-upload"></i>
+                    Update Profile Pic</a>
             </div>
         </div>
         <div class="m-3 mx-5">
@@ -23,6 +32,21 @@
                 <span class="text-warning"><i class="bi bi-calendar2"></i></span>
                 <span class="mx-2">{{user?.user?.createdAt}}</span>
                 <span class="badge rounded-pill text-bg-warning mx-2">{{user?.user?.role}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+<div class="modal fade" id="addTimeslotsModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog border rounded">
+        <div class="modal-content dark-my-modal">
+            <div class="modal-header">
+                <button type="button" class="btn-close dark-modal-cross-btn" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex justify-content-center">
+                <app-fallproof-image #profilePic [class]="'img-fluid'" [src]="profilePicSrc"></app-fallproof-image>
             </div>
         </div>
     </div>
