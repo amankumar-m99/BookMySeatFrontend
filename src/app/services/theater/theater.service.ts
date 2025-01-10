@@ -28,4 +28,8 @@ export class TheaterService {
     let data = { theaterId: theaterId, movieId: movieId };
     return this.httpClient.put<Theater[]>(AppData.baseUrl+"/theater/addMovie", data);
   }
+
+  getTheaterCount(): Observable<number>{
+    return this.httpClient.get<number>(AppData.baseUrl+"/theater/get/count");
+  }
 }
