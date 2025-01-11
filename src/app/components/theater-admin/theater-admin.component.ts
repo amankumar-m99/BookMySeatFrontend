@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { AppData } from 'src/app/data/app.data';
 import { TheaterFormModel } from 'src/app/model/theater-form.model';
 import { Theater } from 'src/app/model/theater.model';
@@ -18,7 +19,8 @@ export class TheaterAdminComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private theaterService: TheaterService
+    private theaterService: TheaterService,
+    private toastr: ToastrService
   ) {
     this.theaters = [];
     this.userId = 0;
@@ -38,12 +40,8 @@ export class TheaterAdminComponent implements OnInit {
 
   fetchTheaters(): void {
     this.theaterService.getAllTheatersOfOwner(this.userId).subscribe({
-      next: (response) => {
-        this.theaters = response;
-      },
-      error: (error) => {
-        alert("Couldn't get all theaters!");
-      },
+      next: (response) => this.theaters = response,
+      error: (error) => this.toastr.error("Error", "Couldn't get all theaters"),
       complete: () => { }
     });
   }
@@ -54,17 +52,13 @@ export class TheaterAdminComponent implements OnInit {
     let phoneNumber: string = this.theaterForm.get("phoneNumber")?.value;
     let numberOfScreens: string = this.theaterForm.get("numberOfScreens")?.value;
     if (this.theaterForm.invalid) {
-      alert("Invalid form!");
+      this.toastr.error("Error", "Invalid form");
       return;
     }
     let signUpFormModel: TheaterFormModel = new TheaterFormModel(this.userId, name, location, phoneNumber, Number(numberOfScreens));
     this.theaterService.registerTheater(signUpFormModel).subscribe({
-      next: (response) => {
-        this.fetchTheaters();
-      },
-      error: (error) => {
-        alert(error.status + " " + error.message);
-      },
+      next: (response) => this.fetchTheaters(),
+      error: (error) => this.toastr.error("Error", error.message),
       complete: () => { }
     });
   }

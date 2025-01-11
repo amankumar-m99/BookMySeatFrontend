@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { SignUpFormModel } from 'src/app/model/sign-up-form.model';
 import { SignupService } from 'src/app/services/signup/signup.service';
 
@@ -15,6 +16,7 @@ export class SignUpComponent {
   constructor(
     private formBuilder: FormBuilder,
     private signUpService: SignupService,
+    private toastr: ToastrService
   ) {
     this.signUpForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -36,23 +38,19 @@ export class SignUpComponent {
     let middleName: string = this.signUpForm.get("middleName")?.value;
     let lastName: string = this.signUpForm.get("lastName")?.value;
     let phoneNumber: string = this.signUpForm.get("phoneNumber")?.value;
-    let role: string = (this.signUpForm.get("isTheaterAdmin")?.value)?"theateradmin":"user";
+    let role: string = (this.signUpForm.get("isTheaterAdmin")?.value) ? "theateradmin" : "user";
     if (this.signUpForm.invalid) {
-      alert("Invalid form!");
+      this.toastr.error("Error", "Invalid form");
       return;
     }
     if (password != confirmPassword) {
-      alert("Password and confirm password not matching!");
+      this.toastr.error("Error", "Password and confirm password not matching.");
       return;
     }
     let signUpFormModel: SignUpFormModel = new SignUpFormModel(email, password, firstName, middleName, lastName, phoneNumber, role);
     this.signUpService.signUp(signUpFormModel).subscribe({
-      next: (response) => {
-        alert("Sign up success.")
-      },
-      error: (error) => {
-        alert(error.status + " " + error.message);
-      },
+      next: (response) => this.toastr.success("Success", "Sign up success."),
+      error: (error) => this.toastr.error("Error", error.message),
       complete: () => { }
     });
   }

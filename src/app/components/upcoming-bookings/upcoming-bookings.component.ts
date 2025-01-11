@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BookingResponseModel } from 'src/app/model/booking-response.model';
 import { BookingService } from 'src/app/services/booking/booking.service';
 
@@ -12,20 +13,17 @@ export class UpcomingBookingsComponent {
   bookings?: BookingResponseModel[];
 
   constructor(
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private toastr: ToastrService
   ) {
     this.fetchData();
   }
 
   fetchData(): void {
     this.bookingService.getUpcomingBookingByUserId(Number(localStorage.getItem("userId"))).subscribe({
-      next: (res) => {
-        this.bookings = res;
-      },
-      error: (err) => {
-        alert("error: " + err.status + " " + err.message);
-      },
-      complete: ()=> {}
+      next: (res) => this.bookings = res,
+      error: (error) => this.toastr.error("Error", error.message),
+      complete: () => { }
     });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ShowtimeForm } from 'src/app/model/showtime-form.model';
 import { Theater } from 'src/app/model/theater.model';
 import { TimeslotRequestDTO } from 'src/app/model/timeslot-request-dto.model';
@@ -32,7 +33,8 @@ export class TheaterActionsComponent implements OnInit {
     private activatedroute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private showtimeService: ShowtimeService,
-    private timeslotService: TimeslotService
+    private timeslotService: TimeslotService,
+    private toastr: ToastrService
   ) {
     this.theaterId = 0;
     this.minDate = "";
@@ -62,7 +64,7 @@ export class TheaterActionsComponent implements OnInit {
   fetchData(): void {
     this.theaterService.getTheaterById(this.theaterId).subscribe({
       next: (response) => this.theater = response,
-      error: (error) => alert(error),
+      error: (error) => this.toastr.error("Error", error.message),
       complete: () => { }
     });
   }
@@ -83,7 +85,7 @@ export class TheaterActionsComponent implements OnInit {
 
   submitShowsForm(): void {
     if (this.addShowsForm.invalid) {
-      alert("Invalid form.");
+      this.toastr.error("Error", "Invalid form.");
       return;
     }
     let fromDateValue: string = this.addShowsForm.get("fromDate")?.value;
@@ -93,24 +95,24 @@ export class TheaterActionsComponent implements OnInit {
     let fromDate: Date = new Date(Date.parse(fromDateValue));
     let toDate: Date = new Date(Date.parse(toDateValue));
     if (fromDate < new Date()) {
-      alert("'From' date connot be older than today.");
+      this.toastr.error("Error", "'From' date connot be older than today.");
       return;
     }
     if (fromDate > toDate) {
-      alert("'To' date is earlier than 'From' date.");
+      this.toastr.error("Error", "'To' date is earlier than 'From' date.");
       return;
     }
     if (screenId == "0") {
-      alert("Please select a screen.");
+      this.toastr.error("Error", "Please select a screen.");
       return;
     }
     if (movieId == "0") {
-      alert("Please select a movie.");
+      this.toastr.error("Error", "Please select a movie.");
       return;
     }
     let formModel = this.generateShowtimeFormArray(fromDate, toDate, movieId, screenId);
     if (formModel.length == 0) {
-      alert("Please choose at least one timeslot.");
+      this.toastr.error("Error", "Please choose at least one timeslot.");
       return;
     }
     this.showtimeService.addShowtime(formModel).subscribe({
@@ -119,9 +121,9 @@ export class TheaterActionsComponent implements OnInit {
           this.theater?.showtimes.push(showtime);
         });
         this.closeAddShowFormModalButton?.nativeElement.click();
-        alert("Added.")
+        this.toastr.success("Success", "Show added.")
       },
-      error: (error) => alert(error.status + ":" + error.message),
+      error: (error) => this.toastr.error("Error", error.message),
       complete: () => { }
     });
   }
@@ -147,7 +149,7 @@ export class TheaterActionsComponent implements OnInit {
 
   submitTimeslotForm(): void {
     if (this.addTimeslotsForm.invalid) {
-      alert("Invalid form");
+      this.toastr.error("Error", "Invalid form");
       return;
     }
     this.modalCloseBtn?.nativeElement.click();
@@ -156,7 +158,7 @@ export class TheaterActionsComponent implements OnInit {
     let timeslotRequestDTO = new TimeslotRequestDTO(Number(startHH), Number(startMM), this.theaterId);
     this.timeslotService.addTimeSlot(timeslotRequestDTO).subscribe({
       next: (response) => { this.theater?.timeslots.push(response) },
-      error: (error) => { alert(error.message); }
+      error: (error) => this.toastr.error("Error", error.message)
     });
   }
 

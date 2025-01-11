@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AppData } from 'src/app/data/app.data';
 import { LoginFormModel } from 'src/app/model/login-form.model';
 import { LoginService } from 'src/app/services/login/login.service';
-import { ToastService } from 'src/app/services/toast/toast.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -14,24 +14,17 @@ import { ToastService } from 'src/app/services/toast/toast.service';
 export class LoginComponent {
 
   loginForm: FormGroup;
-  toasts: { message: string; duration: number }[] = [];
   type = "password";
 
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
-    private toastService: ToastService
+    private toastr: ToastrService
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
-    });
-    this.toastService.toast$.subscribe(toast => {
-      this.toasts.push(toast);
-      setTimeout(() => {
-        this.toasts.shift();
-      }, toast.duration);
     });
   }
 
@@ -41,6 +34,7 @@ export class LoginComponent {
     let loginFormModel = new LoginFormModel(username, password);
     this.loginService.login(loginFormModel).subscribe({
       next: (user) => {
+        this.toastr.success('Login Success', '');
         AppData.logIn(String(user.id), String(user.role));
         switch (user.role) {
           case "superadmin": this.router.navigate(["/dashboard/super-admin"]); break;
@@ -49,21 +43,17 @@ export class LoginComponent {
         }
       },
       error: (error) => {
-        alert(error.status + " " + error.message);
-        this.showToast(error.message);
+        this.toastr.error('Error ' + error.status, error.message);
       },
       complete: () => { }
     });
   }
 
-  showToast(msg: string) {
-    this.toastService.showToast(msg, 4000);
-  }
-  showPassword(){
-    if(this.type == "text"){
+  showPassword() {
+    if (this.type == "text") {
       this.type = "password";
     }
-    else{
+    else {
       this.type = "text";
     }
   }

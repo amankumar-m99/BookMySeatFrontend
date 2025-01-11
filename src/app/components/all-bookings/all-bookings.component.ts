@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BookingResponseModel } from 'src/app/model/booking-response.model';
 import { BookingService } from 'src/app/services/booking/booking.service';
 
@@ -12,7 +13,8 @@ export class AllBookingsComponent {
   bookings?: BookingResponseModel[];
 
   constructor(
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private toastr: ToastrService
   ) {
     this.fetchData();
   }
@@ -22,10 +24,10 @@ export class AllBookingsComponent {
       next: (res) => {
         this.bookings = res;
       },
-      error: (err) => {
-        alert("error: " + err.status + " " + err.message);
+      error: (error) => {
+        this.toastr.error('Error', error.message);
       },
-      complete: ()=> {}
+      complete: () => { }
     });
   }
 }

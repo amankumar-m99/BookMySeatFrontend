@@ -23,7 +23,6 @@ import { SuperAdminComponent } from './components/super-admin/super-admin.compon
 import { TheaterActionsComponent } from './components/theater-actions/theater-actions.component';
 import { MovieBookingComponent } from './components/movie-booking/movie-booking.component';
 import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-marketplace.component';
-import { ToastComponent } from './components/toast/toast.component';
 import { TheaterListComponent } from './components/theater-list/theater-list.component';
 import { LeadingZerosPipe } from './pipes/leading-zeros/leading-zeros.pipe';
 import { ClockFormat12Pipe } from './pipes/clock-format/clock-format-12.pipe';
@@ -40,6 +39,9 @@ import { SuperAdminTheatersComponent } from './components/super-admin-theaters/s
 import { SuperAdminUsersComponent } from './components/super-admin-users/super-admin-users.component';
 import { SuperAdminAdminsComponent } from './components/super-admin-admins/super-admin-admins.component';
 import { SuperAdminHomeComponent } from './components/super-admin-home/super-admin-home.component';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,6 @@ import { SuperAdminHomeComponent } from './components/super-admin-home/super-adm
     TheaterActionsComponent,
     MovieBookingComponent,
     MovieMarketplaceComponent,
-    ToastComponent,
     TheaterListComponent,
     LeadingZerosPipe,
     ClockFormat12Pipe,
@@ -86,7 +87,10 @@ import { SuperAdminHomeComponent } from './components/super-admin-home/super-adm
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ImageCropperModule
+    ImageCropperModule,
+    CommonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [],
   bootstrap: [AppComponent]

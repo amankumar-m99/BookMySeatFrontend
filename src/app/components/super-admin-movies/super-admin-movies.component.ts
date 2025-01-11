@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Movie } from 'src/app/model/movie.model';
 import { MovieService } from 'src/app/services/movie/movie.service';
 
@@ -10,18 +11,17 @@ import { MovieService } from 'src/app/services/movie/movie.service';
 export class SuperAdminMoviesComponent {
   movies?: Movie[];
 
-  constructor(private movieService: MovieService) {
+  constructor(
+    private movieService: MovieService,
+    private toastr: ToastrService
+  ) {
     this.fetchMovies();
   }
 
   fetchMovies() {
     this.movieService.getAllMovies().subscribe({
-      next: (response) => {
-        this.movies = response;
-      },
-      error: (error) => {
-        alert("Error " + error.status + ", " + error.message);
-      }
+      next: (response) => this.movies = response,
+      error: (error) => this.toastr.error("Error", error.message)
     })
   }
 }

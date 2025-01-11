@@ -12,21 +12,19 @@
             </div>
 
             <div class="form-floating my-3">
-                <input type="password" [type]="type" class="form-control dark-input" id="floatingPassword" placeholder="Password"
-                    formControlName="password">
+                <input type="password" [type]="type" class="form-control dark-input" id="floatingPassword"
+                    placeholder="Password" formControlName="password">
                 <label for="floatingPassword">Password</label>
             </div>
 
             <div class="form-check text-start my-3">
-                <input class="form-check-input dark-input" type="checkbox" value="remember-me" id="flexCheckDefault" (change)="showPassword()">
+                <input class="form-check-input dark-input" type="checkbox" value="remember-me" id="flexCheckDefault"
+                    (change)="showPassword()">
                 <label class="form-check-label" for="flexCheckDefault">
                     Show Password
                 </label>
             </div>
             <button class="btn btn-warning w-75 py-2" type="submit">Log in</button>
         </form>
-        <app-toast [message]="'sample toast'" [duration]="10000"></app-toast>
-        <div *ngFor="let toast of toasts">
-        </div>
     </main>
 </div>

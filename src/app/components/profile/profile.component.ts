@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ImageCroppedEvent, ImageTransform, LoadedImage } from 'ngx-image-cropper';
+import { ToastrService } from 'ngx-toastr';
 import { AppData } from 'src/app/data/app.data';
 import { UserPersonalDetails } from 'src/app/model/user-personal-details.model';
 import { ProfilePicService } from 'src/app/services/profile-pic/profile-pic.service';
@@ -31,7 +32,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private userService: UserPersonalDetailsService,
     private profilePicService: ProfilePicService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -44,13 +46,13 @@ export class ProfileComponent implements OnInit {
   fetchData(userId: number) {
     this.userService.getUserById(userId).subscribe({
       next: (response) => this.user = response,
-      error: (error) => alert(error.message)
+      error: (error) => this.toastr.error("Error", error.message)
     });
   }
 
   fileChangeEvent(event: any): void {
     if (event.srcElement.files.length < 1) {
-      alert("No files selected.");
+      this.toastr.info("No files selected.");
       return;
     }
     this.imageChangedEvent = event;
@@ -71,10 +73,15 @@ export class ProfileComponent implements OnInit {
       this.profilePicSrc = "";
       this.profilePicService.uploadProfilePic(Number(localStorage.getItem("userId")), file).subscribe({
         next: (response) => {
-          alert("Response:" + response);
+          if (response) {
+            this.toastr.success("Success", "Profile pic updated");
+          }
+          else {
+            this.toastr.error("Error", "Profile pic not updated");
+          }
         },
         error: (error) => {
-          alert("Error " + error.status + ", " + error.messsage);
+          this.toastr.error("Error", error.message);
         },
         complete: () => {
           this.closeProfilePicPreviewModal();
@@ -88,7 +95,6 @@ export class ProfileComponent implements OnInit {
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    console.log("Image cropped event fired");
     let testStr: string = "";
     if (typeof event.objectUrl == "string") {
       testStr = event.objectUrl;
@@ -97,21 +103,18 @@ export class ProfileComponent implements OnInit {
     // event.blob can be used to upload the cropped image
     this.imageCroppedEvent = event;
   }
-  
+
   imageLoaded(image: LoadedImage) {
     // show cropper
-    console.log("Image loaded event fired");
     this.openProfilePicPreviewModal();
   }
-  
+
   cropperReady() {
     // cropper ready
-    console.log("cropper ready event fired");
   }
-  
+
   loadImageFailed() {
     // show message
-    console.log("image loading failed event fired");
   }
 
   rotateLeft() {

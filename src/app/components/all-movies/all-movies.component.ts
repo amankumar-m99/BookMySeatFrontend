@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Movie } from 'src/app/model/movie.model';
 import { MovieService } from 'src/app/services/movie/movie.service';
 
@@ -11,7 +12,8 @@ export class AllMoviesComponent {
   movies: Movie[];
 
   constructor(
-    private movieService: MovieService
+    private movieService: MovieService,
+    private toastr: ToastrService
   ) {
     this.movies = [];
   }
@@ -26,7 +28,7 @@ export class AllMoviesComponent {
         this.movies = response;
       },
       error: (error) => {
-        alert("error");
+        this.toastr.error("Error", error.message);
       },
       complete: () => { }
     });

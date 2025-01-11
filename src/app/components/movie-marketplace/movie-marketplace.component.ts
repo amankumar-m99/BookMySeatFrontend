@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Movie } from 'src/app/model/movie.model';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { TheaterService } from 'src/app/services/theater/theater.service';
@@ -18,7 +19,8 @@ export class MovieMarketplaceComponent {
   constructor(
     private theaterService: TheaterService,
     private movieService: MovieService,
-    private activatedroute: ActivatedRoute
+    private activatedroute: ActivatedRoute,
+    private toastr: ToastrService
   ) {
     this.movies = [];
     this.theaterId = 0;
@@ -39,7 +41,7 @@ export class MovieMarketplaceComponent {
         this.fetchAllMovies();
       },
       error: (error) => {
-        alert(error);
+        this.toastr.error("Error", error.message);
       },
       complete: () => { }
     });
@@ -51,7 +53,7 @@ export class MovieMarketplaceComponent {
         this.movies = response;
       },
       error: (error) => {
-        alert(error.message);
+        this.toastr.error("Error", error.message);
       },
       complete: () => { }
     });
@@ -63,14 +65,14 @@ export class MovieMarketplaceComponent {
         this.addedMovieIds.push(movieId);
       },
       error: (error) => {
-        alert(error.message)
+        this.toastr.error("Error", error.message);
       }
     })
   }
 
   isMovieAdded(movieId: number): boolean {
     let result = this.addedMovieIds.find(x => x == movieId);
-    if(result != undefined){
+    if (result != undefined) {
       return true;
     }
     return false;

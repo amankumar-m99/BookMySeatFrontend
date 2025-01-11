@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Theater } from 'src/app/model/theater.model';
 import { TheaterService } from 'src/app/services/theater/theater.service';
 
@@ -10,18 +11,17 @@ import { TheaterService } from 'src/app/services/theater/theater.service';
 export class SuperAdminTheatersComponent {
   theaters?: Theater[];
 
-  constructor(private theaterService: TheaterService) {
-      this.fetchTheaters();
-    }
-  
-    fetchTheaters() {
-      this.theaterService.getAllTheaters().subscribe({
-        next: (response) => {
-          this.theaters = response;
-        },
-        error: (error) => {
-          alert("Error " + error.status + ", " + error.message);
-        }
-      })
-    }
+  constructor(
+    private theaterService: TheaterService,
+    private toastr: ToastrService
+  ) {
+    this.fetchTheaters();
+  }
+
+  fetchTheaters() {
+    this.theaterService.getAllTheaters().subscribe({
+      next: (response) => this.theaters = response,
+      error: (error) => this.toastr.error("Error", error.message)
+    })
+  }
 }

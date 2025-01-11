@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AppData } from 'src/app/data/app.data';
 import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/services/user/user.service';
@@ -15,7 +16,8 @@ export class NavbarComponent implements OnInit {
   user?: User;
   constructor(
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService
   ) {
     if (AppData.isLoggedIn()) {
       this.isLoggedIn = true;
@@ -31,11 +33,11 @@ export class NavbarComponent implements OnInit {
     }
     this.userService.getUserById(Number(localStorage.getItem("userId"))).subscribe({
       next: (response) => this.user = response,
-      error: (error) => alert("Error in fetching user data.")
+      error: (error) => this.toastr.error("Error", error.message)
     });
   }
 
-  profile(): void{
+  profile(): void {
     this.router.navigate(['/dashboard/profile']);
   }
 
