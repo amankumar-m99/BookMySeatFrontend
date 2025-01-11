@@ -1,1 +1,37 @@
-<p>super-admin-theaters works!</p>
+<div class="container">
+    <div class="d-flex justify-content-between">
+        <div>
+            <span class="h3"><span class="text-warning"><i class="bi bi-film"></i></span> Theaters</span>
+        </div>
+        <div>
+            <button class="btn btn-outline-warning mx-1"><i class="bi bi-plus-lg"></i> Add Theater</button>
+        </div>
+    </div>
+    <hr>
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th scope="col" class="text-warning">#</th>
+                <th scope="col" class="text-warning">Owner Id</th>
+                <th scope="col" class="text-warning">Name</th>
+                <th scope="col" class="text-warning">Location</th>
+                <th scope="col" class="text-warning">Screens</th>
+                <th scope="col" class="text-warning">Phone Number</th>
+                <th scope="col" class="text-warning">Date created</th>
+                <th scope="col" class="text-warning"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let theater of theaters">
+                <th>{{theater.id}}</th>
+                <th>{{theater.owner.id}}</th>
+                <td>{{theater.name}}</td>
+                <td>{{theater.location}}</td>
+                <td>{{theater.screens.length}}</td>
+                <td>{{theater.phoneNumber}}</td>
+                <td>{{theater.createdAt | date }}</td>
+                <td><a class="text-light" [routerLink]="['theater', theater.id]">Details</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

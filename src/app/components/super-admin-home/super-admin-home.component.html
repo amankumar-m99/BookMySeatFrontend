@@ -1,36 +1,73 @@
 <div class="container">
     <div class="row text-center">
         <div class="col-3 px-3">
-            <div class="border border-warning rounded indicator" (click)="navigate('movies')">
-                <div class="bg-dark rounded rounded-3 py-3 text-warning h6">
-                    <span class=" mx-2"><i class="bi bi-film"></i></span>Movies
-                </div>
-                <div class="h1 mt-3 pb-3 text-warning">{{totalMovies | leadingZeros:2}}</div>
-                <div class="bg-warning rounded text-dark py-2"><i class="bi bi-plus-lg"></i> Add movie</div>
+            <div class="border border-warning rounded">
+                <a [routerLink]="'movies'" style="text-decoration: none;">
+                    <div class="bg-dark rounded rounded-3 py-3 text-warning h6">
+                        <span class=" mx-2"><i class="bi bi-film"></i></span>Movies
+                    </div>
+                    <div class="h1 mt-3 pb-3 text-warning">{{totalMovies | leadingZeros:2}}</div>
+                </a>
+                <div class="bg-warning rounded text-dark py-2 indicator" data-bs-toggle="modal"
+                    data-bs-target="#sampleModal"><i class="bi bi-plus-lg"></i> Add a Movie</div>
             </div>
         </div>
         <div class="col-3 px-3">
-            <div class="border border-warning rounded indicator" (click)="navigate('movies')">
-                <div class="bg-dark rounded rounded-3 py-3">
-                    <span class="text-warning mx-2"><i class="bi bi-tv"></i></span>Theaters
+            <div class="border border-warning rounded">
+                <a [routerLink]="'theaters'" style="text-decoration: none;">
+                    <div class="bg-dark rounded rounded-3 py-3 text-warning h6">
+                        <span class="text-warning mx-2"><i class="bi bi-tv"></i></span>Theaters
+                    </div>
+                    <div class="h1 mt-3 pb-3 text-warning">{{totalTheaters | leadingZeros:2}}</div>
+                </a>
+                <div class="bg-warning rounded text-dark py-2 indicator" data-bs-toggle="modal"
+                    data-bs-target="#sampleModal"><i class="bi bi-plus-lg"></i> Add a Theater
                 </div>
-                <div class="h1 mt-3 pb-3 text-warning">{{totalTheaters | leadingZeros:2}}</div>
             </div>
         </div>
         <div class="col-3 px-3">
-            <div class="border border-warning rounded indicator" (click)="navigate('movies')">
-                <div class="bg-dark rounded rounded-3 py-3">
-                    <span class="text-warning mx-2"><i class="bi bi-person-circle"></i></span>Admins
+            <div class="border border-warning rounded">
+                <a [routerLink]="'admins'" style="text-decoration: none;">
+                    <div class="bg-dark rounded rounded-3 py-3 text-warning h6">
+                        <span class="text-warning mx-2"><i class="bi bi-person-circle"></i></span>Admins
+                    </div>
+                    <div class="h1 mt-3 pb-3 text-warning">{{totalAdmins | leadingZeros:2}}</div>
+                </a>
+                <div class="bg-warning rounded text-dark py-2 indicator" data-bs-toggle="modal"
+                    data-bs-target="#sampleModal"><i class="bi bi-plus-lg"></i> Add an Admin
                 </div>
-                <div class="h1 mt-3 pb-3 text-warning">{{totalAdmins | leadingZeros:2}}</div>
             </div>
         </div>
         <div class="col-3 px-3">
-            <div class="border border-warning rounded indicator" (click)="navigate('movies')">
-                <div class="bg-dark rounded rounded-3 py-3">
-                    <span class="text-warning mx-2"><i class="bi bi-people-fill"></i></span>Users
-                </div>
-                <div class="h1 mt-3 pb-3 text-warning">{{totalUsers | leadingZeros:2}}</div>
+            <div class="border border-warning rounded">
+                <a [routerLink]="'users'" style="text-decoration: none;">
+                    <div class="bg-dark rounded rounded-3 py-3 text-warning h6">
+                        <span class="text-warning mx-2"><i class="bi bi-people-fill"></i></span>Users
+                    </div>
+                    <div class="h1 mt-3 pb-3 text-warning">{{totalUsers | leadingZeros:2}}</div>
+                </a>
+                <div class="bg-warning rounded text-dark py-2 indicator" data-bs-toggle="modal"
+                    data-bs-target="#sampleModal"><i class="bi bi-plus-lg"></i> Add a User</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+<div class="modal fade" id="sampleModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content dark-my-modal">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Timeslots</h1>
+                <button type="button" class="btn-close dark-modal-cross-btn" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    #cancelAddTimeslotsModalButton>Cancel</button>
+                <button type="button" class="btn btn-warning">Submit</button>
             </div>
         </div>
     </div>

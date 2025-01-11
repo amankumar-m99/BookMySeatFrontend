@@ -37,7 +37,7 @@ export class TheaterAdminComponent implements OnInit {
   }
 
   fetchTheaters(): void {
-    this.theaterService.getAllTheaters(this.userId).subscribe({
+    this.theaterService.getAllTheatersOfOwner(this.userId).subscribe({
       next: (response) => {
         this.theaters = response;
       },

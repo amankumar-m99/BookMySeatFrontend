@@ -2,6 +2,7 @@ import { Movie } from "./movie.model";
 import { Showtime } from "./showtime.model";
 import { Timeslot } from "./timeslot.model";
 import { Screen } from "./screen.model"
+import { User } from "./user.model";
 
 export class Theater {
 
@@ -10,6 +11,7 @@ export class Theater {
         public name: string,
         public location: string,
         public phoneNumber: string,
+        public owner: User,
         public ownerId: number,
         public timeslots: Timeslot[],
         public movies: Movie[],

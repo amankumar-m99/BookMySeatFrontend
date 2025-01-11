@@ -20,8 +20,12 @@ export class TheaterService {
     return this.httpClient.get<Theater>(AppData.baseUrl+"/theater/get/"+theaterId);
   }
 
-  getAllTheaters(ownerId:number): Observable<Theater[]>{
+  getAllTheatersOfOwner(ownerId:number): Observable<Theater[]>{
     return this.httpClient.get<Theater[]>(AppData.baseUrl+"/theater/owner/"+ownerId);
+  }
+
+  getAllTheaters(): Observable<Theater[]>{
+    return this.httpClient.get<Theater[]>(AppData.baseUrl+"/theater/all");
   }
 
   addMovieToTheater(theaterId:number, movieId: number): Observable<Theater[]>{
