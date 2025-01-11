@@ -17,12 +17,25 @@ import { SeatSelectionComponent } from './components/seat-selection/seat-selecti
 import { AuthGuard } from './guards/auth/auth.guard';
 import { LoginGuard } from './guards/login/login.guard';
 import { TestComponent } from './components/test/test.component';
+import { SuperAdminMoviesComponent } from './components/super-admin-movies/super-admin-movies.component';
+import { SuperAdminHomeComponent } from './components/super-admin-home/super-admin-home.component';
+import { SuperAdminTheatersComponent } from './components/super-admin-theaters/super-admin-theaters.component';
+import { SuperAdminAdminsComponent } from './components/super-admin-admins/super-admin-admins.component';
+import { SuperAdminUsersComponent } from './components/super-admin-users/super-admin-users.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent, canActivate: [LoginGuard] },
   {
     path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard], children: [
-      { path: 'super-admin', component: SuperAdminComponent },
+      {
+        path: 'super-admin', component: SuperAdminComponent, children: [
+          { path: 'movies', component: SuperAdminMoviesComponent },
+          { path: 'theaters', component: SuperAdminTheatersComponent },
+          { path: 'admins', component: SuperAdminAdminsComponent },
+          { path: 'users', component: SuperAdminUsersComponent },
+          { path: '', pathMatch: 'full', component: SuperAdminHomeComponent }
+        ]
+      },
       {
         path: 'theater-admin', component: TheaterAdminComponent, children: [
           { path: "", pathMatch: 'full', component: TheaterListComponent },

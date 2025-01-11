@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row text-center">
+        <div class="col-3 px-3">
+            <div class="border border-warning rounded indicator" (click)="navigate('movies')">
+                <div class="bg-dark rounded rounded-3 py-3 text-warning h6">
+                    <span class=" mx-2"><i class="bi bi-film"></i></span>Movies
+                </div>
+                <div class="h1 mt-3 pb-3 text-warning">{{totalMovies | leadingZeros:2}}</div>
+                <div class="bg-warning rounded text-dark py-2"><i class="bi bi-plus-lg"></i> Add movie</div>
+            </div>
+        </div>
+        <div class="col-3 px-3">
+            <div class="border border-warning rounded indicator" (click)="navigate('movies')">
+                <div class="bg-dark rounded rounded-3 py-3">
+                    <span class="text-warning mx-2"><i class="bi bi-tv"></i></span>Theaters
+                </div>
+                <div class="h1 mt-3 pb-3 text-warning">{{totalTheaters | leadingZeros:2}}</div>
+            </div>
+        </div>
+        <div class="col-3 px-3">
+            <div class="border border-warning rounded indicator" (click)="navigate('movies')">
+                <div class="bg-dark rounded rounded-3 py-3">
+                    <span class="text-warning mx-2"><i class="bi bi-person-circle"></i></span>Admins
+                </div>
+                <div class="h1 mt-3 pb-3 text-warning">{{totalAdmins | leadingZeros:2}}</div>
+            </div>
+        </div>
+        <div class="col-3 px-3">
+            <div class="border border-warning rounded indicator" (click)="navigate('movies')">
+                <div class="bg-dark rounded rounded-3 py-3">
+                    <span class="text-warning mx-2"><i class="bi bi-people-fill"></i></span>Users
+                </div>
+                <div class="h1 mt-3 pb-3 text-warning">{{totalUsers | leadingZeros:2}}</div>
+            </div>
+        </div>
+    </div>
+</div>

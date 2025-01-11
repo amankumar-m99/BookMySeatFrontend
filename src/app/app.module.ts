@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ImageCropperModule } from 'ngx-image-cropper';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -35,6 +35,11 @@ import { SeatSelectionComponent } from './components/seat-selection/seat-selecti
 import { TestComponent } from './components/test/test.component';
 import { BookingViewComponent } from './components/booking-view/booking-view.component';
 import { FallproofImageComponent } from './components/fallproof-image/fallproof-image.component';
+import { SuperAdminMoviesComponent } from './components/super-admin-movies/super-admin-movies.component';
+import { SuperAdminTheatersComponent } from './components/super-admin-theaters/super-admin-theaters.component';
+import { SuperAdminUsersComponent } from './components/super-admin-users/super-admin-users.component';
+import { SuperAdminAdminsComponent } from './components/super-admin-admins/super-admin-admins.component';
+import { SuperAdminHomeComponent } from './components/super-admin-home/super-admin-home.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +73,12 @@ import { FallproofImageComponent } from './components/fallproof-image/fallproof-
     SeatSelectionComponent,
     TestComponent,
     BookingViewComponent,
-    FallproofImageComponent
+    FallproofImageComponent,
+    SuperAdminMoviesComponent,
+    SuperAdminTheatersComponent,
+    SuperAdminUsersComponent,
+    SuperAdminAdminsComponent,
+    SuperAdminHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -76,6 +86,7 @@ import { FallproofImageComponent } from './components/fallproof-image/fallproof-
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ImageCropperModule
   ],
   providers: [],
   bootstrap: [AppComponent]
