@@ -42,6 +42,7 @@ import { SuperAdminHomeComponent } from './components/super-admin-home/super-adm
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoaderButtonComponent } from './components/loader-button/loader-button.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SuperAdminTheatersComponent,
     SuperAdminUsersComponent,
     SuperAdminAdminsComponent,
-    SuperAdminHomeComponent
+    SuperAdminHomeComponent,
+    LoaderButtonComponent
   ],
   imports: [
     BrowserModule,

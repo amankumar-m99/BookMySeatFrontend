@@ -1,0 +1,7 @@
+<button class="btn" [ngClass]="className" [style]="styleName" (click)="clicked()">
+    <span>{{defaultText}}</span>
+    <span>{{loaderText}}</span>
+    <div class="spinner-border mx-1" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</button>
