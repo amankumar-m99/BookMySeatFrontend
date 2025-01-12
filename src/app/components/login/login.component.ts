@@ -15,6 +15,7 @@ export class LoginComponent {
 
   loginForm: FormGroup;
   type = "password";
+  isFormSubmissionInProcess = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,6 +33,7 @@ export class LoginComponent {
     let username: string = this.loginForm.get("username")?.value;
     let password: string = this.loginForm.get("password")?.value;
     let loginFormModel = new LoginFormModel(username, password);
+    this.isFormSubmissionInProcess = true;
     this.loginService.login(loginFormModel).subscribe({
       next: (user) => {
         this.toastr.success('Login Success', '');
@@ -43,9 +45,15 @@ export class LoginComponent {
         }
       },
       error: (error) => {
-        this.toastr.error('Error ' + error.status, error.message);
+        this.isFormSubmissionInProcess = false;
+        if (error.status == 0) {
+          this.toastr.error("Couldn't connect to server", "");
+        }
+        else {
+          this.toastr.error('Error ' + error.status, error.message);
+        }
       },
-      complete: () => { }
+      complete: () => this.isFormSubmissionInProcess = false
     });
   }
 
@@ -56,5 +64,8 @@ export class LoginComponent {
     else {
       this.type = "text";
     }
+  }
+  tryy(): void {
+    alert("Sucess");
   }
 }
