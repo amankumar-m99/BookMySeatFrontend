@@ -57,6 +57,6 @@ export class SuperAdminHomeComponent {
 
   navigate(path: string) {
     path = "/dashboard/super-admin/" + path;
-    this.router.navigate([ path]);
+    this.router.navigate([path]);
   }
 }

@@ -7,6 +7,7 @@ import { Showtime } from 'src/app/model/showtime.model';
 import { Theater } from 'src/app/model/theater.model';
 import { Ticket } from 'src/app/model/ticket.model';
 import { BookingService } from 'src/app/services/booking/booking.service';
+import { EncryptionService } from 'src/app/services/encryption/encryption.service';
 import { TheaterService } from 'src/app/services/theater/theater.service';
 
 @Component({
@@ -29,17 +30,26 @@ export class SeatSelectionComponent {
     private activatedRoute: ActivatedRoute,
     private theaterService: TheaterService,
     private bookingService: BookingService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private encryption: EncryptionService
   ) {
     this.ticketArr = [];
     this.classesArr = [];
     this.myBooking = [];
     if (this.activatedRoute.snapshot.paramMap?.has("showtimeId")) {
-      this.showtimeId = Number(this.activatedRoute.snapshot.paramMap.get("showtimeId"));
-      if (this.activatedRoute.snapshot.paramMap?.has("theaterId")) {
-        this.theaterId = Number(this.activatedRoute.snapshot.paramMap.get("theaterId"));
-        this.fetchData();
+      let obj = this.activatedRoute.snapshot.paramMap.get("showtimeId");
+      if (obj != undefined && obj != null) {
+        this.showtimeId = Number(this.encryption.decrypt(obj));
       }
+    }
+    if (this.activatedRoute.snapshot.paramMap?.has("theaterId")) {
+      let obj = this.activatedRoute.snapshot.paramMap.get("theaterId");
+      if (obj != undefined && obj != null) {
+        this.theaterId = Number(this.encryption.decrypt(obj));
+      }
+    }
+    if (this.theaterId > 0 && this.showtimeId > 0) {
+      this.fetchData();
     }
   }
 

@@ -23,7 +23,7 @@ export class LoginComponent {
     private loginService: LoginService,
     private router: Router,
     private toastr: ToastrService,
-    private encryptionService: EncryptionService
+    private encryption: EncryptionService
 
   ) {
     this.loginForm = this.formBuilder.group({
@@ -68,12 +68,9 @@ export class LoginComponent {
       this.type = "text";
     }
   }
-  tryy(): void {
-    alert("Sucess");
-  }
 
-  get forgotPasswordParam(): string {
-    return this.encryptionService.encrypt(this.username);
+  get encryptedUsername(): string {
+    return this.encryption.encrypt(this.username);
   }
 
   get username() {

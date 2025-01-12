@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { TheaterFormModel } from 'src/app/model/theater-form.model';
 import { Theater } from 'src/app/model/theater.model';
+import { EncryptionService } from 'src/app/services/encryption/encryption.service';
 import { TheaterService } from 'src/app/services/theater/theater.service';
 
 @Component({
@@ -20,7 +21,9 @@ export class TheaterListComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private theaterService: TheaterService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private encryption: EncryptionService
+
   ) {
     this.theaters = [];
     this.userId = 0;
@@ -61,5 +64,9 @@ export class TheaterListComponent implements OnInit {
       error: (error) => this.toastr.error("Error", error.message),
       complete: () => { }
     });
+  }
+
+  encryptedId(id: number): string {
+    return this.encryption.encrypt(String(id));
   }
 }

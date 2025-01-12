@@ -30,7 +30,7 @@
                 <td>{{theater.screens.length}}</td>
                 <td>{{theater.phoneNumber}}</td>
                 <td>{{theater.createdAt | date }}</td>
-                <td><a class="text-light" [routerLink]="['theater', theater.id]">Details</a></td>
+                <td><a class="text-light" [routerLink]="['theater', encryptedId(theater.id)]">Details</a></td>
             </tr>
         </tbody>
     </table>

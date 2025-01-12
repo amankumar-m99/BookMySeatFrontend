@@ -69,7 +69,7 @@
     <div class="">
         <div class="d-flex justify-content-between">
             <p class="h4"><span class="mx-1 text-warning"><i class="bi bi-film"></i></span>Movies</p>
-            <a [routerLink]="'/dashboard/theater-admin/movie-marketplace/' + this.theaterId"
+            <a [routerLink]="['/dashboard/theater-admin/movie-marketplace', encryptedId(this.theaterId)]"
                 class="btn btn-outline-warning">Add Movies <i class="bi bi-plus-lg"></i></a>
         </div>
         <div *ngIf="theater?.movies?.length == 0" class="my-2 p-5 bg-dark rounded text-center">

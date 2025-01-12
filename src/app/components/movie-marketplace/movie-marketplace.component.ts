@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Movie } from 'src/app/model/movie.model';
+import { EncryptionService } from 'src/app/services/encryption/encryption.service';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { TheaterService } from 'src/app/services/theater/theater.service';
 
@@ -19,19 +20,22 @@ export class MovieMarketplaceComponent {
   constructor(
     private theaterService: TheaterService,
     private movieService: MovieService,
-    private activatedroute: ActivatedRoute,
-    private toastr: ToastrService
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService,
+    private encryption: EncryptionService
   ) {
     this.movies = [];
     this.theaterId = 0;
     this.addedMovieIds = [];
-    if (this.activatedroute.snapshot.paramMap?.has("theaterId")) {
-      this.theaterId = Number(this.activatedroute.snapshot.paramMap.get("theaterId"));
+    if (this.activatedRoute.snapshot.paramMap?.has("theaterId")) {
+      let obj = this.activatedRoute.snapshot.paramMap.get("theaterId");
+      if(obj != undefined && obj != null){
+        this.theaterId = Number(this.encryption.decrypt(obj));
+      }
+      if(this.theaterId > 0){
+        this.fetchAddedMovies();
+      }
     }
-  }
-
-  ngOnInit(): void {
-    this.fetchAddedMovies();
   }
 
   fetchAddedMovies() {

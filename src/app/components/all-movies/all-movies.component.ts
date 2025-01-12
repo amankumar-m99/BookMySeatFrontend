@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Movie } from 'src/app/model/movie.model';
+import { EncryptionService } from 'src/app/services/encryption/encryption.service';
 import { MovieService } from 'src/app/services/movie/movie.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class AllMoviesComponent {
 
   constructor(
     private movieService: MovieService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private encryption: EncryptionService
   ) {
     this.movies = [];
   }
@@ -33,4 +35,9 @@ export class AllMoviesComponent {
       complete: () => { }
     });
   }
+
+  encryptedId(id: number): string {
+    return this.encryption.encrypt(String(id));
+  }
+
 }

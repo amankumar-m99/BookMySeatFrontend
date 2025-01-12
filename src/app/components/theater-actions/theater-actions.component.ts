@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ShowtimeForm } from 'src/app/model/showtime-form.model';
 import { Theater } from 'src/app/model/theater.model';
 import { TimeslotRequestDTO } from 'src/app/model/timeslot-request-dto.model';
+import { EncryptionService } from 'src/app/services/encryption/encryption.service';
 import { ShowtimeService } from 'src/app/services/showtime/showtime.service';
 import { TheaterService } from 'src/app/services/theater/theater.service';
 import { TimeslotService } from 'src/app/services/timeslot/timeslot.service';
@@ -30,11 +31,12 @@ export class TheaterActionsComponent implements OnInit {
 
   constructor(
     private theaterService: TheaterService,
-    private activatedroute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private showtimeService: ShowtimeService,
     private timeslotService: TimeslotService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private encryption: EncryptionService
   ) {
     this.theaterId = 0;
     this.minDate = "";
@@ -51,9 +53,14 @@ export class TheaterActionsComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    if (this.activatedroute.snapshot.paramMap?.has("theaterId")) {
-      this.theaterId = Number(this.activatedroute.snapshot.paramMap.get("theaterId"));
-      this.fetchData();
+    if (this.activatedRoute.snapshot.paramMap?.has("theaterId")) {
+      let obj = this.activatedRoute.snapshot.paramMap.get("theaterId");
+      if(obj != undefined && obj != null){
+        this.theaterId = Number(this.encryption.decrypt(obj));
+      }
+      if(this.theaterId > 0){
+        this.fetchData();
+      }
     }
     this.customDatePicker?.nativeElement.datepicker({
       multidate: true,
@@ -160,6 +167,10 @@ export class TheaterActionsComponent implements OnInit {
       next: (response) => { this.theater?.timeslots.push(response) },
       error: (error) => this.toastr.error("Error", error.message)
     });
+  }
+
+  encryptedId(id: number): string {
+    return this.encryption.encrypt(String(id));
   }
 
 }

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovieBookingShowDTO } from 'src/app/model/movie-booking-show.dto';
 import { Movie } from 'src/app/model/movie.model';
+import { EncryptionService } from 'src/app/services/encryption/encryption.service';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { ShowtimeService } from 'src/app/services/showtime/showtime.service';
 import { DateUtils } from 'src/app/utils/date-utils';
@@ -25,7 +26,8 @@ export class MovieBookingComponent {
     private activatedRoute: ActivatedRoute,
     private movieService: MovieService,
     private showtimeService: ShowtimeService,
-    private formbuilder: FormBuilder
+    private formbuilder: FormBuilder,
+    private encryption: EncryptionService
   ) {
     this.movieId = 0;
     this.movie = Movie.getDummyMovie();
@@ -33,9 +35,14 @@ export class MovieBookingComponent {
       bookingDate: [DateUtils.getTodayDateString(), Validators.required]
     });
     if (this.activatedRoute.snapshot.paramMap?.has("movieId")) {
-      this.movieId = Number(this.activatedRoute.snapshot.paramMap.get("movieId"));
-      this.fetchData();
-      this.fetchShows();
+      let obj = this.activatedRoute.snapshot.paramMap.get("movieId");
+      if(obj != undefined && obj != null ){
+        this.movieId = Number(this.encryption.decrypt(obj));
+      }
+      if(this.movieId > 0){
+        this.fetchData();
+        this.fetchShows();
+      }
     }
   }
 
@@ -70,11 +77,15 @@ export class MovieBookingComponent {
   }
 
   showBoxClicked(theaterId: number, showtimeId: number) {
-    this.router.navigate(['/dashboard/seat-selection', theaterId, showtimeId])
+    this.router.navigate(['/dashboard/seat-selection', this.encryptedId(theaterId), this.encryptedId(showtimeId)])
   }
 
   submitBookingForm(): void {
     this.fetchShows();
+  }
+
+  encryptedId(id: number): string {
+    return this.encryption.encrypt(String(id));
   }
 
   get selectedDate(): Date {
