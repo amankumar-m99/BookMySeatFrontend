@@ -22,7 +22,7 @@
                 <span class="badge rounded-pill text-bg-warning mx-2">{{movie.language}}</span>
             </div>
             <div class="my-3 bg-dark p-2 rounded">
-                <span class="h6">Releasing on {{movie.releaseDate | date}}</span>
+                <span class="h6">{{movie.releaseDate | releaseDatePhrase}} {{movie.releaseDate | date}}</span>
             </div>
         </div>
         <div class="my-3 mx-5 w-50 p-3 bg-dark rounded">
@@ -44,7 +44,7 @@
         </form>
     </div>
     <div class="my-3" *ngIf="movieBookingShowDTO?.length == 0">
-        <div class="bg-dark rounded text-center p-5 h5">No shows available for this movie in any theater on this day
+        <div class="bg-dark rounded text-center p-5 h5">No shows available for this movie in any theater on {{ selectedDate | date}}
             <span class="text-warning"><i class="bi bi-emoji-frown-fill"></i></span>
         </div>
     </div>

@@ -49,9 +49,8 @@ export class MovieBookingComponent {
     });
   }
 
-  fetchShows(): void{
-    let dateStr = this.bookingForm.get("bookingDate")?.value;
-    this.showtimeService.findShowtimeByMovieId(this.movieId, new Date(Date.parse(dateStr))).subscribe({
+  fetchShows(): void {
+    this.showtimeService.findShowtimeByMovieId(this.movieId, this.selectedDate).subscribe({
       next: (response) => {
         this.movieBookingShowDTO = response;
       },
@@ -74,7 +73,11 @@ export class MovieBookingComponent {
     this.router.navigate(['/dashboard/seat-selection', theaterId, showtimeId])
   }
 
-  submitBookingForm(): void{
+  submitBookingForm(): void {
     this.fetchShows();
+  }
+
+  get selectedDate(): Date {
+    return new Date(Date.parse(this.bookingForm.get("bookingDate")?.value));
   }
 }
