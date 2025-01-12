@@ -68,4 +68,8 @@ export class LoginComponent {
   tryy(): void {
     alert("Sucess");
   }
+
+  get username(){
+    return this.loginForm.get("username")?.value;
+  }
 }
