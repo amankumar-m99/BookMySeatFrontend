@@ -5,6 +5,7 @@ import { AppData } from 'src/app/data/app.data';
 import { LoginFormModel } from 'src/app/model/login-form.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import { ToastrService } from 'ngx-toastr';
+import { EncryptionService } from 'src/app/services/encryption/encryption.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -22,11 +23,14 @@ export class ForgotPasswordComponent {
     private loginService: LoginService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private encryptionService: EncryptionService
   ) {
-    let username: string | null = "";
+    let username: string = "";
     if (this.activatedRoute.snapshot.paramMap?.has("username")) {
-      username = this.activatedRoute.snapshot.paramMap.get("username");
+      let obj = this.activatedRoute.snapshot.paramMap.get("username");
+      if(obj != undefined && obj != null)
+        username = this.encryptionService.decrypt(obj);
     }
     this.form = this.formBuilder.group({
       username: [username, Validators.required],

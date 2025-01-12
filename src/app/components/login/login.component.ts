@@ -5,6 +5,7 @@ import { AppData } from 'src/app/data/app.data';
 import { LoginFormModel } from 'src/app/model/login-form.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import { ToastrService } from 'ngx-toastr';
+import { EncryptionService } from 'src/app/services/encryption/encryption.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,9 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private encryptionService: EncryptionService
+
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -69,7 +72,11 @@ export class LoginComponent {
     alert("Sucess");
   }
 
-  get username(){
+  get forgotPasswordParam(): string {
+    return this.encryptionService.encrypt(this.username);
+  }
+
+  get username() {
     return this.loginForm.get("username")?.value;
   }
 }
