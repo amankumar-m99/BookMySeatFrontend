@@ -22,6 +22,7 @@ import { SuperAdminHomeComponent } from './components/super-admin-home/super-adm
 import { SuperAdminTheatersComponent } from './components/super-admin-theaters/super-admin-theaters.component';
 import { SuperAdminAdminsComponent } from './components/super-admin-admins/super-admin-admins.component';
 import { SuperAdminUsersComponent } from './components/super-admin-users/super-admin-users.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent, canActivate: [LoginGuard] },
@@ -51,6 +52,8 @@ const routes: Routes = [
   },
   { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
   { path: "signup", component: SignUpComponent, canActivate: [LoginGuard] },
+  { path: "forgot-password", component: ForgotPasswordComponent, canActivate: [LoginGuard] },
+  { path: "forgot-password/:username", component: ForgotPasswordComponent, canActivate: [LoginGuard] },
   { path: "test", component: TestComponent },
   { path: "", redirectTo: "home", pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

@@ -43,6 +43,8 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoaderButtonComponent } from './components/loader-button/loader-button.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ReleaseDatePhrasePipe } from './pipes/release-dates/release-date-phrase.pipe';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { LoaderButtonComponent } from './components/loader-button/loader-button.
     SuperAdminUsersComponent,
     SuperAdminAdminsComponent,
     SuperAdminHomeComponent,
-    LoaderButtonComponent
+    LoaderButtonComponent,
+    ForgotPasswordComponent,
+    ReleaseDatePhrasePipe
   ],
   imports: [
     BrowserModule,
