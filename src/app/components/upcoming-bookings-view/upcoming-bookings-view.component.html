@@ -1,0 +1,26 @@
+<div *ngFor="let booking of bookings" class="bg-dark rounded p-3 px-5 my-2 mx-1 row w-75 mx-auto">
+    <div class="col-3">
+        <div class="">
+            <div class="bg-dark text-light mx-2" style="width: 10rem; min-width: 10rem;">
+                <img src="../../../assets/logo.png" class="" alt="movie" width="auto" height="150">
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="my-2 h5"> <span class="text-warning mx-1"><i class="bi bi-film"></i></span> {{booking.showtimeDTO.movie}} | {{booking.showtimeDTO.theater}}</div>
+        <div class="my-2"><span class="text-warning mx-2"><i class="bi bi-people-fill"></i></span>{{booking.tickets.length}} Persons</div>
+        <div class="my-2"><span class="text-warning mx-2"><i class="bi bi-calendar2"></i></span>{{booking?.showtimeDTO?.date | date}}, {{booking?.showtimeDTO?.startHH + ":" + booking?.showtimeDTO?.startMM | clockFormat12}}</div>
+        <div class="my-2 fw-lighter fs-6"><span class="text-warning mx-2"><i class="bi bi-clock-history"></i></span>Booked on {{booking.bookingDate | date}}</div>
+    </div>
+    <div class="col-3 text-center">
+        <div class="my-2">
+            <button class="btn btn-outline-warning w-75">View Tickets</button>
+        </div>
+        <div class="my-2">
+            <button class="btn btn-outline-danger w-75">Full Cancel</button>
+        </div>
+        <div class="my-2">
+            <button class="btn btn-outline-danger w-75">Partial Cancel</button>
+        </div>
+    </div>
+</div>

@@ -45,6 +45,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoaderButtonComponent } from './components/loader-button/loader-button.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ReleaseDatePhrasePipe } from './pipes/release-dates/release-date-phrase.pipe';
+import { UpcomingBookingsViewComponent } from './components/upcoming-bookings-view/upcoming-bookings-view.component';
+import { CompletedBookingsViewComponent } from './components/completed-bookings-view/completed-bookings-view.component';
+import { AllBookingsViewComponent } from './components/all-bookings-view/all-bookings-view.component';
+import { PluralityPipe } from './pipes/plurality/plurality.pipe';
 
 @NgModule({
   declarations: [
@@ -85,7 +89,11 @@ import { ReleaseDatePhrasePipe } from './pipes/release-dates/release-date-phrase
     SuperAdminHomeComponent,
     LoaderButtonComponent,
     ForgotPasswordComponent,
-    ReleaseDatePhrasePipe
+    ReleaseDatePhrasePipe,
+    UpcomingBookingsViewComponent,
+    CompletedBookingsViewComponent,
+    AllBookingsViewComponent,
+    PluralityPipe
   ],
   imports: [
     BrowserModule,
