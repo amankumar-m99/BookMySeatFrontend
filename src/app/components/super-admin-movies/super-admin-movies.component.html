@@ -31,12 +31,12 @@
                 <td>{{movie.title}}</td>
                 <!-- <td>{{movie.releaseDate | date: 'mediumDate'}}</td> -->
                 <td>{{movie.releaseDate | date: 'yyyy'}}</td>
-                <td>{{movie.releaseDate | date: 'MM'}}</td>
+                <td>{{movie.releaseDate | date: 'MMMM'}}</td>
                 <td>{{movie.language}}</td>
                 <td>{{movie.duration | minutesTohhmm}}</td>
                 <td>{{movie.genre}}</td>
                 <td>{{movie.rating}}</td>
-                <td><button class="btn btn-outline-warning">More</button></td>
+                <td><span class="mx-1 linkss">Quick View</span><a class="mx-1 linkss">Details</a></td>
 
             </tr>
         </tbody>
@@ -47,7 +47,7 @@
 <!-- modal -->
 <div class="modal fade" id="addMovieModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog border rounded">
         <div class="modal-content dark-my-modal">
             <div class="modal-header">
                 <h1 class="modal-title fs-5 text-warning" id="staticBackdropLabel"><i class="bi bi-film"></i> Add a
@@ -56,7 +56,7 @@
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class=" rounded text-center border p-4" [formGroup]="addMovieForm" (ngSubmit)="submitMovie()">
+                <form class=" rounded text-center px-2" [formGroup]="addMovieForm" (ngSubmit)="submitMovie()">
                     <div class="row">
                         <div class="col my-2">
                             <div class="form-floating">
@@ -86,16 +86,25 @@
                     <div class="row">
                         <div class="col my-2">
                             <div class="form-floating">
-                                <input type="password" class="form-control dark-input" id="cpassword"
-                                    placeholder="confirm password" formControlName="confirmPassword">
-                                <label for="cpassword">Genre</label>
+                                <input type="text" class="form-control dark-input" id="genre"
+                                    placeholder="confirm password" formControlName="genre">
+                                <label for="genre">Genre</label>
                             </div>
                         </div>
                         <div class="col my-2">
                             <div class="form-floating">
-                                <input type="text" class="form-control dark-input" id="firstName"
-                                    placeholder="First Name" formControlName="firstName">
-                                <label for="firstName">Rating</label>
+                                <input type="text" class="form-control dark-input" id="rating" placeholder="First Name"
+                                    formControlName="rating">
+                                <label for="rating">Rating</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col my-2">
+                            <div class="form-floating">
+                                <input type="text" class="form-control dark-input" id="language"
+                                    placeholder="Title of the movie" formControlName="language">
+                                <label for="language">Language</label>
                             </div>
                         </div>
                     </div>
@@ -103,22 +112,33 @@
                     <div class="row">
                         <div class="col my-2">
                             <div class="form-floating">
-                                <textarea class="form-control dark-input" id="description" formControlName="description" rows="6"></textarea>
+                                <textarea class="form-control dark-input textarea-height" id="description"
+                                    formControlName="description" rows="10"></textarea>
                                 <label for="description">Description</label>
                             </div>
                         </div>
                     </div>
                     <div class="row d-none">
                         <div class="col my-2">
-                            <button class="btn btn-warning w-50" type="submit">Sign Up</button>
+                            <button #addMovieFormSubmitButton class="btn btn-warning w-50" type="submit"
+                                [disabled]="isFormSubmissionInProcess">Submit</button>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                    #cancelAddTimeslotsModalButton>Cancel</button>
-                <button type="button" class="btn btn-warning">Submit</button>
+                    #cancelAddMovieModalButton>Cancel</button>
+                <button type="button" class="btn btn-warning" (click)="modalSubmitButtonClicked()"
+                    [disabled]="isFormSubmissionInProcess">
+                    <span *ngIf="isFormSubmissionInProcess">
+                        Submitting...
+                        <div class="spinner-border spinner-border-sm mx-1" role="status">
+                            <span class="visually-hidden"></span>
+                        </div>
+                    </span>
+                    <span *ngIf="!isFormSubmissionInProcess">Submit</span>
+                </button>
             </div>
         </div>
     </div>

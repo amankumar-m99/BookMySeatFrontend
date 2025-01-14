@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AppData } from 'src/app/data/app.data';
 import { Movie } from 'src/app/model/movie.model';
+import { MovieAddForm } from 'src/app/model/movie/movie-add.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class MovieService {
 
   getMoviesCount(): Observable<number> {
     return this.httpClient.get<number>(AppData.baseUrl + "/movie/get/count");
+  }
+
+  addMovie(movieForm: MovieAddForm): Observable<Movie> {
+    return this.httpClient.post<Movie>(AppData.baseUrl + "/movie", movieForm);
   }
 }
