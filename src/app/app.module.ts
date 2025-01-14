@@ -27,7 +27,7 @@ import { TheaterListComponent } from './components/theater-list/theater-list.com
 import { LeadingZerosPipe } from './pipes/leading-zeros/leading-zeros.pipe';
 import { ClockFormat12Pipe } from './pipes/clock-format/clock-format-12.pipe';
 import { ClockFormat24Pipe } from './pipes/clock-format/clock-format-24.pipe';
-import { MinutesToHhmmPipe } from './pipes/time/minutes-to-hhmm/minutes-to-hhmm.pipe';
+import { MinutesToHHMMPipe } from './pipes/minutes-to-hhmm/minutes-to-hhmm.pipe';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SeatSelectionComponent } from './components/seat-selection/seat-selection.component';
@@ -75,7 +75,7 @@ import { PluralityPipe } from './pipes/plurality/plurality.pipe';
     LeadingZerosPipe,
     ClockFormat12Pipe,
     ClockFormat24Pipe,
-    MinutesToHhmmPipe,
+    MinutesToHHMMPipe,
     DashboardComponent,
     ProfileComponent,
     SeatSelectionComponent,
