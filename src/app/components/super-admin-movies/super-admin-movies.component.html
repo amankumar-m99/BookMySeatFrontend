@@ -4,7 +4,8 @@
             <span class="h3"><span class="text-warning"><i class="bi bi-film"></i></span> Movies</span>
         </div>
         <div>
-            <button class="btn btn-outline-warning mx-1"><i class="bi bi-plus-lg"></i> Add Movie</button>
+            <button class="btn btn-outline-warning mx-1" data-bs-toggle="modal" data-bs-target="#addMovieModal"><i
+                    class="bi bi-plus-lg"></i> Add Movie</button>
         </div>
     </div>
     <hr>
@@ -32,12 +33,93 @@
                 <td>{{movie.releaseDate | date: 'yyyy'}}</td>
                 <td>{{movie.releaseDate | date: 'MM'}}</td>
                 <td>{{movie.language}}</td>
-                <td>{{movie.duration}}</td>
+                <td>{{movie.duration | minutesTohhmm}}</td>
                 <td>{{movie.genre}}</td>
                 <td>{{movie.rating}}</td>
                 <td><button class="btn btn-outline-warning">More</button></td>
-                
+
             </tr>
         </tbody>
     </table>
+</div>
+
+
+<!-- modal -->
+<div class="modal fade" id="addMovieModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content dark-my-modal">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-warning" id="staticBackdropLabel"><i class="bi bi-film"></i> Add a
+                    Movie</h1>
+                <button type="button" class="btn-close dark-modal-cross-btn" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class=" rounded text-center border p-4" [formGroup]="addMovieForm" (ngSubmit)="submitMovie()">
+                    <div class="row">
+                        <div class="col my-2">
+                            <div class="form-floating">
+                                <input type="text" class="form-control dark-input" id="title"
+                                    placeholder="Title of the movie" formControlName="title">
+                                <label for="title">Title of the Movie</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col my-2">
+                            <div class="form-floating">
+                                <input type="date" class="form-control dark-input" id="releaseDate"
+                                    placeholder="Release Date" formControlName="releaseDate">
+                                <label for="releaseDate">Release Date</label>
+                            </div>
+                        </div>
+                        <div class="col my-2">
+                            <div class="form-floating">
+                                <input type="number" class="form-control dark-input" id="duration"
+                                    placeholder="Duration" formControlName="duration">
+                                <label for="duration">Duration (Minutes)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col my-2">
+                            <div class="form-floating">
+                                <input type="password" class="form-control dark-input" id="cpassword"
+                                    placeholder="confirm password" formControlName="confirmPassword">
+                                <label for="cpassword">Genre</label>
+                            </div>
+                        </div>
+                        <div class="col my-2">
+                            <div class="form-floating">
+                                <input type="text" class="form-control dark-input" id="firstName"
+                                    placeholder="First Name" formControlName="firstName">
+                                <label for="firstName">Rating</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col my-2">
+                            <div class="form-floating">
+                                <textarea class="form-control dark-input" id="description" formControlName="description" rows="6"></textarea>
+                                <label for="description">Description</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-none">
+                        <div class="col my-2">
+                            <button class="btn btn-warning w-50" type="submit">Sign Up</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    #cancelAddTimeslotsModalButton>Cancel</button>
+                <button type="button" class="btn btn-warning">Submit</button>
+            </div>
+        </div>
+    </div>
 </div>
