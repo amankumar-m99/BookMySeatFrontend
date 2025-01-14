@@ -39,7 +39,6 @@ export class LoginComponent {
     this.isFormSubmissionInProcess = true;
     this.loginService.login(loginFormModel).subscribe({
       next: (user) => {
-        this.toastr.success('Login Success', '');
         AppData.logIn(String(user.id), String(user.role));
         switch (user.role) {
           case "superadmin": this.router.navigate(["/dashboard/super-admin"]); break;
@@ -50,10 +49,10 @@ export class LoginComponent {
       error: (error) => {
         this.isFormSubmissionInProcess = false;
         if (error.status == 0) {
-          this.toastr.error("Couldn't connect to server", "");
+          this.toastr.error("Couldn't connect to server");
         }
         else {
-          this.toastr.error('Error ' + error.status, error.message);
+          this.toastr.error(error.message, 'Error ' + error.status);
         }
       },
       complete: () => this.isFormSubmissionInProcess = false

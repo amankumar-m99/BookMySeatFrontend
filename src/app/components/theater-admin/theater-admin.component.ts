@@ -52,13 +52,13 @@ export class TheaterAdminComponent implements OnInit {
     let phoneNumber: string = this.theaterForm.get("phoneNumber")?.value;
     let numberOfScreens: string = this.theaterForm.get("numberOfScreens")?.value;
     if (this.theaterForm.invalid) {
-      this.toastr.error("Error", "Invalid form");
+      this.toastr.error("Fill all fields", "Invalid form");
       return;
     }
     let signUpFormModel: TheaterFormModel = new TheaterFormModel(this.userId, name, location, phoneNumber, Number(numberOfScreens));
     this.theaterService.registerTheater(signUpFormModel).subscribe({
       next: (response) => this.fetchTheaters(),
-      error: (error) => this.toastr.error("Error", error.message),
+      error: (error) => this.toastr.error(error.message, 'Error ' + error.status),
       complete: () => { }
     });
   }

@@ -22,7 +22,7 @@ export class UpcomingBookingsComponent {
   fetchData(): void {
     this.bookingService.getUpcomingBookingByUserId(Number(localStorage.getItem("userId"))).subscribe({
       next: (res) => this.bookings = res,
-      error: (error) => this.toastr.error("Error", error.message),
+      error: (error) => this.toastr.error(error.message, 'Error ' + error.status),
       complete: () => { }
     });
   }
