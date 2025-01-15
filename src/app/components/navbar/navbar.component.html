@@ -12,8 +12,8 @@
                         <span class="mx-2">{{user?.email}}</span>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><span class="dropdown-item" (click)="profile()">Profile</span></li>
-                      <li><span class="dropdown-item" (click)="logout()">Logout</span></li>
+                      <li><a class="dropdown-item" [routerLink]="['/dashboard/profile']">Profile</a></li>
+                      <li><span class="dropdown-item hover-pointer" (click)="logout()">Logout</span></li>
                     </ul>
                   </div>
             </div>

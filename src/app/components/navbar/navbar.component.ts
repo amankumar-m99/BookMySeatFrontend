@@ -37,10 +37,6 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  profile(): void {
-    this.router.navigate(['/dashboard/profile']);
-  }
-
   logout(): void {
     AppData.logout();
     this.router.navigate(['/']);
