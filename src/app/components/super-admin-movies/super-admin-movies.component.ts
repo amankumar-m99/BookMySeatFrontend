@@ -14,11 +14,13 @@ import { MovieService } from 'src/app/services/movie/movie.service';
 export class SuperAdminMoviesComponent {
 
   movies?: Movie[];
+  quickMovie: Movie = new Movie(0, "", "", "", 0, "", 0, "", new Date(), []);;
   addMovieForm: FormGroup;
   isFormSubmissionInProcess = false;
 
   @ViewChild('addMovieFormSubmitButton') addMovieFormSubmitButton!: ElementRef;
   @ViewChild('cancelAddMovieModalButton') cancelAddMovieModalButton!: ElementRef;
+  @ViewChild('quickViewMovieModalLaunch') quickViewMovieModalLaunch!: ElementRef;
 
   constructor(
     private movieService: MovieService,
@@ -46,6 +48,11 @@ export class SuperAdminMoviesComponent {
 
   modalSubmitButtonClicked(): void {
     this.addMovieFormSubmitButton.nativeElement.click();
+  }
+  
+  qickViewMovie(movie: Movie): void {
+    this.quickMovie = movie;
+    this.quickViewMovieModalLaunch.nativeElement.click();
   }
 
   submitMovie(): void {

@@ -49,6 +49,7 @@ import { UpcomingBookingsViewComponent } from './components/upcoming-bookings-vi
 import { CompletedBookingsViewComponent } from './components/completed-bookings-view/completed-bookings-view.component';
 import { AllBookingsViewComponent } from './components/all-bookings-view/all-bookings-view.component';
 import { PluralityPipe } from './pipes/plurality/plurality.pipe';
+import { QuickViewMovieComponent } from './components/quick-view-movie/quick-view-movie.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { PluralityPipe } from './pipes/plurality/plurality.pipe';
     UpcomingBookingsViewComponent,
     CompletedBookingsViewComponent,
     AllBookingsViewComponent,
-    PluralityPipe
+    PluralityPipe,
+    QuickViewMovieComponent
   ],
   imports: [
     BrowserModule,
