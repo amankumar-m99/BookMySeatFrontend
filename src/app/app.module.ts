@@ -50,6 +50,7 @@ import { CompletedBookingsViewComponent } from './components/completed-bookings-
 import { AllBookingsViewComponent } from './components/all-bookings-view/all-bookings-view.component';
 import { PluralityPipe } from './pipes/plurality/plurality.pipe';
 import { QuickViewMovieComponent } from './components/quick-view-movie/quick-view-movie.component';
+import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { QuickViewMovieComponent } from './components/quick-view-movie/quick-vie
     CompletedBookingsViewComponent,
     AllBookingsViewComponent,
     PluralityPipe,
-    QuickViewMovieComponent
+    QuickViewMovieComponent,
+    MovieDetailsComponent
   ],
   imports: [
     BrowserModule,

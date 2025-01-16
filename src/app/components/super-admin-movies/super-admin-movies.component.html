@@ -36,13 +36,17 @@
                 <td>{{movie.duration | minutesTohhmm}}</td>
                 <td>{{movie.genre}}</td>
                 <td>{{movie.rating}}</td>
-                <td><span class="mx-1 linkss" (click)="qickViewMovie(movie)">Quick View</span><a class="mx-1 linkss">Details</a></td>
+                <td>
+                    <span class="mx-1 linkss" (click)="qickViewMovie(movie)">Quick View</span>
+                    <a class="mx-1 linkss" [routerLink]="['../movie-details', encryptedId(movie.id)]" >Details</a>
+                </td>
 
             </tr>
         </tbody>
     </table>
 </div>
-<button class="d-none" #quickViewMovieModalLaunch data-bs-toggle="modal" data-bs-target="#quickViewMovieModal">QuickMovieModal</button>
+<button class="d-none" #quickViewMovieModalLaunch data-bs-toggle="modal"
+    data-bs-target="#quickViewMovieModal">QuickMovieModal</button>
 
 <!-- modal -->
 <div class="modal fade" id="addMovieModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"

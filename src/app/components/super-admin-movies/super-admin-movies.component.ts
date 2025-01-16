@@ -4,6 +4,7 @@ import { defaultUrlMatcher } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Movie } from 'src/app/model/movie.model';
 import { MovieAddForm } from 'src/app/model/movie/movie-add.model';
+import { EncryptionService } from 'src/app/services/encryption/encryption.service';
 import { MovieService } from 'src/app/services/movie/movie.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class SuperAdminMoviesComponent {
   constructor(
     private movieService: MovieService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private encryption: EncryptionService
   ) {
     this.fetchMovies();
     this.addMovieForm = this.formBuilder.group({
@@ -49,7 +51,7 @@ export class SuperAdminMoviesComponent {
   modalSubmitButtonClicked(): void {
     this.addMovieFormSubmitButton.nativeElement.click();
   }
-  
+
   qickViewMovie(movie: Movie): void {
     this.quickMovie = movie;
     this.quickViewMovieModalLaunch.nativeElement.click();
@@ -83,5 +85,9 @@ export class SuperAdminMoviesComponent {
       },
       complete: () => this.isFormSubmissionInProcess = false
     })
+  }
+
+  encryptedId(id: number): string {
+    return this.encryption.encrypt(String(id));
   }
 }
