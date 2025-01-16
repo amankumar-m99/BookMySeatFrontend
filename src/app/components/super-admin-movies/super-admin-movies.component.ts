@@ -1,6 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { defaultUrlMatcher } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Movie } from 'src/app/model/movie.model';
 import { MovieAddForm } from 'src/app/model/movie/movie-add.model';
@@ -52,7 +51,7 @@ export class SuperAdminMoviesComponent {
     this.addMovieFormSubmitButton.nativeElement.click();
   }
 
-  qickViewMovie(movie: Movie): void {
+  quickViewMovie(movie: Movie): void {
     this.quickMovie = movie;
     this.quickViewMovieModalLaunch.nativeElement.click();
   }
