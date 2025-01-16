@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Movie } from 'src/app/model/movie.model';
@@ -10,7 +10,7 @@ import { MovieService } from 'src/app/services/movie/movie.service';
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.css']
 })
-export class MovieDetailsComponent {
+export class MovieDetailsComponent implements OnInit {
 
   movieId = 0;
   movie: Movie = new Movie(0, "", "", "", 0, "", 0, "", new Date(), []);;
@@ -22,10 +22,15 @@ export class MovieDetailsComponent {
     private movieService: MovieService,
     private toastr: ToastrService
   ) {
-    this.movieId = Number(this.encryption.decryptRouteParam(this.activatedRoute, "movieId"));
-    if (this.movieId > 0) {
-      this.fetchData();
-    }
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.movieId = Number(this.encryption.decryptRouteParam(this.activatedRoute, "movieId"));
+      if (this.movieId > 0) {
+        this.fetchData();
+      }
+    });
   }
 
   fetchData(): void {
@@ -43,11 +48,11 @@ export class MovieDetailsComponent {
     if (this.movieId == 0) {
       return;
     }
-    this.router.navigate(['../../movie-details', this.encryptId(this.movieId - 1)]);
+    this.router.navigate(['../../movie-details', this.encryptId(this.movieId - 1)], { relativeTo: this.activatedRoute });
   }
 
   navigateNextMovie(): void {
-    this.router.navigate(['../movie-details', this.encryptId(this.movieId + 1)]);
+    this.router.navigate(['../../movie-details', this.encryptId(this.movieId + 1)], { relativeTo: this.activatedRoute });
   }
 
 }
