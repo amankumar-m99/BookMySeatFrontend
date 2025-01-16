@@ -53,14 +53,10 @@ export class TheaterActionsComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    if (this.activatedRoute.snapshot.paramMap?.has("theaterId")) {
-      let obj = this.activatedRoute.snapshot.paramMap.get("theaterId");
-      if(obj != undefined && obj != null){
-        this.theaterId = Number(this.encryption.decrypt(obj));
-      }
-      if(this.theaterId > 0){
-        this.fetchData();
-      }
+
+    this.theaterId = Number(this.encryption.decryptRouteParam(this.activatedRoute, "theaterId"));
+    if (this.theaterId > 0) {
+      this.fetchData();
     }
     this.customDatePicker?.nativeElement.datepicker({
       multidate: true,

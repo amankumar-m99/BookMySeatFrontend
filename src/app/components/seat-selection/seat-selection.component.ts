@@ -36,18 +36,8 @@ export class SeatSelectionComponent {
     this.ticketArr = [];
     this.classesArr = [];
     this.myBooking = [];
-    if (this.activatedRoute.snapshot.paramMap?.has("showtimeId")) {
-      let obj = this.activatedRoute.snapshot.paramMap.get("showtimeId");
-      if (obj != undefined && obj != null) {
-        this.showtimeId = Number(this.encryption.decrypt(obj));
-      }
-    }
-    if (this.activatedRoute.snapshot.paramMap?.has("theaterId")) {
-      let obj = this.activatedRoute.snapshot.paramMap.get("theaterId");
-      if (obj != undefined && obj != null) {
-        this.theaterId = Number(this.encryption.decrypt(obj));
-      }
-    }
+    this.showtimeId = Number(this.encryption.decryptRouteParam(this.activatedRoute, "showtimeId"));
+    this.theaterId = Number(this.encryption.decryptRouteParam(this.activatedRoute, "theaterId"));
     if (this.theaterId > 0 && this.showtimeId > 0) {
       this.fetchData();
     }

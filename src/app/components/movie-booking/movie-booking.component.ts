@@ -34,15 +34,10 @@ export class MovieBookingComponent {
     this.bookingForm = this.formbuilder.group({
       bookingDate: [DateUtils.getTodayDateString(), Validators.required]
     });
-    if (this.activatedRoute.snapshot.paramMap?.has("movieId")) {
-      let obj = this.activatedRoute.snapshot.paramMap.get("movieId");
-      if(obj != undefined && obj != null ){
-        this.movieId = Number(this.encryption.decrypt(obj));
-      }
-      if(this.movieId > 0){
-        this.fetchData();
-        this.fetchShows();
-      }
+    this.movieId = Number(this.encryption.decryptRouteParam(this.activatedRoute, "movieId"));
+    if (this.movieId > 0) {
+      this.fetchData();
+      this.fetchShows();
     }
   }
 

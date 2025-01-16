@@ -27,14 +27,10 @@ export class MovieMarketplaceComponent {
     this.movies = [];
     this.theaterId = 0;
     this.addedMovieIds = [];
-    if (this.activatedRoute.snapshot.paramMap?.has("theaterId")) {
-      let obj = this.activatedRoute.snapshot.paramMap.get("theaterId");
-      if(obj != undefined && obj != null){
-        this.theaterId = Number(this.encryption.decrypt(obj));
-      }
-      if(this.theaterId > 0){
-        this.fetchAddedMovies();
-      }
+
+    this.theaterId = Number(this.encryption.decryptRouteParam(this.activatedRoute, "theaterId"));
+    if (this.theaterId > 0) {
+      this.fetchAddedMovies();
     }
   }
 

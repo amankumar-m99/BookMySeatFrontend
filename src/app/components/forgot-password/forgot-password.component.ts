@@ -25,12 +25,7 @@ export class ForgotPasswordComponent {
     private toastr: ToastrService,
     private encryption: EncryptionService
   ) {
-    let username: string = "";
-    if (this.activatedRoute.snapshot.paramMap?.has("username")) {
-      let obj = this.activatedRoute.snapshot.paramMap.get("username");
-      if (obj != undefined && obj != null)
-        username = this.encryption.decrypt(obj);
-    }
+    let username = this.encryption.decryptRouteParam(this.activatedRoute, "username");
     this.form = this.formBuilder.group({
       username: [username, Validators.required],
       password: ['', Validators.required],
