@@ -3,7 +3,6 @@ export class TheaterFormModel {
         public ownerId: number,
         public name: string,
         public location: string,
-        public phoneNumber: string,
-        public numberOfScreens: number
+        public phoneNumber: string
     ) { }
 }
