@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { TheaterFormModel } from 'src/app/model/theater-form.model';
@@ -18,6 +18,8 @@ export class TheaterListComponent implements OnInit {
   userId: number;
   theaterForm: FormGroup;
 
+  @ViewChild("closeAddTheaterModal") closeAddTheaterModal !: ElementRef;
+
   constructor(
     private formBuilder: FormBuilder,
     private theaterService: TheaterService,
@@ -30,10 +32,10 @@ export class TheaterListComponent implements OnInit {
     this.theaterForm = this.formBuilder.group({
       name: ['', Validators.required],
       location: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      numberOfScreens: ['', Validators.required]
+      phoneNumber: ['', Validators.required]
     });
   }
+
   ngOnInit(): void {
     if (localStorage.getItem("userId")) {
       this.userId = Number(localStorage.getItem("userId"));
@@ -48,18 +50,23 @@ export class TheaterListComponent implements OnInit {
       complete: () => { }
     });
   }
-  submit(): void {
+
+  submitAddTheaterForm(): void {
+    if (this.theaterForm.invalid) {
+      this.toastr.error("Fill all fields", "Invalid form");
+      return;
+    }
     let name: string = this.theaterForm.get("name")?.value;
     let location: string = this.theaterForm.get("location")?.value;
     let phoneNumber: string = this.theaterForm.get("phoneNumber")?.value;
-    let numberOfScreens: string = this.theaterForm.get("numberOfScreens")?.value;
-    if (this.theaterForm.invalid) {
-      this.toastr.error("Fill all fields" ,"Invalid form");
-      return;
-    }
-    let signUpFormModel: TheaterFormModel = new TheaterFormModel(this.userId, name, location, phoneNumber, Number(numberOfScreens));
+    let signUpFormModel: TheaterFormModel = new TheaterFormModel(this.userId, name, location, phoneNumber);
     this.theaterService.registerTheater(signUpFormModel).subscribe({
-      next: (response) => this.fetchTheaters(),
+      next: (response) => {
+        this.theaters.push(response);
+        this.closeAddTheaterModal.nativeElement.click();
+        this.theaterForm.reset();
+        this.toastr.success("Added a theater", "Success");
+      },
       error: (error) => this.toastr.error(error.message, 'Error ' + error.status),
       complete: () => { }
     });

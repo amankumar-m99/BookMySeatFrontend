@@ -1,67 +1,81 @@
 <div class="container">
-    <div class="mb-2 h3">Theater List &amp; Actions</div>
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="h4">Theater List<span class="mx-2 text-warning">&amp;</span>Actions</div>
+        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#addTheaterFormModal">Add Theater
+            <span class="ms-1"><i class="bi bi-plus-lg"></i></span></button>
+    </div>
+    <hr>
     <div class="row">
-        <div class="col-9">
-            <table class="table table-dark table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col" class="text-warning">#</th>
-                        <th scope="col" class="text-warning">Name</th>
-                        <th scope="col" class="text-warning">Location</th>
-                        <th scope="col" class="text-warning">Screens</th>
-                        <th scope="col" class="text-warning">Phone Number</th>
-                        <th scope="col" class="text-warning">Date created</th>
-                        <th scope="col" class="text-warning"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let theater of theaters">
-                        <th scope="row">{{theater.id}}</th>
-                        <td>{{theater.name}}</td>
-                        <td>{{theater.location}}</td>
-                        <td>{{theater.screens.length}}</td>
-                        <td>{{theater.phoneNumber}}</td>
-                        <td>{{theater.createdAt | date }}</td>
-                        <td><a class="text-light" [routerLink]="['theater', encryptedId(theater.id)]">Details</a></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div *ngIf="theaters.length == 0">
-                <div class="bg-dark text-center p-5 h5">No theaters. Try adding few.</div>
-            </div>
+        <div *ngIf="theaters.length == 0">
+            <div class="bg-dark text-center p-5 h5">No theaters added yet. Try adding few.</div>
         </div>
-        <div class="col-3">
-            <main class="form-signin mx-auto">
-                <form class="text-center bg-dark border rounded p-3" [formGroup]="theaterForm" (ngSubmit)="submit()">
-                    <p class="h3 mb-3 fw-normal">Add a theater</p>
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-warning">#</th>
+                    <th scope="col" class="text-warning">Theater Id</th>
+                    <th scope="col" class="text-warning">Name</th>
+                    <th scope="col" class="text-warning">Location</th>
+                    <th scope="col" class="text-warning">Screens</th>
+                    <th scope="col" class="text-warning">Movies</th>
+                    <th scope="col" class="text-warning">Phone Number</th>
+                    <th scope="col" class="text-warning">Date created</th>
+                    <th scope="col" class="text-warning"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let theater of theaters let i=index">
+                    <th scope="row">{{i+1}}</th>
+                    <th>{{theater.id}}</th>
+                    <td>{{theater.name}}</td>
+                    <td>{{theater.location}}</td>
+                    <td>{{theater.screens.length}}</td>
+                    <td>{{theater.movies.length}}</td>
+                    <td>{{theater.phoneNumber}}</td>
+                    <td>{{theater.createdAt | date }}</td>
+                    <td><a class="text-light" [routerLink]="['theater', encryptedId(theater.id)]">Details</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- modal -->
+<div class="modal fade" id="addTheaterFormModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog border border-dark-subtle rounded">
+        <div class="modal-content dark-my-modal">
+            <form class="text-center" [formGroup]="theaterForm" (ngSubmit)="submitAddTheaterForm()">
+                <div class="modal-header">
+                    <span class="h3"><span class="text-warning">Add</span> a theater</span>
+                    <button #closeAddTheaterModal type="button" class="btn-close dark-modal-cross-btn"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-signin mx-auto bg-dark rounded p-3">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control dark-input" id="name" placeholder="theater name"
+                                formControlName="name">
+                            <label for="name">Name of theater</label>
+                        </div>
 
-                    <div class="form-floating my-3">
-                        <input type="text" class="form-control dark-input" id="name" placeholder="theater name"
-                            formControlName="name">
-                        <label for="name">Name of theater</label>
+                        <div class="form-floating my-3">
+                            <input type="text" class="form-control dark-input" id="location"
+                                placeholder="Location of theater" formControlName="location">
+                            <label for="location">Location of theater</label>
+                        </div>
+
+                        <div class="form-floating my-3">
+                            <input type="text" class="form-control dark-input" id="phoneNumber"
+                                placeholder="Phone number" formControlName="phoneNumber">
+                            <label for="phoneNumber">Phone Number</label>
+                        </div>
                     </div>
-
-                    <div class="form-floating my-3">
-                        <input type="text" class="form-control dark-input" id="location"
-                            placeholder="Location of theater" formControlName="location">
-                        <label for="location">Location of theater</label>
-                    </div>
-
-                    <div class="form-floating my-3">
-                        <input type="text" class="form-control dark-input" id="numberOfScreens"
-                            placeholder="Number of screens" formControlName="numberOfScreens">
-                        <label for="numberOfScreens">Number of Screens</label>
-                    </div>
-
-                    <div class="form-floating my-3">
-                        <input type="text" class="form-control dark-input" id="phoneNumber" placeholder="Phone number"
-                            formControlName="phoneNumber">
-                        <label for="phoneNumber">Phone Number</label>
-                    </div>
-
-                    <button class="btn btn-warning w-75 py-2" type="submit">Add Theater</button>
-                </form>
-            </main>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary mx-1" type="button" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-warning mx-1" type="submit">Add</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
