@@ -1,71 +1,257 @@
 <div class="container">
-
-    <div class="my-3">
+    <div class="">
         <div class="my-1">
-            <span class="h2">{{theater?.name}}</span>
+            <span class="h3">{{theater?.name}}</span>
         </div>
-        <div class="my-2">
-            <span class="my-1">
-                <span class="text-warning"><i class="bi bi-geo-alt"></i> Location</span>
-                <span class="h6 mx-2">{{theater?.location}}</span>
-            </span>
-            <span class="my-1 mx-4">
-                <span class="text-warning"><i class="bi bi-telephone"></i> Phone</span>
-                <span class="h6 mx-2">{{theater?.phoneNumber}}</span>
-            </span>
-            <span class="my-1 mx-4">
-                <span class="text-warning"><i class="bi bi-calendar2"></i> Since</span>
-                <span class="h6 mx-2">{{theater?.createdAt | date: 'yyyy' }}</span>
-            </span>
-            <span class="my-1 mx-4">
-                <span class="text-warning"><i class="bi bi-film"></i> Movies</span>
-                <span class="h6 mx-2">{{theater?.movies?.length}}</span>
-            </span>
-            <span class="my-1 mx-4">
-                <span class="text-warning"><i class="bi bi-tv"></i> Screens</span>
-                <span class="h6 mx-2">{{theater?.screens?.length}}</span>
-            </span>
+        <div class="d-flex justify-content-between align-items-center bg-dark rounded p-3">
+            <div class="">
+                <span class="">
+                    <span class="text-warning"><i class="bi bi-geo-alt"></i> Location</span>
+                    <span class="h6 mx-2">{{theater?.location}}</span>
+                </span>
+                <span class="mx-4">
+                    <span class="text-warning"><i class="bi bi-tv"></i> Screens</span>
+                    <span class="h6 mx-2">{{theater?.screens?.length}}</span>
+                </span>
+                <span class="mx-4">
+                    <span class="text-warning"><i class="bi bi-film"></i> Movies</span>
+                    <span class="h6 mx-2">{{theater?.movies?.length}}</span>
+                </span>
+                <span class="mx-4">
+                    <span class="text-warning"><i class="bi bi-telephone"></i> Phone</span>
+                    <span class="h6 mx-2">{{theater?.phoneNumber}}</span>
+                </span>
+                <span class="mx-4">
+                    <span class="text-warning"><i class="bi bi-calendar2"></i> Since</span>
+                    <span class="h6 mx-2">{{theater?.createdAt | date: 'yyyy' }}</span>
+                </span>
+                <span class="mx-4">
+                    <span class="text-warning"><i class="bi bi-hash"></i>Id</span>
+                    <span class="h6 mx-2">{{theater?.id }}</span>
+                </span>
+            </div>
+            <button class="btn btn-outline-warning">Edit <i class="bi bi-pencil"></i></button>
         </div>
     </div>
     <hr>
     <div>
         <div class="d-flex justify-content-between">
-            <p class="h4"><span class="mx-1 text-warning"><i class="bi bi-calendar-week"></i></span>Timeslots</p>
-            <button class="btn btn-outline-warning" type="button" data-bs-toggle="modal"
-                data-bs-target="#addTimeslotsModal">Add Timeslots <i class="bi bi-plus-lg"></i></button>
+            <span class="h4"><span class="mx-1 text-warning"><i class="bi bi-tv"></i></span>Screens</span>
+            <button #openAddScreenModalButton class="d-none" type="button" data-bs-toggle="modal"
+                data-bs-target="#addScreensModal">Add a screen</button>
+            <button class="btn btn-outline-warning" (click)="openAddScreenModal()">Add a Screen <i
+                    class="bi bi-plus-lg"></i></button>
+        </div>
+        <div *ngIf="theater?.screens?.length == 0" class="my-2 p-5 bg-dark rounded text-center">
+            <span class="h6">No Screens added yet.</span>
+        </div>
+        <div class="d-flex my-2" style="overflow: auto;">
+            <div *ngFor="let screen of theater?.screens"
+                class="bg-dark border border-dark-subtle rounded-3 p-2 px-4 mx-3 text-center">
+                <div class="text-warning">#{{screen.id}}</div>
+                <div>{{screen.name}}</div>
+                <div class="small fw-light">{{screen.maximumRows}} X {{screen.maximumCols}}</div>
+                <div>{{screen.maximumRows * screen.maximumCols}} Seats</div>
+            </div>
+        </div>
+        <!-- add screen modal -->
+        <div class="modal fade" id="addScreensModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog border border-dark-subtle rounded">
+                <div class="modal-content dark-my-modal">
+                    <form [formGroup]="addScreensForm" (ngSubmit)="submitScreensForm()">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel"><span class="text-warning">
+                                    <i class="bi bi-plus-lg"></i> Add</span> a Screen
+                            </h1>
+                            <button #closeAddScreenModalButton type="button" class="btn-close dark-modal-cross-btn"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="bg-dark rounded p-4">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control dark-input" id="floatingInput"
+                                        placeholder="Number " formControlName="name">
+                                    <label for="floatingInput">Name of the screen</label>
+                                </div>
+                                <div class="form-floating my-3">
+                                    <input type="number" class="form-control dark-input" id="floatingInput" min="1"
+                                        placeholder="Number of rows" formControlName="rows">
+                                    <label for="floatingInput">Number of Rows</label>
+                                </div>
+                                <div class="form-floating mt-3">
+                                    <input type="number" class="form-control dark-input" id="floatingInput" min="1"
+                                        placeholder="Number of cols" formControlName="cols">
+                                    <label for="floatingInput">Number of Columns</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-warning">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <hr>
+
+    <div>
+        <div class="d-flex justify-content-between">
+            <span class="h4"><span class="mx-1 text-warning"><i class="bi bi-calendar-week"></i></span>Timeslots</span>
+            <button #openTimeslotModalButton class="d-none" type="button" data-bs-toggle="modal"
+                data-bs-target="#addTimeslotsModal">Add
+                Timeslot</button>
+            <button class="btn btn-outline-warning" (click)="openAddTimeslotModal()">Add Timeslots <i
+                    class="bi bi-plus-lg"></i></button>
         </div>
         <div *ngIf="theater?.timeslots?.length == 0" class="my-2 p-5 bg-dark rounded text-center">
             <span class="h6">No timeslots. Begin to add some timeslots.</span>
         </div>
         <div class="d-flex my-2" style="overflow: auto;">
             <span *ngFor="let timeslot of theater?.timeslots"
-                class="border border-warning rounded-3 text-warning p-2 mx-3">
+                class="bg-dark border border-dark-subtle rounded-3 p-2 mx-3">
                 {{timeslot.startHH +":" + timeslot.startMM | clockFormat12}}
             </span>
         </div>
+        <!-- add timeslot modal -->
+        <div class="modal fade" id="addTimeslotsModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog border border-dark-subtle rounded">
+                <div class="modal-content dark-my-modal">
+                    <form [formGroup]="addTimeslotsForm" (ngSubmit)="submitTimeslotForm()">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel"><span class="text-warning">
+                                    <i class="bi bi-plus-lg"></i> Add</span> Timeslot</h1>
+                            <button #closeTimeslotModalButton type="button" class="btn-close dark-modal-cross-btn"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="bg-dark rounded p-3">
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control dark-input" id="startHour"
+                                        placeholder="Hours" formControlName="startHH">
+                                    <label for="startHour">Start hours (0 - 23)</label>
+                                    <div class="form-text small text-warning">24-hour format</div>
+                                </div>
+                                <div class="form-floating mt-3">
+                                    <input type="number" class="form-control dark-input" id="startMinute"
+                                        placeholder="Minutes" formControlName="startMM">
+                                    <label for="startMinute">Start minutes (0 - 59)</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-warning">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+
     <hr>
-    <div class="">
+
+    <div>
         <div class="d-flex justify-content-between">
             <p class="h4"><span class="mx-1 text-warning"><i class="bi bi-tv"></i></span>Shows</p>
-            <button class="btn btn-outline-warning" (click)="initAddShowForm()">Add Shows <i
-                    class="bi bi-plus-lg"></i></button>
-            <button class="btn btn-outline-warning d-none" type="button" data-bs-toggle="modal" #openAddShowFormModal
+            <button #openAddShowModalButton class="d-none" type="button" data-bs-toggle="modal"
                 data-bs-target="#addShowsModal">Open Add Show Modal</button>
+            <button class="btn btn-outline-warning" (click)="openAddShowModal()">Add Shows
+                <i class="bi bi-plus-lg"></i></button>
         </div>
         <div *ngIf="theater?.showtimes?.length == 0" class="my-2 p-5 bg-dark rounded text-center">
             <span class="h6">No Shows. Begin to add Shows.</span>
         </div>
         <div class="d-flex my-3" style="overflow: auto;">
-            <div *ngFor="let showtime of theater?.showtimes" class="bg-dark rounded mx-2 p-2 text-center">
+            <div *ngFor="let showtime of theater?.showtimes"
+                class="bg-dark border border-dark-subtle rounded mx-2 p-2 text-center">
                 <div> {{showtime.timeslot.startHH +":" + showtime.timeslot.startMM | clockFormat12}} </div>
                 <div class="">{{showtime.movie.title}}</div>
                 <div class="">{{showtime.screen.name}}</div>
             </div>
         </div>
+
+        <!-- add show modal -->
+        <div class="modal fade" id="addShowsModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog border border-dark-subtle rounded">
+                <div class="modal-content dark-my-modal">
+                    <form [formGroup]="addShowsForm" (ngSubmit)="submitShowsForm()">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel"><span class="text-warning">
+                                    <i class="bi bi-plus-lg"></i> Add</span> Show</h1>
+                            <button #closeAddShowModalButton type="button" class="btn-close dark-modal-cross-btn"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="bg-dark rounded p-3">
+                                <div class="mb-2">
+                                    <div class="form-floating my-3">
+                                        <input type="date" class="form-control dark-input" id="fromDayDate"
+                                            [min]="minDate" formControlName="fromDate">
+                                        <label for="fromDayDate">From Date</label>
+                                    </div>
+                                </div>
+
+                                <div class="my-2">
+                                    <div class="form-floating my-3">
+                                        <input type="date" class="form-control dark-input" id="toDayDate"
+                                            [min]="minDate" formControlName="toDate">
+                                        <label for="fromDayDate">To Date</label>
+                                    </div>
+                                </div>
+
+                                <div class="my-2">
+                                    <select class="form-select" aria-label="Default select example"
+                                        formControlName="screenId">
+                                        <option class="dropdown-item" selected [value]="0">-- Select the screen --
+                                        </option>
+                                        <option class="dropdown-item"
+                                            *ngFor="let screen of theater?.screens let i = index" [value]="screen.id">
+                                            {{screen.name}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="my-2">
+                                    <select class="form-select" aria-label="Default select example"
+                                        formControlName="movieId">
+                                        <option class="dropdown-item" selected [value]="0">-- Select the movie--
+                                        </option>
+                                        <option class="dropdown-item" *ngFor="let movie of theater?.movies"
+                                            [value]="movie.id">
+                                            {{movie.title}} - {{movie.releaseDate |
+                                            date: 'yyyy'}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="mt-2">
+                                    Time-slot
+                                    <div class="form-check" formArrayName="timeslotsFormChecks"
+                                        *ngFor="let item of timeslotsFormChecksArray?.controls let i=index">
+                                        <input class="form-check-input" type="checkbox" [id]="i" [formControlName]="i">
+                                        <label class="form-check-label" [htmlFor]="i">{{theater?.timeslots?.[i]?.startHH
+                                            +":" + theater?.timeslots?.[i]?.startMM | clockFormat12}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-warning">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+
+
     <hr>
+
     <div class="">
         <div class="d-flex justify-content-between">
             <p class="h4"><span class="mx-1 text-warning"><i class="bi bi-film"></i></span>Movies</p>
@@ -90,110 +276,4 @@
         </div>
     </div>
 
-</div>
-<!-- modal -->
-<div class="modal fade" id="addTimeslotsModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content dark-my-modal">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Timeslots</h1>
-                <button type="button" class="btn-close dark-modal-cross-btn" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="text-center p-3 bg-dark rounded" [formGroup]="addTimeslotsForm"
-                    (ngSubmit)="submitTimeslotForm()">
-                    <div class="form-floating my-3">
-                        <input type="number" class="form-control dark-input" id="floatingInput" min="0" max="23"
-                            placeholder="Hours" formControlName="startHH">
-                        <label for="floatingInput">Start hours</label>
-                    </div>
-
-                    <div class="form-floating my-3">
-                        <input type="number" class="form-control dark-input" id="floatingPassword" min="0" max="59"
-                            placeholder="Minutes" formControlName="startMM">
-                        <label for="floatingPassword">Start minutes</label>
-                    </div>
-                    <!-- <button class="btn btn-warning w-75 py-2" type="submit">Log in</button> -->
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                    #cancelAddTimeslotsModalButton>Cancel</button>
-                <button type="button" class="btn btn-warning" (click)="submitTimeslotForm()">Submit</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- modal -->
-<div class="modal fade" id="addShowsModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content dark-my-modal">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add shows</h1>
-                <button type="button" class="btn-close dark-modal-cross-btn" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="bg-dark rounded p-1 px-3" [formGroup]="addShowsForm" (ngSubmit)="submitShowsForm()">
-                    <div class="my-2">
-                        <div class="form-floating my-3">
-                            <input type="date" class="form-control dark-input" id="fromDayDate" [min]="minDate"
-                                formControlName="fromDate">
-                            <label for="fromDayDate">From Date</label>
-                        </div>
-                    </div>
-
-                    <div class="my-2">
-                        <div class="form-floating my-3">
-                            <input type="date" class="form-control dark-input" id="toDayDate" [min]="minDate"
-                                formControlName="toDate">
-                            <label for="fromDayDate">To Date</label>
-                        </div>
-                    </div>
-
-                    <div class="my-2">
-                        <select class="form-select" aria-label="Default select example" formControlName="screenId">
-                            <option class="dropdown-item" selected [value]="0">-- Select the screen --
-                            </option>
-                            <option class="dropdown-item" *ngFor="let screen of theater?.screens let i = index"
-                                [value]="screen.id">
-                                {{screen.name}}</option>
-                        </select>
-                    </div>
-
-                    <div class="my-2">
-                        <select class="form-select" aria-label="Default select example" formControlName="movieId">
-                            <option class="dropdown-item" selected [value]="0">-- Select the movie--
-                            </option>
-                            <option class="dropdown-item" *ngFor="let movie of theater?.movies" [value]="movie.id">
-                                {{movie.title}} - {{movie.releaseDate |
-                                date: 'yyyy'}}</option>
-                        </select>
-                    </div>
-
-                    <div class="">
-                        Time-slot
-                        <div formArrayName="timeslotsFormChecks"
-                            *ngFor="let item of timeslotsFormChecksArray?.controls let i=index" class="form-check">
-                            <input class="form-check-input" type="checkbox" [id]="i" [formControlName]="i">
-                            <label class="form-check-label" [htmlFor]="i">{{theater?.timeslots?.[i]?.startHH
-                                +":" + theater?.timeslots?.[i]?.startMM | clockFormat12}}</label>
-                        </div>
-                    </div>
-
-                    <!-- <div class="my-2 d-flex justify-content-center">
-                        <button class="btn btn-warning w-25 py-2" type="submit">Add show</button>
-                    </div> -->
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                    #closeAddShowFormModalButton>Cancel</button>
-                <button class="btn btn-warning" (click)="submitShowsForm()">Add show</button>
-            </div>
-        </div>
-    </div>
 </div>
