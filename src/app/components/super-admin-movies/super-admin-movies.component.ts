@@ -18,9 +18,9 @@ export class SuperAdminMoviesComponent {
   addMovieForm: FormGroup;
   isFormSubmissionInProcess = false;
 
-  @ViewChild('addMovieFormSubmitButton') addMovieFormSubmitButton!: ElementRef;
-  @ViewChild('cancelAddMovieModalButton') cancelAddMovieModalButton!: ElementRef;
-  @ViewChild('quickViewMovieModalLaunch') quickViewMovieModalLaunch!: ElementRef;
+  @ViewChild("addMovieModalButton") addMovieModalButton!: ElementRef;
+  @ViewChild("closeAddMovieModalButton") closeAddMovieModalButton!: ElementRef;
+  @ViewChild("quickViewMovieModalLaunch") quickViewMovieModalLaunch!: ElementRef;
 
   constructor(
     private movieService: MovieService,
@@ -47,13 +47,19 @@ export class SuperAdminMoviesComponent {
     })
   }
 
-  modalSubmitButtonClicked(): void {
-    this.addMovieFormSubmitButton.nativeElement.click();
-  }
-
   quickViewMovie(movie: Movie): void {
     this.quickMovie = movie;
     this.quickViewMovieModalLaunch.nativeElement.click();
+  }
+
+  openAddMovieModal(): void {
+    this.initAddMovieModal();
+    this.openAddMovieModal
+  }
+
+  initAddMovieModal(): void {
+    this.addMovieForm.reset();
+    this.addMovieModalButton.nativeElement.click();
   }
 
   submitMovie(): void {
@@ -74,8 +80,7 @@ export class SuperAdminMoviesComponent {
       next: (response) => {
         this.movies?.push(response);
         this.toastr.success("Movie added.", "Sucess");
-        this.cancelAddMovieModalButton.nativeElement.click();
-        this.addMovieForm.reset();
+        this.closeAddMovieModalButton.nativeElement.click();
         this.isFormSubmissionInProcess = false;
       },
       error: (error) => {
