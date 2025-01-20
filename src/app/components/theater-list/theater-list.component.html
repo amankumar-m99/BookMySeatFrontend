@@ -39,19 +39,21 @@
         </table>
     </div>
 </div>
-<!-- modal -->
+<!-- add theater modal -->
 <div class="modal fade" id="addTheaterFormModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog border border-dark-subtle rounded">
         <div class="modal-content dark-my-modal">
-            <form class="text-center" [formGroup]="theaterForm" (ngSubmit)="submitAddTheaterForm()">
+            <form [formGroup]="theaterForm" (ngSubmit)="submitAddTheaterForm()">
                 <div class="modal-header">
-                    <span class="h3"><span class="text-warning">Add</span> a theater</span>
+                    <h1 class="modal-title fs-5"><span class="text-warning"><i class="bi bi-plus-lg"></i> Add</span> a
+                        theater
+                    </h1>
                     <button #closeAddTheaterModal type="button" class="btn-close dark-modal-cross-btn"
                         data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-signin mx-auto bg-dark rounded p-3">
+                    <div class="bg-dark rounded p-3">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control dark-input" id="name" placeholder="theater name"
                                 formControlName="name">
