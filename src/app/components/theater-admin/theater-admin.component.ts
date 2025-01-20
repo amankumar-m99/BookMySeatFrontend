@@ -27,8 +27,7 @@ export class TheaterAdminComponent implements OnInit {
     this.theaterForm = this.formBuilder.group({
       name: ['', Validators.required],
       location: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      numberOfScreens: ['', Validators.required]
+      phoneNumber: ['', Validators.required]
     });
   }
   ngOnInit(): void {
@@ -50,12 +49,11 @@ export class TheaterAdminComponent implements OnInit {
     let name: string = this.theaterForm.get("name")?.value;
     let location: string = this.theaterForm.get("location")?.value;
     let phoneNumber: string = this.theaterForm.get("phoneNumber")?.value;
-    let numberOfScreens: string = this.theaterForm.get("numberOfScreens")?.value;
     if (this.theaterForm.invalid) {
       this.toastr.error("Fill all fields", "Invalid form");
       return;
     }
-    let signUpFormModel: TheaterFormModel = new TheaterFormModel(this.userId, name, location, phoneNumber, Number(numberOfScreens));
+    let signUpFormModel: TheaterFormModel = new TheaterFormModel(this.userId, name, location, phoneNumber);
     this.theaterService.registerTheater(signUpFormModel).subscribe({
       next: (response) => this.fetchTheaters(),
       error: (error) => this.toastr.error(error.message, 'Error ' + error.status),
