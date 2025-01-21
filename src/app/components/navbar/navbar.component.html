@@ -1,11 +1,12 @@
-<nav class="navbar border-dark-subtle border-bottom mb-3 bg-body-dark">
+<nav class="navbar sticky-top border-dark-subtle border-bottom mb-3 bg-body-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand text-light">
-            <img src="../../../assets/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top"  [routerLink]="['/home']">
+            <img src="../../../assets/logo.png" alt="Logo" width="auto" height="30" class="d-inline-block align-text-top"  [routerLink]="['/home']">
             BookMySeat
+            <!-- Book<span class="text-dark bg-warning rounded fw-bold">My</span>Seat -->
         </a>
         <div>
-            <div *ngIf="isLoggedIn" class="me-2 p-2">
+            <div *ngIf="isLoggedIn" class="me-2">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class=""><i class="bi bi-person-circle"></i></span>
