@@ -11,16 +11,16 @@
         <table class="table table-striped table-dark">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Poster</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Release Year</th>
-                    <th scope="col">Release Month</th>
-                    <th scope="col">Language</th>
-                    <th scope="col">Duration</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Rating</th>
-                    <th scope="col"></th>
+                    <th class="text-warning" scope="col">#</th>
+                    <th class="text-warning">Poster</th>
+                    <th class="text-warning">Movie Title</th>
+                    <th class="text-warning">Release Year</th>
+                    <th class="text-warning">Release Month</th>
+                    <th class="text-warning">Language</th>
+                    <th class="text-warning">Duration</th>
+                    <th class="text-warning">Genre</th>
+                    <th class="text-warning">Rating</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -37,7 +37,7 @@
                     <td>{{movie.rating}}</td>
                     <td>
                         <span class="mx-1 linkss" (click)="quickViewMovie(movie)">Quick View</span>
-                        <a class="mx-1 linkss" [routerLink]="['../movie-details', encryptedId(movie.id)]">Details</a>
+                        <a class="mx-1 linkss" [routerLink]="['../movie', encryptedId(movie.id)]">Details</a>
                     </td>
                 </tr>
             </tbody>

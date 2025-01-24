@@ -7,11 +7,10 @@ import { UserComponent } from './components/user/user.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { TheaterAdminComponent } from './components/theater-admin/theater-admin.component';
 import { SuperAdminComponent } from './components/super-admin/super-admin.component';
-import { TheaterActionsComponent } from './components/theater-actions/theater-actions.component';
 import { MovieBookingComponent } from './components/movie-booking/movie-booking.component';
 import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-marketplace.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { TheaterListComponent } from './components/theater-list/theater-list.component';
+import { TheaterListComponent } from './components/theater/theater-list/theater-list.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SeatSelectionComponent } from './components/seat-selection/seat-selection.component';
 import { AuthGuard } from './guards/auth/auth.guard';
@@ -24,6 +23,7 @@ import { SuperAdminAdminsComponent } from './components/super-admin-admins/super
 import { SuperAdminUsersComponent } from './components/super-admin-users/super-admin-users.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { TheaterDetailsComponent } from './components/theater/theater-details/theater-details.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent, canActivate: [LoginGuard] },
@@ -32,8 +32,9 @@ const routes: Routes = [
       {
         path: 'super-admin', component: SuperAdminComponent, children: [
           { path: 'movies', component: SuperAdminMoviesComponent },
-          { path: 'movie-details/:movieId', component: MovieDetailsComponent },
+          { path: 'movie/:movieId', component: MovieDetailsComponent },
           { path: 'theaters', component: SuperAdminTheatersComponent },
+          { path: 'theater/:theaterId', component: TheaterDetailsComponent },
           { path: 'admins', component: SuperAdminAdminsComponent },
           { path: 'users', component: SuperAdminUsersComponent },
           { path: '', pathMatch: 'full', component: SuperAdminHomeComponent }
@@ -42,7 +43,7 @@ const routes: Routes = [
       {
         path: 'theater-admin', component: TheaterAdminComponent, children: [
           { path: "", pathMatch: 'full', component: TheaterListComponent },
-          { path: "theater/:theaterId", component: TheaterActionsComponent },
+          { path: "theater/:theaterId", component: TheaterDetailsComponent },
           { path: "movie-marketplace/:theaterId", component: MovieMarketplaceComponent },
         ]
       },

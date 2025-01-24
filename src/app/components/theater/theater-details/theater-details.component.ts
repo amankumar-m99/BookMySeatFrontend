@@ -14,11 +14,12 @@ import { TimeslotService } from 'src/app/services/timeslot/timeslot.service';
 import { DateUtils } from 'src/app/utils/date-utils';
 
 @Component({
-  selector: 'app-theater-actions',
-  templateUrl: './theater-actions.component.html',
-  styleUrls: ['./theater-actions.component.css']
+  selector: 'app-theater-details',
+  templateUrl: './theater-details.component.html',
+  styleUrls: ['./theater-details.component.css']
 })
-export class TheaterActionsComponent implements OnInit {
+
+export class TheaterDetailsComponent implements OnInit {
 
   theaterId: number;
   theater?: Theater;

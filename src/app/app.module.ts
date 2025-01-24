@@ -20,10 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TheaterAdminComponent } from './components/theater-admin/theater-admin.component';
 import { SuperAdminComponent } from './components/super-admin/super-admin.component';
-import { TheaterActionsComponent } from './components/theater-actions/theater-actions.component';
 import { MovieBookingComponent } from './components/movie-booking/movie-booking.component';
 import { MovieMarketplaceComponent } from './components/movie-marketplace/movie-marketplace.component';
-import { TheaterListComponent } from './components/theater-list/theater-list.component';
+import { TheaterListComponent } from './components/theater/theater-list/theater-list.component';
 import { LeadingZerosPipe } from './pipes/leading-zeros/leading-zeros.pipe';
 import { ClockFormat12Pipe } from './pipes/clock-format/clock-format-12.pipe';
 import { ClockFormat24Pipe } from './pipes/clock-format/clock-format-24.pipe';
@@ -51,6 +50,7 @@ import { AllBookingsViewComponent } from './components/all-bookings-view/all-boo
 import { PluralityPipe } from './pipes/plurality/plurality.pipe';
 import { QuickViewMovieComponent } from './components/quick-view-movie/quick-view-movie.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { TheaterDetailsComponent } from './components/theater/theater-details/theater-details.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +70,6 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
     AllMoviesComponent,
     TheaterAdminComponent,
     SuperAdminComponent,
-    TheaterActionsComponent,
     MovieBookingComponent,
     MovieMarketplaceComponent,
     TheaterListComponent,
@@ -97,7 +96,8 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
     AllBookingsViewComponent,
     PluralityPipe,
     QuickViewMovieComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    TheaterDetailsComponent
   ],
   imports: [
     BrowserModule,
