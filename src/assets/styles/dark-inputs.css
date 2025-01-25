@@ -1,0 +1,40 @@
+.dark-input {
+    background-color: #333635;
+    color: white;
+}
+
+.dark-input:focus {
+    background-color: lightblue;
+}
+
+.dark-input::placeholder {
+    color: white;
+}
+
+.dark-select {
+    background-color: #333635;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.dark-select:hover {
+    border-color: #888;
+    /* Lighter border on hover */
+}
+
+.dark-select:focus {
+    border-color: #1e90ff;
+    /* Blue border on focus */
+    box-shadow: 0 0 5px #1e90ff;
+    /* Subtle glow effect */
+}
+
+/* Optional: Custom dropdown arrow */
+.dark-select {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpolyline points="6 9 12 15 18 9"%3E%3C/polyline%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+}

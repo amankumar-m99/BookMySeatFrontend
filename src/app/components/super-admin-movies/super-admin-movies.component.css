@@ -10,10 +10,3 @@ height: 150px;
 .linkss{
     text-decoration: underline;
 }
-
-.table thead th {
-    position: sticky;
-    top: 0;
-    /* background-color: #f8f9fa; Bootstrap's light grey background */
-    z-index: 1; /* Ensure the header is above the table content */
-}

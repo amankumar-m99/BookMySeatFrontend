@@ -1,0 +1,25 @@
+.dark-input {
+    background-color: #333635;
+    color: white;
+    font-weight: 400;
+}
+
+.dark-input:focus {
+    background-color: lightblue;
+    font-weight: 500;
+}
+
+.dark-input::placeholder {
+    color: white;
+}
+
+.dark-my-modal {
+    /* background-color: #17242b; */
+    /* background-color: #1b2a33; */
+    background-color: rgb(20, 20, 20);
+    color: white;
+}
+
+.my-modal-text-color {
+    color: white;
+}

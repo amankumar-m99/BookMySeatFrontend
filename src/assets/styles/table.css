@@ -1,0 +1,9 @@
+
+.table-container {
+    max-height: 76vh; /* Set the height for the scrollable area */
+  }
+  
+  .sticky-header-table thead th {
+    position: sticky; /* Makes the header sticky */
+    top: 0; /* Stick to the top */
+  }

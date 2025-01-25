@@ -7,8 +7,8 @@
             Movie</button>
     </div>
     <hr>
-    <div class="table-responsive rounded" style="height: 76vh;">
-        <table class="table table-striped table-dark">
+    <div class="table-responsive rounded table-container">
+        <table class="table table-striped table-dark sticky-header-table">
             <thead>
                 <tr>
                     <th class="text-warning" scope="col">#</th>
@@ -53,11 +53,11 @@
     <div class="modal-dialog border border-dark-subtle rounded">
         <div class="modal-content dark-my-modal">
             <form class=" rounded text-center px-2" [formGroup]="addMovieForm" (ngSubmit)="submitMovie()">
-                <div class="modal-header">
+                <div class="modal-header" data-bs-theme="dark">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">
                         <span class="text-warning"><i class="bi bi-plus-lg"></i> Add </span>a Movie
                     </h1>
-                    <button #closeAddMovieModalButton type="button" class="btn-close dark-modal-cross-btn"
+                    <button #closeAddMovieModalButton type="button" class="btn-close"
                         data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

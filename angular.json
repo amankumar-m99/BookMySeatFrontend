@@ -25,7 +25,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/styles/dark-inputs.css",
+              "src/assets/styles/dark-modal.css",
+              "src/assets/styles/scrollbar.css",
+              "src/assets/styles/table.css",
+              "src/assets/styles/toastr.css"
             ],
             "scripts": []
           },
@@ -87,7 +92,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/styles/dark-inputs.css",
+              "src/assets/styles/dark-modal.css",
+              "src/assets/styles/scrollbar.css",
+              "src/assets/styles/table.css",
+              "src/assets/styles/toastr.css"
             ],
             "scripts": []
           }
