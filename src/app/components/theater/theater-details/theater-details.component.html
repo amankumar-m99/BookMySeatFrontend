@@ -3,6 +3,7 @@
         <div class="my-1">
             <span class="h4">{{theater?.name}}</span>
         </div>
+        <hr>
         <div class="d-flex justify-content-between align-items-center bg-dark rounded p-3">
             <div class="">
                 <span class="">
@@ -63,8 +64,8 @@
                             <p class="modal-title h5" id="staticBackdropLabel"><span class="text-warning"><i
                                         class="bi bi-plus-lg"></i> Add</span> a Screen
                             </p>
-                            <button #closeAddScreenModalButton type="button" class="btn-close"
-                                data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button #closeAddScreenModalButton type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="bg-dark rounded p-4">
@@ -123,8 +124,8 @@
                             <p class="modal-title h5" id="staticBackdropLabel"><span class="text-warning"><i
                                         class="bi bi-plus-lg"></i> Add</span> Timeslot
                             </p>
-                            <button #closeTimeslotModalButton type="button" class="btn-close"
-                                data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button #closeTimeslotModalButton type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="bg-dark rounded p-3">
@@ -155,10 +156,11 @@
         <div class="d-flex justify-content-between">
             <p class="h5"><span class="mx-1 text-warning"><i class="bi bi-tv"></i></span>Shows of the day</p>
             <div>
+                <a class="btn btn-outline-warning mx-1" [routerLink]="['../shows', encryptedId(theaterId)]">View all
+                    shows <i class="bi bi-arrow-right"></i></a>
+
                 <button #openAddShowModalButton class="d-none" type="button" data-bs-toggle="modal"
                     data-bs-target="#addShowsModal">Open Add Show Modal</button>
-
-                <button class="btn btn-outline-warning mx-1" (click)="openAddShowModal()">View all shows</button>
 
                 <button class="btn btn-outline-warning mx-1" (click)="openAddShowModal()">Add Shows
                     <i class="bi bi-plus-lg"></i></button>
@@ -178,14 +180,15 @@
                         <div class="d-flex justify-content-between">
                             <div class="my-1"><span class="text-warning"># </span>{{showtime.id}}</div>
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">Details</a></li>
-                                  <li><a class="dropdown-item" href="#">Cancel</a></li>
-                                  <li><a class="dropdown-item" href="#">More</a></li>
+                                    <li><a class="dropdown-item" href="#">Details</a></li>
+                                    <li><a class="dropdown-item" href="#">Cancel</a></li>
+                                    <li><a class="dropdown-item" href="#">More</a></li>
                                 </ul>
-                              </div>
+                            </div>
                         </div>
                         <div class="my-1"><span class="text-warning"><i class="bi bi-calendar-week"></i></span>
                             {{showtime.date | date}}</div>

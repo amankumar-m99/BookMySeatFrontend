@@ -35,9 +35,10 @@
         <form class="w-75" [formGroup]="bookingForm" (submit)="submitBookingForm()">
             <div class="">
                 <div class="d-flex align-items-center">
-                    <label class="mx-2" for="bookingdate">Looking for Date</label>
-                    <input type="date" class="form-control dark-input w-25" id="bookingdate" placeholder="Password"
+                    <label class="mx-2 d-none" for="bookingdate">Looking for Date</label>
+                    <input type="date" class="form-control dark-input w-25 d-none" id="bookingdate" placeholder="Password"
                         [min]="minDate" formControlName="bookingDate" (change)="submitBookingForm()">
+                    <app-booking-date-picker (dateSelected)="handleDateSelectedEvent($event)" ></app-booking-date-picker>
                 </div>
                 <!-- <button class="btn btn-outline-warning"><i class="bi bi-search"></i></button> -->
             </div>

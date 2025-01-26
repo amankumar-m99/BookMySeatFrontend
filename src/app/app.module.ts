@@ -51,6 +51,8 @@ import { PluralityPipe } from './pipes/plurality/plurality.pipe';
 import { QuickViewMovieComponent } from './components/quick-view-movie/quick-view-movie.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { TheaterDetailsComponent } from './components/theater/theater-details/theater-details.component';
+import { ShowsComponent } from './components/shows/shows.component';
+import { BookingDatePickerComponent } from './components/booking-date-picker/booking-date-picker.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +99,9 @@ import { TheaterDetailsComponent } from './components/theater/theater-details/th
     PluralityPipe,
     QuickViewMovieComponent,
     MovieDetailsComponent,
-    TheaterDetailsComponent
+    TheaterDetailsComponent,
+    ShowsComponent,
+    BookingDatePickerComponent
   ],
   imports: [
     BrowserModule,

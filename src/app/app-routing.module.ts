@@ -24,6 +24,7 @@ import { SuperAdminUsersComponent } from './components/super-admin-users/super-a
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { TheaterDetailsComponent } from './components/theater/theater-details/theater-details.component';
+import { ShowsComponent } from './components/shows/shows.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent, canActivate: [LoginGuard] },
@@ -34,6 +35,7 @@ const routes: Routes = [
           { path: 'movies', component: SuperAdminMoviesComponent },
           { path: 'movie/:movieId', component: MovieDetailsComponent },
           { path: 'theaters', component: SuperAdminTheatersComponent },
+          { path: 'theater/shows/:theaterId', component: ShowsComponent },
           { path: 'theater/:theaterId', component: TheaterDetailsComponent },
           { path: 'admins', component: SuperAdminAdminsComponent },
           { path: 'users', component: SuperAdminUsersComponent },

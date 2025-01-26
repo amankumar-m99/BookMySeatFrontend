@@ -37,7 +37,7 @@ export class MovieBookingComponent {
     this.movieId = Number(this.encryption.decryptRouteParam(this.activatedRoute, "movieId"));
     if (this.movieId > 0) {
       this.fetchData();
-      this.fetchShows();
+      this.fetchShows(this.selectedDate);
     }
   }
 
@@ -51,8 +51,8 @@ export class MovieBookingComponent {
     });
   }
 
-  fetchShows(): void {
-    this.showtimeService.findShowtimeByMovieId(this.movieId, this.selectedDate).subscribe({
+  fetchShows(date: Date): void {
+    this.showtimeService.findShowtimeByMovieId(this.movieId, date).subscribe({
       next: (response) => {
         this.movieBookingShowDTO = response;
       },
@@ -66,7 +66,11 @@ export class MovieBookingComponent {
   }
 
   submitBookingForm(): void {
-    this.fetchShows();
+    this.fetchShows(this.selectedDate);
+  }
+  
+  handleDateSelectedEvent(date: Date): void {
+    this.bookingForm.get("bookingDate")?.patchValue(date);
   }
 
   encryptedId(id: number): string {

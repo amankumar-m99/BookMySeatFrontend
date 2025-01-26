@@ -1,0 +1,11 @@
+<div class="d-flex align-items-center">
+    <span class="mx-2"><button class="btn btn-outline-warning" (click)="prev()"><i class="bi bi-chevron-left"></i></button></span>
+    <div *ngFor="let date of dateArr let i = index" class="mx-2 text-center" style="width:4rem;">
+        <button class="btn" [class.btn-warning]="i == selectedIndex%maxSize" [class.btn-outline-warning]="i != selectedIndex%maxSize" (click)="dateClicked(i)">
+            {{date | date: 'EEE'}}&nbsp;
+            {{date | date: 'dd'}}&nbsp;{{date | date: 'MMM'}}
+            {{date | date: 'YYYY'}}
+        </button>
+    </div>
+    <span class="mx-2"><button class="btn btn-outline-warning" (click)="next()"><i class="bi bi-chevron-right"></i></button></span>
+</div>
