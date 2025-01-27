@@ -41,16 +41,16 @@ export class BookingDatePickerComponent {
   }
 
   prev(): void {
-    if (this.index == 0) {
-      return;
+    if (this.index > 0 && this.selectedIndex == this.maxSize * (this.index)) {
+      this.index--;
+      this.refreshDateArr();
     }
-    this.index--;
-    this.refreshDateArr();
+    this.selectedIndex--;
     this.sendData();
   }
 
   dateClicked(clickedIndex: number): void {
-    this.selectedIndex = clickedIndex;
+    this.selectedIndex = clickedIndex + (this.index * this.maxSize);
     this.sendData();
   }
 
